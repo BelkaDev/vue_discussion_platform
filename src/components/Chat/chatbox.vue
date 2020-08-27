@@ -1,8 +1,8 @@
 <template>
   <v-container height="100%">
     <v-col :cols="chatboxWidth" wrap>
-      <v-card>
-        <v-card color="grey lighten-4" flat tile>
+      <baseCard>
+        
           <v-toolbar color="#FAFBFF" flat height="80px">
             <v-avatar class="ml-2" size="50">
               <img src="https://cdn.vuetifyjs.com/images/john.jpg" alt="John" />
@@ -26,7 +26,7 @@
           </template>
 
           </v-toolbar>
-        </v-card>
+        
 
         <v-list id="messageList" rounded height="380px" class="scroll">
           <v-list-item-group color="primary">
@@ -104,12 +104,14 @@
               </v-btn>
           </v-col>
         </v-row>
-      </v-card>
+      </baseCard>
     </v-col>
   </v-container>
 </template>
 
 <script>
+import baseCard from "@/components/UI/Cards/baseCard.vue";
+
 export default {
   data: () => ({
     recent: false,
@@ -195,6 +197,9 @@ export default {
     }
   }, mounted() {
     this.setBlocks();
+  },
+  components: {
+    baseCard
   }
 };
 </script>
