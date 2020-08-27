@@ -4,8 +4,8 @@
       <baseCard>
       <!-- Top bar chat !-->
       <chatToolbar
-       v-on:close="closeWindow($event)"
-       v-on:windowPropertiesChanged="updateSize($event)"
+       @close="closeWindow($event)"
+       @windowPropertiesChanged="updateSize($event)"
       ></chatToolbar>
 
         <!-- Liste messages !-->
@@ -13,7 +13,7 @@
               </messageList>
 
         <!-- Input message !-->
-        <chatInput :label="'Type your message here'" v-on:sendMessage="submitMessage($event)">
+        <chatInput :label="'Type your message here'" @sendMessage="submitMessage($event)">
         </chatInput>
 
       </baseCard>

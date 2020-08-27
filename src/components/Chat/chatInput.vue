@@ -1,43 +1,30 @@
 <template>
         <v-row class="pt-2">
-          <v-col cols="2" class="pr-2 pt-7">
-              <v-btn
-                fab
-                dark
-                small
-                color="primary"
-                class="send_icon"
-                @click="sendMessage"
-              >
-                            <v-icon dark size="22">mdi-plus</v-icon>
-              </v-btn>
+          <v-col cols="1" class="pt-7 ml-4">
+              <iconButton :icon="'mdi-plus'" :shadow="true" :gradient="true"></iconButton>
+
           </v-col>
-          <v-col class="ml-n6" cols="8">
+          <v-col class="ml-5" cols="8">
             <v-textarea
               @click:append-outer="sendMessage"
               @keyup.enter="sendMessage"
               v-model="messageNew.text"
+              :no-resize="true"
               :label="label"
               rows="1"
             ></v-textarea>
           </v-col>
          <v-col cols="1" class="pr-15 pt-7">
-              <v-btn
-                fab
-                dark
-                small
-                color="primary"
-                class="send_icon"
-                @click="sendMessage"
-              >
-                            <v-icon dark size="22">mdi-send</v-icon>
-              </v-btn>
+              <iconButton :icon="'mdi-send'" :shadow="true" :gradient="true"></iconButton>
           </v-col>
         </v-row>
 </template>
 
 
 <script>
+import iconButton from "@/components/UI/Buttons/iconButton.vue";
+
+
 export default {
   name: "",
 
@@ -48,11 +35,14 @@ export default {
     }
     
   }),
+    components: {
+      iconButton
+  },
   methods: {
     sendMessage() {
     this.$emit("sendMessage",this.messageNew)
     this.messageNew.text = null;
-	}
+  }
 }
 
 };

@@ -1,5 +1,6 @@
 <template>
 <div>
+  
   <div v-if="sent" class="message">
 <li class="message_chain me">{{ message.msg }}</li>
                   <v-icon class="message_icon_left">mdi-dots-horizontal</v-icon>
@@ -31,6 +32,7 @@ ul li {
   clear: both;
   padding: 10px;
   font-family: Helvetica, Arial, sans-serif;
+  opacity: 0.8;
 }
 
 .me {

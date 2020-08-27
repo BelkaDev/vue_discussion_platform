@@ -9,17 +9,12 @@
             </v-toolbar-title>
 
             <v-spacer></v-spacer>
-            <template class="toolbar_icons">
-              <v-icon class="toolbar_icon" color="#979797">mdi-magnify</v-icon>
-
-
-              <v-icon v-if="!windowProperties.isExpanded" @click="expand" class="toolbar_icon" color="#979797">mdi-fullscreen</v-icon>
-              <v-icon v-if="windowProperties.isExpanded" @click="expand" class="toolbar_icon" color="#979797">mdi-fullscreen-exit</v-icon>
-
-
-              <v-icon class="toolbar_icon" color="#979797">mdi-close</v-icon>
-
-          </template>
+            <template class="toolbar_buttons">
+              <iconButton :color="'#979797'" :icon="'mdi-magnify'" :shadow="true"></iconButton>
+              <iconButton v-if="!windowProperties.isExpanded" @click="expand" :color="'#979797'" :icon="'mdi-fullscreen'" :shadow="true"></iconButton>
+              <iconButton v-if="windowProperties.isExpanded" @click="expand" :color="'#979797'" :icon="'mdi-fullscreen-exit'" :shadow="true"></iconButton>
+              <iconButton :color="'#979797'" :icon="'mdi-close'" :shadow="true"></iconButton>
+            </template>
 
           </v-toolbar>
 </template>
@@ -27,6 +22,8 @@
 
 
 <script>
+import iconButton from "@/components/UI/Buttons/iconButton.vue";
+
 export default {
   name: "chatToolbar",
 
@@ -37,7 +34,7 @@ export default {
   }),
 
   methods: {
-          expand(){
+     expand(){
       if (!this.windowProperties.isExpanded) {
       this.chatboxWidth=12;
       this.expand_icon="mdi-fullscreen-exit"
@@ -49,6 +46,9 @@ export default {
       }
     this.$emit("windowPropertiesChanged",{"isExpanded":this.isExpanded,"width":this.chatboxWidth})
     }
+  },
+  components: {
+      iconButton
   }
 };
 </script>
@@ -56,16 +56,6 @@ export default {
 
 
 <style >
-
-.toolbar_icon {
-  background-color: white !important;
-  border-radius: 50%;
-  padding:8px;
-  opacity: .6;
-  margin:5px;
-           box-shadow: 
-  0px 3px 10px rgba(0,0,0,0.2);
-}
 
 .chat_title_primary {
   color: #0d1c2e;
@@ -82,5 +72,9 @@ export default {
   margin-top: 1.8em;
 }
 
+.toolbar_buttons {
+    padding: 2px;
+    margin: 2px;
+}
 
 </style>
