@@ -3,107 +3,34 @@
     <v-col :cols="chatboxWidth" wrap>
       <baseCard>
         
-          <v-toolbar color="#FAFBFF" flat height="80px">
-            <v-avatar class="ml-2" size="50">
-              <img src="https://cdn.vuetifyjs.com/images/john.jpg" alt="John" />
-            </v-avatar>
-            <v-toolbar-title class="title_primary">Luy Robin </v-toolbar-title>
-            <v-toolbar-title class="title_secondary"
-              >Last message 5 hours ago
-            </v-toolbar-title>
-
-            <v-spacer></v-spacer>
-            <template class="toolbar_icons">
-              <v-icon class="toolbar_icon" color="#979797">mdi-magnify</v-icon>
-
-
-              <v-icon v-if="!isExpanded" @click="expand" class="toolbar_icon" color="#979797">mdi-fullscreen</v-icon>
-              <v-icon v-if="isExpanded" @click="expand" class="toolbar_icon" color="#979797">mdi-fullscreen-exit</v-icon>
-
-
-              <v-icon class="toolbar_icon" color="#979797">mdi-close</v-icon>
-
-          </template>
-
-          </v-toolbar>
-        
+      <chatToolbar></chatToolbar>
 
         <v-list id="messageList" rounded height="380px" class="scroll">
-          <v-list-item-group color="primary">
+          <v-list-item-group >
             <ul
               v-for="(block, block_index) in message_blocks"
               :key="block_index"
               :class="block.sent ? 'text-right' : ''"
             >
-            <!-- message chain !-->
-
             <div v-for="(message,message_index) in block"
             :key="message_index">
-              <template>
-                <div class="message" v-if="message.sent">
-                  <!-- OSEF -->
-                  <li class="message_chain me">{{ message.msg }}</li>
-                  <v-icon class="message_icon_left">mdi-dots-horizontal</v-icon>
-                  <p v-if="message_index==block.length-1" class="message_date_left">4 hours ago</p>
-                </div>
-
-                <div class="message" v-else>
-                  <!-- received messages !-->
-                  <v-avatar v-if="message_index==0" class="message_avatar_right ml-2" size="38">
-                    <img
-                      src="https://cdn.vuetifyjs.com/images/john.jpg"
-                      alt="John"
-                    />
-                  </v-avatar>
-                  <li class="message_chain him">{{ message.msg }}</li>
-                  <br style="margin-bottom:8px">
-                  <v-icon class="message_icon_right">mdi-dots-horizontal</v-icon>
-                  <p v-if="message_index==block.length-1" class="message_date_right">4 hours ago</p>
-                </div>
-              </template>
+             
+                <template v-if="message.sent">
+                <chatBubble :sent="true" :message="message" :isFirst="message_index==0" :isLast="message_index==block.length-1">
+                </chatBubble>
+                </template>
+                <chatBubble v-else :message="message" :isFirst="message_index==0" :isLast="message_index==block.length-1">
+                </chatBubble>
         </div>
             </ul>
           </v-list-item-group>
         </v-list>
         <!-- CHAT INPUT !-->
-        <v-row class="pt-2">
-          <v-col cols="2" class="pr-2 pt-7">
-              <v-btn
-                fab
-                dark
-                small
-                color="primary"
-                class="send_icon"
-                @click="sendMessage"
-              >
-                            <v-icon dark size="22">mdi-plus</v-icon>
-              </v-btn>
-          </v-col>
-          <v-col class="ml-n6" cols="8">
-            <v-textarea
-              @click:append-outer="sendMessage"
-              @keyup.enter="sendMessage"
-              v-model="messageNew.text"
-              no-resize="noResize"
-              label="Type message here"
-              rows="1"
-              clearable="clearable"
-              auto-grow="autoGrow"
-            ></v-textarea>
-          </v-col>
-         <v-col cols="1" class="pr-15 pt-7">
-              <v-btn
-                fab
-                dark
-                small
-                color="primary"
-                class="send_icon"
-                @click="sendMessage"
-              >
-                            <v-icon dark size="22">mdi-send</v-icon>
-              </v-btn>
-          </v-col>
-        </v-row>
+        <!--  !-->
+        <chatInput v-on:sendMessage="submitMessage($event)">
+
+        </chatInput>
+
       </baseCard>
     </v-col>
   </v-container>
@@ -111,6 +38,9 @@
 
 <script>
 import baseCard from "@/components/UI/Cards/baseCard.vue";
+import chatToolbar from "./chatToolbar";
+import chatBubble from "./chatBubble";
+import chatInput from "./chatInput";
 
 export default {
   data: () => ({
@@ -119,9 +49,6 @@ export default {
     message_blocks: [],
     expand_icon: "mdi-fullscreen",
     isExpanded: false,
-    messageNew: {
-      text: null
-    },
     messages: [
       {
         msg: "message1",
@@ -151,11 +78,11 @@ export default {
     ]
   }),
   methods: {
-    sendMessage() {
+    submitMessage(newMessage) {
       var container = this.$el.querySelector("#messageList");
       container.scrollTop = container.scrollHeight;
       let message = {
-        msg: this.messageNew.text,
+        msg: newMessage.text,
         avatar: "https://cdn.vuetifyjs.com/images/john.png",
         sent: true
       };
@@ -194,12 +121,15 @@ export default {
       this.expand_icon="mdi-fullscreen"
       this.isExpanded=false;
       }
-    }
+    },
   }, mounted() {
     this.setBlocks();
   },
   components: {
-    baseCard
+    baseCard,
+    chatToolbar,
+    chatBubble,
+    chatInput
   }
 };
 </script>
@@ -217,19 +147,6 @@ export default {
 }
 * {
   overflow: hidden;
-}
-.title_primary {
-  color: #0d1c2e;
-  font-size: 20px;
-  margin-left: 10px;
-  margin-bottom: 1em;
-  font-size: 18px;
-}
-.title_secondary {
-  color: #2a8bf2;
-  font-size: 12px;
-  margin-left: -6.6em;
-  margin-top: 1.8em;
 }
 
 ul {
@@ -321,17 +238,6 @@ ul li {
 .message_chain:not(:first-child) {
   margin-top: -2em;
   box-shadow: 1px 0.5px 3px rgba(42, 139, 242, 0.4);
-}
-
-/* TOOLBAR CSS */
-.toolbar_icon {
-  background-color: white !important;
-  border-radius: 50%;
-  padding:8px;
-  opacity: .6;
-  margin:5px;
-           box-shadow: 
-  0px 3px 10px rgba(0,0,0,0.2);
 }
 
 /* INPUT CSS */
