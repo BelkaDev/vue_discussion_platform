@@ -13,8 +13,8 @@
               <v-icon class="toolbar_icon" color="#979797">mdi-magnify</v-icon>
 
 
-              <v-icon v-if="!isExpanded" @click="expand" class="toolbar_icon" color="#979797">mdi-fullscreen</v-icon>
-              <v-icon v-if="isExpanded" @click="expand" class="toolbar_icon" color="#979797">mdi-fullscreen-exit</v-icon>
+              <v-icon v-if="!windowProperties.isExpanded" @click="expand" class="toolbar_icon" color="#979797">mdi-fullscreen</v-icon>
+              <v-icon v-if="windowProperties.isExpanded" @click="expand" class="toolbar_icon" color="#979797">mdi-fullscreen-exit</v-icon>
 
 
               <v-icon class="toolbar_icon" color="#979797">mdi-close</v-icon>
@@ -32,11 +32,27 @@ export default {
 
   props: {
   },
-  data: () => ({}),
+  data: () => ({
+    windowProperties: {isExpanded:false,width:6},
+  }),
 
-  methods: {}
+  methods: {
+          expand(){
+      if (!this.windowProperties.isExpanded) {
+      this.chatboxWidth=12;
+      this.expand_icon="mdi-fullscreen-exit"
+      this.windowProperties.isExpanded=true;
+      } else {
+      this.chatboxWidth=6;
+      this.expand_icon="mdi-fullscreen"
+      this.windowProperties.isExpanded=false;
+      }
+    this.$emit("windowPropertiesChanged",{"isExpanded":this.isExpanded,"width":this.chatboxWidth})
+    }
+  }
 };
 </script>
+    
 
 
 <style >

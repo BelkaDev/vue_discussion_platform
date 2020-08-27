@@ -17,7 +17,7 @@
               @click:append-outer="sendMessage"
               @keyup.enter="sendMessage"
               v-model="messageNew.text"
-              label="Type message here"
+              :label="label"
               rows="1"
             ></v-textarea>
           </v-col>
@@ -37,13 +37,11 @@
 </template>
 
 
-
 <script>
 export default {
   name: "",
 
-  props: {
-  },
+  props: ["label"],
   data: () => ({
     messageNew: {
       text: null
@@ -52,10 +50,21 @@ export default {
   }),
   methods: {
     sendMessage() {
-	this.$emit("sendMessage",this.messageNew)
+    this.$emit("sendMessage",this.messageNew)
+    this.messageNew.text = null;
 	}
 }
 
 };
 </script>
 
+<style>
+.v-textarea {
+  opacity:0.5;
+}
+
+.send_icon {
+    background: linear-gradient(to top, rgba(42, 139, 242, 1), rgba(124, 184, 247, 1));
+    box-shadow: 0px 0px 3px #2A8BF2;
+}
+</style>

@@ -1,34 +1,19 @@
 <template>
   <v-container height="100%">
-    <v-col :cols="chatboxWidth" wrap>
+    <v-col :cols="windowProperties.width" wrap>
       <baseCard>
-        
-      <chatToolbar></chatToolbar>
+      <!-- Top bar chat !-->
+      <chatToolbar
+       v-on:close="closeWindow($event)"
+       v-on:windowPropertiesChanged="updateSize($event)"
+      ></chatToolbar>
 
-        <v-list id="messageList" rounded height="380px" class="scroll">
-          <v-list-item-group >
-            <ul
-              v-for="(block, block_index) in message_blocks"
-              :key="block_index"
-              :class="block.sent ? 'text-right' : ''"
-            >
-            <div v-for="(message,message_index) in block"
-            :key="message_index">
-             
-                <template v-if="message.sent">
-                <chatBubble :sent="true" :message="message" :isFirst="message_index==0" :isLast="message_index==block.length-1">
-                </chatBubble>
-                </template>
-                <chatBubble v-else :message="message" :isFirst="message_index==0" :isLast="message_index==block.length-1">
-                </chatBubble>
-        </div>
-            </ul>
-          </v-list-item-group>
-        </v-list>
-        <!-- CHAT INPUT !-->
-        <!--  !-->
-        <chatInput v-on:sendMessage="submitMessage($event)">
+        <!-- Liste messages !-->
+              <messageList :blocks="message_blocks">
+              </messageList>
 
+        <!-- Input message !-->
+        <chatInput :label="'Type your message here'" v-on:sendMessage="submitMessage($event)">
         </chatInput>
 
       </baseCard>
@@ -39,16 +24,14 @@
 <script>
 import baseCard from "@/components/UI/Cards/baseCard.vue";
 import chatToolbar from "./chatToolbar";
-import chatBubble from "./chatBubble";
 import chatInput from "./chatInput";
+import messageList from "./messageList";
 
 export default {
   data: () => ({
     recent: false,
-    chatboxWidth: 6,
+    windowProperties: {isExpanded:false,width:6},
     message_blocks: [],
-    expand_icon: "mdi-fullscreen",
-    isExpanded: false,
     messages: [
       {
         msg: "message1",
@@ -111,25 +94,18 @@ export default {
         }
       }
     },
-    expand(){
-      if (!this.isExpanded) {
-      this.chatboxWidth=12;
-      this.expand_icon="mdi-fullscreen-exit"
-      this.isExpanded=true;
-      } else {
-      this.chatboxWidth=6;
-      this.expand_icon="mdi-fullscreen"
-      this.isExpanded=false;
-      }
-    },
+    updateSize(newProperties) {
+      this.windowProperties.isExpanded = newProperties.isExpanded
+      this.windowProperties.width = newProperties.width
+    }
   }, mounted() {
     this.setBlocks();
   },
   components: {
     baseCard,
     chatToolbar,
-    chatBubble,
-    chatInput
+    chatInput,
+    messageList
   }
 };
 </script>
@@ -155,98 +131,4 @@ ul {
   padding: 0;
 }
 
-ul li {
-  display: inline-block;
-  clear: both;
-  padding: 10px;
-  font-family: Helvetica, Arial, sans-serif;
-
-}
-
-.me {
-  float: right;
-  background: #fff;
-  border-radius: 10px 10px 0px 10px;
-  margin-left: 10%;
-  margin-right: 1em;
-  margin-bottom: 0.5em;
-  margin-top: 0.5em;
-  color: #707c97;
-  border: 1px solid rgba(112, 124, 151, 0.25);
-}
-
-.him {
-  float: left;
-  background: linear-gradient(to right, #60a9f6, #2a8bf2);
-  border-radius: 0px 10px 10px 10px;
-  margin-left: 3.5em;
-  margin-right: 10%;
-  margin-bottom: 0.5em;
-  margin-top: -2em;
-  color: #fff;
-  box-shadow: 
-  2px 5px 15px rgba(42, 139, 242, 0.4);
-}
-.message {
-  padding: 0;
-  margin: 0;
-}
-.message_icon_right {
-  float: left;
-  margin-top: -0.85em;
-  margin-left: -2em;
-  opacity: 0.6;
-}
-.message_icon_left {
-  float: right;
-  margin-top: 0.85em;
-  margin-right: -2em;
-  opacity: 0.6;
-}
-.message_date_left {
-  color: #707c97;
-  opacity: 0.95;
-  position: relative;
-  float: right;
-  font-size: 12px;
-  display: block;
-  margin-left: 76.5%;
-  margin-right: 2em;
-  padding: -5px;
-}
-.message_date_right {
-  color: #707c97;
-  opacity: 0.75;
-  position: relative;
-  float: left;
-  font-size: 12px;
-  display: block;
-  margin-left: 5em;
-  margin-top: 0px;
-  margin-right: 70%;
-}
-.message_avatar_right {
-  position: relative;
-  margin-right: 100%;
-  top: 6px;
-}
-/* Messages un envoyés après l'autre */
-.message_chain {
-  margin-top: 0.2em;
-  margin-bottom: 0.1em;
-}
-.message_chain:not(:first-child) {
-  margin-top: -2em;
-  box-shadow: 1px 0.5px 3px rgba(42, 139, 242, 0.4);
-}
-
-/* INPUT CSS */
-.v-textarea {
-  opacity:0.5;
-}
-
-.send_icon {
-    background: linear-gradient(to top, rgba(42, 139, 242, 1), rgba(124, 184, 247, 1));
-    box-shadow: 0px 0px 3px #2A8BF2;
-}
 </style>
