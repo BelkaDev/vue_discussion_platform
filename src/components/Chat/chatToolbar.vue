@@ -13,7 +13,7 @@
               <iconButton :color="'#979797'" :icon="'mdi-magnify'" :shadow="true"></iconButton>
               <iconButton v-if="!windowProperties.isExpanded" @click="expand" :color="'#979797'" :icon="'mdi-fullscreen'" :shadow="true"></iconButton>
               <iconButton v-if="windowProperties.isExpanded" @click="expand" :color="'#979797'" :icon="'mdi-fullscreen-exit'" :shadow="true"></iconButton>
-              <iconButton :color="'#979797'" :icon="'mdi-close'" :shadow="true"></iconButton>
+              <iconButton @click="close" :color="'#979797'" :icon="'mdi-close'" :shadow="true"></iconButton>
             </template>
 
           </v-toolbar>
@@ -30,21 +30,23 @@ export default {
   props: {
   },
   data: () => ({
-    windowProperties: {isExpanded:false,width:6},
+    windowProperties: {isExpanded:false,isClosed:false},
   }),
 
   methods: {
      expand(){
       if (!this.windowProperties.isExpanded) {
-      this.chatboxWidth=12;
       this.expand_icon="mdi-fullscreen-exit"
       this.windowProperties.isExpanded=true;
       } else {
-      this.chatboxWidth=6;
       this.expand_icon="mdi-fullscreen"
       this.windowProperties.isExpanded=false;
       }
-    this.$emit("windowPropertiesChanged",{"isExpanded":this.isExpanded,"width":this.chatboxWidth})
+    this.$emit("windowPropertiesChanged",this.windowProperties)
+    },
+    close() {
+     this.windowProperties.isClosed=true
+     this.$emit("windowPropertiesChanged",this.windowProperties)
     }
   },
   components: {

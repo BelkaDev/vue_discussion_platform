@@ -31,7 +31,7 @@ import messageList from "./messageList";
 export default {
   data: () => ({
     recent: false,
-    windowProperties: {isExpanded:false,width:12},
+    windowProperties: {isExpanded:false,isClosed:false},
     message_blocks: [],
     messages: [
       {
@@ -96,8 +96,12 @@ export default {
       }
     },
     updateSize(newProperties) {
-      this.windowProperties.isExpanded = newProperties.isExpanded
-      this.windowProperties.width = newProperties.width
+      this.windowProperties = newProperties
+      this.$emit("layoutPropertiesChanged",{"isExpanded":this.windowProperties.isExpanded,"isClosed":this.windowProperties.isClosed,"component":"chatbox"})
+    },
+    closeWindow(newProperties) {
+      this.windowProperties = newProperties
+      this.$emit("layoutPropertiesChanged",{"isExpanded":this.windowProperties.isExpanded,"isClosed":this.windowProperties.isClosed,"component":"chatbox"})
     }
   }, mounted() {
     this.setBlocks();
