@@ -1,5 +1,5 @@
 <template>
-          <v-toolbar color="#FAFBFF" flat height="80px">
+          <v-toolbar class="chat_toolbar" color="#FAFBFF" flat height="80px">
             <v-avatar class="ml-2" size="50">
               <img src="https://cdn.vuetifyjs.com/images/john.jpg" alt="John" />
             </v-avatar>
@@ -59,17 +59,16 @@ export default {
 
 .chat_title_primary {
   color: #0d1c2e;
-  font-size: 20px;
   margin-left: 10px;
   margin-bottom: 1em;
-  font-size: 18px;
+  font-size: 20px;
 }
 
 .chat_title_secondary {
   color: #2a8bf2;
-  font-size: 12px;
-  margin-left: -6.6em;
-  margin-top: 1.8em;
+  font-size: 12px !important;
+  margin-left: -7.3em;
+  margin-top: 2em;
 }
 
 .toolbar_buttons {

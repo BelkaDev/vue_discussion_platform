@@ -1,5 +1,5 @@
 <template>
-  <v-card class="mb-7">
+  <v-card class="">
     <slot />
       <v-spacer></v-spacer>
     <v-divider></v-divider>

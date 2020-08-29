@@ -1,5 +1,5 @@
 <template>
-        <v-row class="pt-2">
+        <v-row style="">
           <v-col cols="1" class="pt-7 ml-4">
               <iconButton :icon="'mdi-plus'" :shadow="true" :gradient="true"></iconButton>
 
@@ -9,7 +9,7 @@
               @click:append-outer="sendMessage"
               @keyup.enter="sendMessage"
               v-model="messageNew.text"
-              :no-resize="true"
+              
               :label="label"
               rows="1"
             ></v-textarea>

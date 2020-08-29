@@ -1,19 +1,20 @@
 <template>
-  <v-container height="100%">
-    <v-col :cols="windowProperties.width" wrap>
-      <baseCard>
+  <v-container style="" class="no_padding no_margin">
+    <v-col :cols="windowProperties.width" class="fill-height">
+      <baseCard class="fill-height mb-0"  >
       <!-- Top bar chat !-->
+      
+ 
       <chatToolbar
        @close="closeWindow($event)"
        @windowPropertiesChanged="updateSize($event)"
       ></chatToolbar>
-
         <!-- Liste messages !-->
-              <messageList :blocks="message_blocks">
+              <messageList  ref="infoBox"  :blocks="message_blocks">
               </messageList>
 
         <!-- Input message !-->
-        <chatInput :label="'Type your message here'" @sendMessage="submitMessage($event)">
+        <chatInput class="" :label="'Type your message here'" @sendMessage="submitMessage($event)">
         </chatInput>
 
       </baseCard>
@@ -30,7 +31,7 @@ import messageList from "./messageList";
 export default {
   data: () => ({
     recent: false,
-    windowProperties: {isExpanded:false,width:6},
+    windowProperties: {isExpanded:false,width:12},
     message_blocks: [],
     messages: [
       {
@@ -131,4 +132,10 @@ ul {
   padding: 0;
 }
 
+.no_padding {
+  padding:0;
+}
+.no_margin {
+  margin: 0;
+}
 </style>

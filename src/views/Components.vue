@@ -1,15 +1,15 @@
 <template>
   <v-container>
-    <chatbox></chatbox>
+    <layout></layout>
   </v-container>
 </template>
 
 <script>
-import chatbox from "@/components/Chat/chatbox.vue";
+import layout from "@/components/Layouts/mainLayout.vue";
 
 export default {
   components: {
-    chatbox,
+    layout,
   }
 };
 </script>

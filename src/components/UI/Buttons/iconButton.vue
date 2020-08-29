@@ -36,7 +36,6 @@ export default {
     mounted() {
     this.setClass();
     this.setStyle();
-    alert(this.customStyle)
   },
 };
 </script>
