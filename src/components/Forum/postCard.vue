@@ -1,52 +1,72 @@
 <template>
-        <v-card class="position-relative profile-card mb-7">
-          <v-card-text class="pa-5">
-            <div class="text-center">
-              <img
-                src="https://randomuser.me/api/portraits/men/81.jpg"
-                alt="user"
-                class="rounded-circle"
-                width="100"
-              />
-              <h2 class="font-weight-regular">Angela Dominic</h2>
-              <h6 class="op-5 font-weight-regular">Web Designer & Developer</h6>
-              <v-btn
-                color="deep-purple accent-2"
-                x-large
-                class="text-capitalize white--text mt-7"
-                rounded
-              >Follow</v-btn>
-              <v-row class="mt-6">
-                <v-col cols="4">
-                  <h3 class="mb-0 font-weight-light blue-grey--text text--darken-2">1099</h3>
-                  <small class="blue-grey--text text--darken-2">Articles</small>
-                </v-col>
-                <v-col cols="4">
-                  <h3 class="mb-0 font-weight-light blue-grey--text text--darken-2">23,469</h3>
-                  <small class="blue-grey--text text--darken-2">Followers</small>
-                </v-col>
-                <v-col cols="4">
-                  <h3 class="mb-0 font-weight-light blue-grey--text text--darken-2">6035</h3>
-                  <small class="blue-grey--text text--darken-2">Following</small>
-                </v-col>
-              </v-row>
-            </div>
-          </v-card-text>
-        </v-card>
+<v-card @click="alert('ok')">
+  
+    <v-card-title class="pb-0 pt-1">
+      <v-list-item-avatar color="grey darken-3">
+          <v-img
+            class="elevation-6"
+            src="https://avataaars.io/?avatarStyle=Transparent&topType=ShortHairShortCurly&accessoriesType=Prescription02&hairColor=Black&facialHairType=Blank&clotheType=Hoodie&clotheColor=White&eyeType=Default&eyebrowType=DefaultNatural&mouthType=Default&skinColor=Light"
+          ></v-img>
+        </v-list-item-avatar>
+
+      <span class="title font-weight-bold" style="font-size:16px !important;">Luy Robin</span>
+        <v-spacer></v-spacer>
+      <span class="post_date font-weight-medium">30 minutes ago</span>  
+    </v-card-title>
+    
+      <span class="title font-weight-bold" style="font-size:16px !important;">Topic Title one</span>
+
+    <v-card-text class="">
+      Turns out semicolon-less style is easier and safer in TS because most gotcha edge cases are type invalid as well.
+    </v-card-text>
+
+    <v-card-actions class="mt-n5">
+      <v-list-item class="">
+  
+
+        <v-row
+          align="center"
+          justify="end"
+          class="post_info ml-n8"
+        >
+          <v-icon class="post_info_icon mr-2" size="18">mdi-thumb-up</v-icon>
+          <span class="subheading mr-3 mt-1" style="color:#707C97 !important" >256</span>
+          <v-icon class="post_info_icon mr-2 " size="18" >mdi-forum</v-icon>
+          <span class="subheading mr-3 mt-1" style="color:#707C97 !important">45</span>
+            <v-icon class="post_info_icon  mr-2" size="18">mdi-eye</v-icon>
+          <span class="subheading mr-3 mt-1"  style="color:#707C97 !important">45</span>
+        </v-row>
+      </v-list-item>
+    </v-card-actions>
+</v-card>
+  
 </template>
 
+
 <script>
-export default {
-  name: "postCard",
 
-  props: {
-    heading: {
-      type: String,
-      default: ""
+
+  export default {
+    data: () => ({
+      //
+    }),
+    components: {
+      
     }
-  },
-  data: () => ({}),
-
-  methods: {}
-};
+  }
 </script>
+<style>
+.post_info_icon {
+  opacity:.7;
+}
+
+.subheading {
+  font-size:14px;
+}
+.post_date {
+  color: #707C97 !important;
+  font-size: 14px !important;
+  padding-top:2px;
+}
+
+</style>

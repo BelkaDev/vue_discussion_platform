@@ -20,7 +20,7 @@
                 <v-layout row justify-space-between>
                   <v-flex xs4 sm4 md4 lg4 xl4 d-flex class="pa-0">
                       <v-flex d-flex>
-                        <v-icon class="mr-4" size="36" style="color:#979797"
+                        <v-icon class="mr-4 " size="40" style="color:#979797"
                           >mdi-earth</v-icon
                         >
                         <baseSwitch></baseSwitch>
@@ -46,9 +46,8 @@
 
 
                   <searchBar style="margin-top:90px;margin-bottom:20px;"/>
-<v-card>
-  <v-card-title>ok</v-card-title>
-</v-card>
+<postCard/>
+
 
               </div>
           </v-flex>
@@ -57,12 +56,12 @@
           <v-flex d-flex v-if="!isClosed" :class="breakPointRight" >
             <v-layout row wrap class="right_layout pl-0" >
               <chatbox
+                class="chatbox"
                 :key="id"
                 @layoutPropertiesChanged="updateSize($event)"
               ></chatbox>
             </v-layout>
           </v-flex>
-
           </v-layout>
       </v-container>
     </div>
@@ -74,6 +73,7 @@ import chatbox from "@/components/Chat/chatbox.vue";
 import baseSwitch from "@/components/UI/Switch/baseSwitch.vue";
 import defaultButton from "@/components/UI/Buttons/defaultButton.vue";
 import searchBar from "@/components/Shared/searchBar.vue";
+import postCard from "@/components/Forum/postCard.vue";
 export default {
   data: () => ({
     expandRight: false,
@@ -86,7 +86,8 @@ export default {
     chatbox,
     baseSwitch,
     defaultButton,
-    searchBar
+    searchBar,
+    postCard
   },
   methods: {
     updateSize(windowProperties) {
@@ -116,7 +117,7 @@ export default {
   text-align: center;
   color: #2c3e50;
   border: 1px solid;
-  background-color: #EAF3FE;
+  background-color: rgba(42, 139, 242, 0.1);
   padding: 0;
   margin: 0;
   max-width: 1000px;
@@ -136,9 +137,8 @@ export default {
   }
 }
 .left_layout {
-  border:2px solid red;
   width:100%;
-  padding-left:2%;
+  padding-left:1%;
   padding-top: 5%;
 }
 .header_title {
@@ -176,5 +176,8 @@ export default {
 }
 .post_list {
   margin-top: -35%;
+}
+.chatbox {
+  margin: 0px 5px !important;
 }
 </style>

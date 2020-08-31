@@ -1,6 +1,6 @@
 <template >
   <v-card class="searchBar">
-      <v-layout style="2px solid red">
+      <v-layout >
           <v-flex class="my-n4 mx-4" md7> 
                       <v-text-field
             class="searchField my-6"
@@ -37,12 +37,10 @@
           <v-btn
             color="grey darken-3"
             text
-            v-on="on"
-            style="text-transform:none"
-          >
+            v-on="on"          >
           
            Sort By
-              <v-icon right class="pb-1">mdi-chevron-down</v-icon> 
+              <v-icon right class="pb-2">mdi-chevron-down</v-icon> 
           </v-btn>
         </template>
         <v-list>
@@ -79,14 +77,13 @@ export default {
 }
 .searchBar {
   width:100%;
-  height:60px;
+  height:50px;
 }
 .divider{
-    height:60px;
+    height:50px;
     opacity:.75;
 }
 .sortBy * {
-    padding-top:5px;
-    font-size:14px;
+    padding-top:4px;
 }
 </style>
