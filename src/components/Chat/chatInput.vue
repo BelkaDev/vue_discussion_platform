@@ -1,17 +1,17 @@
 <template>
-        <v-row style="">
+        <v-row class="pt-2">
           <v-col cols="1" class="pt-7 ml-4">
               <iconButton :icon="'mdi-plus'" :shadow="true" :gradient="true"></iconButton>
 
           </v-col>
-          <v-col class="ml-5" cols="8">
+          <v-col class="ml-5 mb-2" cols="8">
             <v-textarea
               @click:append-outer="sendMessage"
               @keyup.enter="sendMessage"
               v-model="messageNew.text"
-              
               :label="label"
               rows="1"
+              :no-resize="true"
             ></v-textarea>
           </v-col>
          <v-col cols="1" class="pr-15 pt-7">

@@ -1,7 +1,7 @@
 <template>
   <v-container style="" class="no_padding no_margin">
     <v-col :cols="windowProperties.width" class="fill-height">
-      <baseCard class="fill-height mb-0"  >
+      <baseCard style="" class=" mb-0"  >
       <!-- Top bar chat !-->
       
  
