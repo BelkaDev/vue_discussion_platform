@@ -46,7 +46,7 @@
 
 
                   <searchBar style="margin-top:90px;margin-bottom:20px;"/>
-<postCard/>
+<postList/>
 
 
               </div>
@@ -73,7 +73,7 @@ import chatbox from "@/components/Chat/chatbox.vue";
 import baseSwitch from "@/components/UI/Switch/baseSwitch.vue";
 import defaultButton from "@/components/UI/Buttons/defaultButton.vue";
 import searchBar from "@/components/Shared/searchBar.vue";
-import postCard from "@/components/Forum/postCard.vue";
+import postList from "@/components/Forum/postList.vue";
 export default {
   data: () => ({
     expandRight: false,
@@ -87,7 +87,7 @@ export default {
     baseSwitch,
     defaultButton,
     searchBar,
-    postCard
+    postList
   },
   methods: {
     updateSize(windowProperties) {

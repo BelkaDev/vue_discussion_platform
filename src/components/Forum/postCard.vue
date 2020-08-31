@@ -1,23 +1,23 @@
 <template>
-<v-card @click="alert('ok')">
+<v-card >
   
     <v-card-title class="pb-0 pt-1">
       <v-list-item-avatar color="grey darken-3">
           <v-img
             class="elevation-6"
-            src="https://avataaars.io/?avatarStyle=Transparent&topType=ShortHairShortCurly&accessoriesType=Prescription02&hairColor=Black&facialHairType=Blank&clotheType=Hoodie&clotheColor=White&eyeType=Default&eyebrowType=DefaultNatural&mouthType=Default&skinColor=Light"
+            :src="post.creator.avatar"
           ></v-img>
         </v-list-item-avatar>
 
-      <span class="title font-weight-bold" style="font-size:16px !important;">Luy Robin</span>
+      <span class="title font-weight-bold" style="font-size:16px !important;">{{post.creator.name}} {{post.creator.lastName}}</span>
         <v-spacer></v-spacer>
-      <span class="post_date font-weight-medium">30 minutes ago</span>  
+      <span class="post_date font-weight-medium">{{post.date}}</span>  
     </v-card-title>
     
-      <span class="title font-weight-bold" style="font-size:16px !important;">Topic Title one</span>
+      <span class="title font-weight-bold" style="font-size:16px !important;">{{post.title}}</span>
 
     <v-card-text class="">
-      Turns out semicolon-less style is easier and safer in TS because most gotcha edge cases are type invalid as well.
+      {{post.content}}
     </v-card-text>
 
     <v-card-actions class="mt-n5">
@@ -30,11 +30,11 @@
           class="post_info ml-n8"
         >
           <v-icon class="post_info_icon mr-2" size="18">mdi-thumb-up</v-icon>
-          <span class="subheading mr-3 mt-1" style="color:#707C97 !important" >256</span>
+          <span class="subheading mr-3 mt-1" style="color:#707C97 !important" >{{post.comments.length}}</span>
           <v-icon class="post_info_icon mr-2 " size="18" >mdi-forum</v-icon>
-          <span class="subheading mr-3 mt-1" style="color:#707C97 !important">45</span>
+          <span class="subheading mr-3 mt-1" style="color:#707C97 !important">{{post.likes.length}}</span>
             <v-icon class="post_info_icon  mr-2" size="18">mdi-eye</v-icon>
-          <span class="subheading mr-3 mt-1"  style="color:#707C97 !important">45</span>
+          <span class="subheading mr-3 mt-1"  style="color:#707C97 !important">{{post.seen}}</span>
         </v-row>
       </v-list-item>
     </v-card-actions>
@@ -47,8 +47,9 @@
 
 
   export default {
+    props: ["post"],
     data: () => ({
-      //
+      
     }),
     components: {
       
