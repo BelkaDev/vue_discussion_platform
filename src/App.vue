@@ -46,7 +46,7 @@
 
 
                   <searchBar style="margin-top:90px;margin-bottom:20px;"/>
-<postList/>
+<postList style="height:50% !important"/>
 
 
               </div>
@@ -55,11 +55,7 @@
 
           <v-flex d-flex v-if="!isClosed" :class="breakPointRight" >
             <v-layout row wrap class="right_layout pl-0" >
-              <chatbox
-                class="chatbox"
-                :key="id"
-                @layoutPropertiesChanged="updateSize($event)"
-              ></chatbox>
+<postPage/>
             </v-layout>
           </v-flex>
           </v-layout>
@@ -69,11 +65,12 @@
 </template>
 
 <script>
-import chatbox from "@/components/Chat/chatbox.vue";
+
 import baseSwitch from "@/components/UI/Switch/baseSwitch.vue";
 import defaultButton from "@/components/UI/Buttons/defaultButton.vue";
 import searchBar from "@/components/Shared/searchBar.vue";
 import postList from "@/components/Forum/postList.vue";
+import postPage from "@/components/Forum/postPage.vue";
 export default {
   data: () => ({
     expandRight: false,
@@ -83,11 +80,12 @@ export default {
     breakPointLeft: "xs12 sm5 md5 lg5 xl5"
   }),
   components: {
-    chatbox,
+    
     baseSwitch,
     defaultButton,
     searchBar,
-    postList
+    postList,
+    postPage
   },
   methods: {
     updateSize(windowProperties) {

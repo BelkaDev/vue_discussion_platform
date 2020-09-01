@@ -1,9 +1,9 @@
 <template >
-        <v-list id="discussionList" class="scroll">
+        <v-list id="discussionList">
           <v-list-item-group  v-for="post in posts"
               :key="post.id"
           >
-            <chatCard :discussion="post"/>
+            <chatCard :post="post"/>
           </v-list-item-group>
         </v-list>
 
@@ -59,3 +59,13 @@ export default {
 };
 </script>
 
+<style>
+
+.scroll {
+  overflow-y: auto;
+  width: 100%;
+  height: 100%;
+  padding-right: 17px; /* Increase/decrease this value for cross-browser compatibility */
+  box-sizing: content-box;
+}
+</style>
