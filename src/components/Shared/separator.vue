@@ -20,14 +20,15 @@ export default {
 
 <style>
 .separator {
-  color:grey;
+  color:#707c97;
   opacity: .4;
   width:40%;
   
 }
 
 .separator.text {
-  opacity:.75;
+  color:#707c97;
+  opacity:.8;
   margin-top:-8px;
 }
 </style>

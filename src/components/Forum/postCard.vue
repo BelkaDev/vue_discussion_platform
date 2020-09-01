@@ -5,16 +5,16 @@
       <v-list-item-avatar color="grey darken-3">
           <v-img
             class="elevation-6"
-            :src="post.creator.avatar"
+            :src="post.user.avatar"
           ></v-img>
         </v-list-item-avatar>
 
-      <span class="title font-weight-bold" style="font-size:16px !important;">{{post.creator.name}} {{post.creator.lastName}}</span>
+      <span class="title font-weight-bold" style="font-size:16px !important;">{{post.user.name}} {{post.user.lastName}}</span>
         <v-spacer></v-spacer>
       <span class="post_date font-weight-medium">{{post.date}}</span>  
     </v-card-title>
     
-      <span class="title font-weight-bold" style="font-size:16px !important;">{{post.title}}</span>
+      <span class="title font-weight-bold" style="font-size:16px !important; color:#555">{{post.title}}</span>
 
     <v-card-text class="">
       {{post.content}}
@@ -22,7 +22,6 @@
 
     <v-card-actions class="mt-n5">
       <v-list-item class="">
-  
 
         <v-row
           align="center"

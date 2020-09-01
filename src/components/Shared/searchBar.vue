@@ -1,5 +1,5 @@
 <template >
-  <v-card class="searchBar">
+  <v-card tile class="searchBar">
       <v-layout >
           <v-flex class="my-n4 mx-4" md7> 
                       <v-text-field
@@ -80,8 +80,8 @@ export default {
   height:50px;
 }
 .divider{
-    height:50px;
-    opacity:.75;
+    height:30px;
+    opacity:1;
 }
 .sortBy * {
     padding-top:4px;

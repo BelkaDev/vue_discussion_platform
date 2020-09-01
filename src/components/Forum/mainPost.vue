@@ -5,18 +5,17 @@
       <v-list-item-avatar color="grey darken-3">
           <v-img
             class="elevation-6"
-            :src="post.creator.avatar"
+            :src="post.user.avatar"
           ></v-img>
         </v-list-item-avatar>
-
-      <span class="title font-weight-bold" style="font-size:16px !important;">{{post.creator.name}} {{post.creator.lastName}}</span>
+      <span class="title username font-weight-bold" style="font-size:16px !important;">{{post.user.name.charAt(0).toUpperCase() + post.user.name.slice(1)}} {{post.user.lastName.charAt(0).toUpperCase() + post.user.lastName.slice(1)}}</span>
         <v-spacer></v-spacer>
       <span class="post_date font-weight-medium">{{post.date}}</span>  
     </v-card-title>
     
-      <span class="title font-weight-bold" style="font-size:16px !important;">{{post.title}}</span>
+      <span class="title font-weight-bold" style="font-size:16px !important; color:#555 !important">{{post.title}}</span>
 
-    <v-card-text class="">
+    <v-card-text class="post_content">
       {{post.content}}
     </v-card-text>
 
@@ -29,12 +28,12 @@
           justify="end"
           class="post_info ml-n8"
         >
-          <v-icon class="post_info_icon mr-2" size="18">mdi-thumb-up</v-icon>
-          <span class="subheading mr-3 mt-1" style="color:#707C97 !important" >{{post.comments.length}}</span>
-          <v-icon class="post_info_icon mr-2 " size="18" >mdi-forum</v-icon>
-          <span class="subheading mr-3 mt-1" style="color:#707C97 !important">{{post.likes.length}}</span>
-            <v-icon class="post_info_icon  mr-2" size="18">mdi-eye</v-icon>
-          <span class="subheading mr-3 mt-1"  style="color:#707C97 !important">{{post.seen}}</span>
+          <v-icon class="post_info_icon mr-2" size="25">mdi-thumb-up</v-icon>
+          <span class="mr-4 mt-1" style="color:#707C97 !important" >{{post.comments.length}}</span>
+          <v-icon class="post_info_icon mr-2 mt-1" size="25" >mdi-forum</v-icon>
+          <span class=" mr-4 mt-1" style="color:#707C97 !important">{{post.likes.length}}</span>
+            <v-icon class="post_info_icon  mr-2" size="25">mdi-eye</v-icon>
+          <span class="mr-4 mt-1"  style="color:#707C97 !important">{{post.seen}}</span>
         </v-row>
       </v-list-item>
     </v-card-actions>
@@ -69,5 +68,10 @@
   font-size: 14px !important;
   padding-top:2px;
 }
-
+.post_content {
+    text-align:left;
+}
+.username {
+  text-transform: capitalize !important;
+}
 </style>

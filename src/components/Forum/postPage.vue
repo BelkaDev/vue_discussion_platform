@@ -7,6 +7,7 @@
                 <separator class="mt-3">
                   Comments
                 </separator>
+      <commentList :comments="post.comments"></commentList>
     </v-flex>
   </v-layout>
  
@@ -18,6 +19,7 @@
 <script>
 import postPageToolbar from "./postPageToolbar";
 import mainPost from "./mainPost";
+import commentList from "./commentList"
 import separator from "@/components/Shared/separator.vue";
 
   export default {
@@ -30,7 +32,7 @@ import separator from "@/components/Shared/separator.vue";
         title: "Nouveau sujet de discussion",
         date: "30 minutes ago",
       "seen": 15,
-        "creator":
+        "user":
          {
            id: "1",
            name: "Luy",
@@ -41,56 +43,65 @@ import separator from "@/components/Shared/separator.vue";
         comments: [
           {
           id: "1",
-          "content":"thank you sir",
+          "content":"Turns out semicolon-less style is easier and safer in TS because most gotcha edge cases are type invalid as well. ",
           "date": "15 minutes ago",
-          "poster": [
+          "user":
             {
               id: "id",
               name: "whatever",
               lastName: "whatever",
               "avatar":"https://avataaars.io/?avatarStyle=Transparent&topType=ShortHairShortCurly&accessoriesType=Prescription02&hairColor=Black&facialHairType=Blank&clotheType=Hoodie&clotheColor=White&eyeType=Default&eyebrowType=DefaultNatural&mouthType=Default&skinColor=Light"
             }
-          ]
           },
                     {
           id: "2",
-          "content":"thank you again",
+          "content":"Turns out semicolon-less style is easier and safer in TS because most gotcha edge cases are type invalid as well. ",
           "date": "10 minutes ago",
-          "poster": [
+          "user": 
             {
               id: "id",
               name: "whatever",
               lastName: "whatever",
               "avatar":"https://avataaars.io/?avatarStyle=Transparent&topType=ShortHairShortCurly&accessoriesType=Prescription02&hairColor=Black&facialHairType=Blank&clotheType=Hoodie&clotheColor=White&eyeType=Default&eyebrowType=DefaultNatural&mouthType=Default&skinColor=Light"
             }
-          ]
-          }
+          },
+                              {
+          id: "2",
+          "content":"Turns out semicolon-less style is easier and safer in TS because most gotcha edge cases are type invalid as well. ",
+          "date": "10 minutes ago",
+          "user": 
+            {
+              id: "id",
+              name: "whatever",
+              lastName: "whatever",
+              "avatar":"https://avataaars.io/?avatarStyle=Transparent&topType=ShortHairShortCurly&accessoriesType=Prescription02&hairColor=Black&facialHairType=Blank&clotheType=Hoodie&clotheColor=White&eyeType=Default&eyebrowType=DefaultNatural&mouthType=Default&skinColor=Light"
+            }
+          },
+          
 
         ],
            likes: [
           {
           id: "1",
           "date": "15 minutes ago",
-          "user": [
+          "user": 
             {
               id: "id",
               name: "whatever",
               lastName: "whatever",
               "avatar":"https://avataaars.io/?avatarStyle=Transparent&topType=ShortHairShortCurly&accessoriesType=Prescription02&hairColor=Black&facialHairType=Blank&clotheType=Hoodie&clotheColor=White&eyeType=Default&eyebrowType=DefaultNatural&mouthType=Default&skinColor=Light"
             }
-          ]
           },
                     {
           id: "1",
           "date": "15 minutes ago",
-          "user": [
+          "user": 
             {
               id: "id",
               name: "whatever",
               lastName: "whatever",
               "avatar":"https://avataaars.io/?avatarStyle=Transparent&topType=ShortHairShortCurly&accessoriesType=Prescription02&hairColor=Black&facialHairType=Blank&clotheType=Hoodie&clotheColor=White&eyeType=Default&eyebrowType=DefaultNatural&mouthType=Default&skinColor=Light"
             }
-          ]
           },
            ]
       }
@@ -98,6 +109,7 @@ import separator from "@/components/Shared/separator.vue";
     components: {
       postPageToolbar,
       mainPost,
+      commentList,
       separator
     }
   }
