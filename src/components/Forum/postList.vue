@@ -39,27 +39,25 @@ export default {
           id: "1",
           "content":"thank you sir",
           "date": "15 minutes ago",
-          "user": [
+          "user":
             {
               id: "id",
               name: "whatever",
               lastName: "whatever",
               "avatar":"https://avataaars.io/?avatarStyle=Transparent&topType=ShortHairShortCurly&accessoriesType=Prescription02&hairColor=Black&facialHairType=Blank&clotheType=Hoodie&clotheColor=White&eyeType=Default&eyebrowType=DefaultNatural&mouthType=Default&skinColor=Light"
             }
-          ]
           },
                     {
           id: "2",
-          "content":"thank you again",
+          "content":"wiiiwwww",
           "date": "10 minutes ago",
-          "user": [
+          "user": 
             {
               id: "id",
               name: "whatever",
               lastName: "whatever",
               "avatar":"https://avataaars.io/?avatarStyle=Transparent&topType=ShortHairShortCurly&accessoriesType=Prescription02&hairColor=Black&facialHairType=Blank&clotheType=Hoodie&clotheColor=White&eyeType=Default&eyebrowType=DefaultNatural&mouthType=Default&skinColor=Light"
             }
-          ]
           }
 
         ],
@@ -67,26 +65,25 @@ export default {
           {
           id: "1",
           "date": "15 minutes ago",
-          "user": [
+          "user": 
             {
               id: "id",
               name: "whatever",
               lastName: "whatever",
               "avatar":"https://avataaars.io/?avatarStyle=Transparent&topType=ShortHairShortCurly&accessoriesType=Prescription02&hairColor=Black&facialHairType=Blank&clotheType=Hoodie&clotheColor=White&eyeType=Default&eyebrowType=DefaultNatural&mouthType=Default&skinColor=Light"
             }
-          ]
           },
                     {
           id: "1",
           "date": "15 minutes ago",
-          "user": [
+          "user": 
             {
               id: "id",
               name: "whatever",
               lastName: "whatever",
               "avatar":"https://avataaars.io/?avatarStyle=Transparent&topType=ShortHairShortCurly&accessoriesType=Prescription02&hairColor=Black&facialHairType=Blank&clotheType=Hoodie&clotheColor=White&eyeType=Default&eyebrowType=DefaultNatural&mouthType=Default&skinColor=Light"
             }
-          ]
+
           },
            ]
       },
@@ -110,27 +107,27 @@ export default {
           id: "1",
           "content":"thank you sir",
           "date": "15 minutes ago",
-          "user": [
+          "user": 
             {
               id: "id",
               name: "whatever",
               lastName: "whatever",
               "avatar":"https://avataaars.io/?avatarStyle=Transparent&topType=ShortHairShortCurly&accessoriesType=Prescription02&hairColor=Black&facialHairType=Blank&clotheType=Hoodie&clotheColor=White&eyeType=Default&eyebrowType=DefaultNatural&mouthType=Default&skinColor=Light"
             }
-          ]
+          
           },
                     {
           id: "2",
           "content":"thank you again",
           "date": "10 minutes ago",
-          "user": [
+          "user": 
             {
               id: "id",
               name: "whatever",
               lastName: "whatever",
               "avatar":"https://avataaars.io/?avatarStyle=Transparent&topType=ShortHairShortCurly&accessoriesType=Prescription02&hairColor=Black&facialHairType=Blank&clotheType=Hoodie&clotheColor=White&eyeType=Default&eyebrowType=DefaultNatural&mouthType=Default&skinColor=Light"
             }
-          ]
+          
           }
 
         ],
@@ -309,7 +306,6 @@ export default {
         postCard
     },
   methods: {
-
     },
     
 };

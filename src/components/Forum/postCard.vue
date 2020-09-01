@@ -1,6 +1,5 @@
 <template>
-<v-card >
-  
+<v-card hover @click="openPost(post)">  
     <v-card-title class="pb-0 pt-1">
       <v-list-item-avatar color="grey darken-3">
           <v-img
@@ -43,6 +42,7 @@
 
 
 <script>
+import EventBus from "@/utils/eventBus";
 
 
   export default {
@@ -52,6 +52,11 @@
     }),
     components: {
       
+    },
+    methods : {
+  openPost: function(post){
+	EventBus.$emit("openPost",post)
+	}
     }
   }
 </script>

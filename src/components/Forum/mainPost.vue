@@ -44,7 +44,6 @@
 
 <script>
 
-
   export default {
     props: ["post"],
     data: () => ({
@@ -52,7 +51,8 @@
     }),
     components: {
       
-    }
+    },
+
   }
 </script>
 <style>

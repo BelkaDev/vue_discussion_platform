@@ -71,6 +71,8 @@ import defaultButton from "@/components/UI/Buttons/defaultButton.vue";
 import searchBar from "@/components/Shared/searchBar.vue";
 import postList from "@/components/Forum/postList.vue";
 import postPage from "@/components/Forum/postPage.vue";
+
+
 export default {
   data: () => ({
     expandRight: false,
