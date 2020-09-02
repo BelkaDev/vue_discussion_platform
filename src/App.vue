@@ -15,23 +15,23 @@
                   >
                 </h3>
               </div>
-                    <div class="header_switch" style="float:right;">
-
-                <v-layout row justify-space-between>
-                  <v-flex xs4 sm4 md4 lg4 xl4 d-flex class="pa-0">
-                      <v-flex d-flex>
-                        <v-icon class="mr-4 " size="40" style="color:#979797"
+                    <div class="header_switch">
+                    <v-layout >
+                      <v-flex d-flex md8 lg12>
+                        <v-icon class="mr-4 mb-1" size="36" style="color:#979797"
                           >mdi-earth</v-icon
                         >
-                        <baseSwitch></baseSwitch>
-                        <v-icon class="" size="40" style="color:#979797"
+      <v-switch
+      v-model="isPrivate"
+      inset="true"
+    ></v-switch>
+                        <v-icon class="" size="36" style="color:#979797"
                           >mdi-account-multiple-outline</v-icon
                         >
-                      </v-flex>
+                      
+                      
 
-                  </v-flex>
-
-                  <v-flex >
+                    
                     <defaultButton
                       :block="true"
                       :style="'width:200px;'"
@@ -44,16 +44,16 @@
                 </v-layout>
                     </div>
 
-
                   <searchBar style="margin-top:90px;margin-bottom:20px;"/>
-<postList style="height:50% !important"/>
+<postList v-if="!isPrivate"/>
+<discussionList v-else/>
 
 
               </div>
           </v-flex>
 
 
-          <v-flex d-flex v-if="!isClosed" :class="breakPointRight" >
+          <v-flex d-flex v-if="!isClosed || !expandLeft" :class="breakPointRight" >
             <v-layout row wrap class="right_layout pl-0" >
 <postPage/>
             </v-layout>
@@ -66,28 +66,33 @@
 
 <script>
 
-import baseSwitch from "@/components/UI/Switch/baseSwitch.vue";
 import defaultButton from "@/components/UI/Buttons/defaultButton.vue";
 import searchBar from "@/components/Shared/searchBar.vue";
 import postList from "@/components/Forum/postList.vue";
 import postPage from "@/components/Forum/postPage.vue";
 
+import discussionList from "@/components/Chat/discussionList.vue";
+
+import EventBus from "@/utils/eventBus";
+
 
 export default {
   data: () => ({
+    isPrivate: false,
+    expandLeft:true,
     expandRight: false,
     isClosed: false, // put this in a general layout object
     id: 0,
-    breakPointRight: "xs12 sm12 md7 lg7 xl7 ",
-    breakPointLeft: "xs12 sm5 md5 lg5 xl5"
+    breakPointRight: "xs12 sm12 md7 lg7 xl7",
+    breakPointLeft: "xs12 sm12 md12 lg12 xl12"
   }),
   components: {
-    
-    baseSwitch,
     defaultButton,
     searchBar,
     postList,
-    postPage
+    postPage,
+    discussionList,
+
   },
   methods: {
     updateSize(windowProperties) {
@@ -104,6 +109,14 @@ export default {
         this.id += 1;
       }
     }
+  },
+    mounted () {
+    // called from postList.vue
+    const that = this
+    EventBus.$on("openPost", function () {
+      that.breakPointLeft = "xs12 sm5 md5 lg5 xl5"
+      that.expandLeft=false
+    })
   }
 };
 </script>
@@ -154,8 +167,7 @@ export default {
 
 
  .header_switch {
-  margin-top:2%;
-  margin-bottom:2%;
+  float:left;
  }
 
 .header_icon {

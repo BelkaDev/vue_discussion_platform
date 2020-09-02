@@ -1,8 +1,8 @@
 <template>
-<v-container >
-  <v-layout class="post_detail" fill-height>
+<v-container>
+  <v-layout class="post_detail" >
     <v-flex>
-      <div v-if="post">
+      <div >
       <postPageToolbar></postPageToolbar>
       <mainPost :post="post"/>
                 <separator class="mt-3">

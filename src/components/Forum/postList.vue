@@ -1,5 +1,5 @@
 <template >
-        <v-list id="postList" class="list_layout scroll">
+        <v-list id="postList" class="list_layout">
           <v-list-item-group v-for="post in posts"
               :key="post.id"
           >
