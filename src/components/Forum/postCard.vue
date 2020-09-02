@@ -1,5 +1,5 @@
 <template>
-<v-card hover @click="openPost(post)">  
+<v-card hover :id="post.id" @click="openPost(post)" :style=" post.id === selectedIndex ? 'border:2px solid red' : ''" >  
     <v-card-title class="pb-0 pt-1">
       <v-list-item-avatar color="grey darken-3">
           <v-img
@@ -7,7 +7,6 @@
             :src="post.user.avatar"
           ></v-img>
         </v-list-item-avatar>
-
       <span class="title font-weight-bold" style="font-size:16px !important;">{{post.user.name}} {{post.user.lastName}}</span>
         <v-spacer></v-spacer>
       <span class="post_date font-weight-medium">{{post.date}}</span>  
@@ -48,14 +47,17 @@ import EventBus from "@/utils/eventBus";
   export default {
     props: ["post"],
     data: () => ({
-      
+      id:0,
+      selectedIndex: 0
     }),
     components: {
       
     },
     methods : {
   openPost: function(post){
-	EventBus.$emit("openPost",post)
+    this.selectedIndex = post.id
+      this.id+=1;
+  EventBus.$emit("openPost",post)
 	}
     }
   }

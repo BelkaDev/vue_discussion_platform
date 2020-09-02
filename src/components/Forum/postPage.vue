@@ -50,4 +50,12 @@ import EventBus from "@/utils/eventBus";
 .post_detail {
   background-color: white;
 }
+.scroll {
+  overflow-y: auto;
+  width: 100%;
+  height: 100%;
+  padding-right: 17px; /* Increase/decrease this value for cross-browser compatibility */
+  box-sizing: content-box;
+}
+
 </style>
