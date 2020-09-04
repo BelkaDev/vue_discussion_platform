@@ -30,9 +30,11 @@ export default {
       if (!this.windowProperties.isExpanded) {
       this.expand_icon="mdi-fullscreen-exit"
       this.windowProperties.isExpanded=true;
+      this.windowProperties.isClosed=false;
       } else {
       this.expand_icon="mdi-fullscreen"
       this.windowProperties.isExpanded=false;
+      this.windowProperties.isClosed=false;
       }
     this.$emit("windowPropertiesChanged",this.windowProperties)
     },

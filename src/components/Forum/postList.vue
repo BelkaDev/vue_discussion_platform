@@ -1,4 +1,7 @@
 <template >
+<span>
+ <searchBar :list="posts" style="margin-top:90px;margin-bottom:20px;"/>
+
         <v-list id="postList" class="list_layout">
           <v-list-item-group v-for="post in posts"
               :key="post.id"
@@ -42,6 +45,7 @@
 </v-card>
           </v-list-item-group>
         </v-list>
+</span>
 
 </template>
 
@@ -49,6 +53,7 @@
 
 <script>
 import EventBus from "@/utils/eventBus";
+import searchBar from "@/components/Shared/searchBar";
 
 
 export default {
@@ -58,10 +63,10 @@ export default {
       {
         id :"1",
        "document_id":"1",
-       "content":  "Turns out semicolon-less style is easier and safer in TS because most gotcha edge cases are type invalid as well.",
+       "content":  "issou out semicolon-less style is easier and safer in TS because most gotcha edge cases are type invalid as well.",
         title: "Nouveau sujet de discussion",
         date: "30 minutes ago",
-      "seen": 15,
+      "seen": 8,
         "user":
          {
            id: "1",
@@ -199,7 +204,7 @@ export default {
        "content":  "Turns out semicolon-less style is easier and safer in TS because most gotcha edge cases are type invalid as well.",
         title: "Nouveau sujet de discussion",
         date: "30 minutes ago",
-      "seen": 15,
+      "seen": 2,
         "user":
          {
            id: "1",
@@ -341,7 +346,7 @@ export default {
        "content":  "Turns out semicolon-less style is easier and safer in TS because most gotcha edge cases are type invalid as well.",
         title: "Nouveau sujet de discussion",
         date: "30 minutes ago",
-      "seen": 15,
+      "seen": 1,
         "user":
          {
            id: "1",
@@ -409,7 +414,7 @@ export default {
     ]
   }),
     components: {
-        
+        searchBar
     },
   methods: {
   openPost: function(post){

@@ -41,18 +41,17 @@
 
                     </div>
 
-                  <searchBar style="margin-top:90px;margin-bottom:20px;"/>
+                 
 <postList v-if="!isPrivate"/>
 <discussionList v-else/>
               </div>
           </v-flex>
 
-
-          <v-flex d-flex v-if="!isClosed || !expandLeft" :class="breakPointRight" >
+          <v-flex d-flex :class="breakPointRight">
             <v-layout row wrap class="right_layout pl-0" >
               
-<postPage v-show="showPost" :key="id" @layoutPropertiesChanged="updateSize($event)"/>
-<chatbox  v-show="showChat" :key="id" @layoutPropertiesChanged="updateSize($event)"/>
+<postPage v-show="showPost && !isClosed " :key="id" @layoutPropertiesChanged="updateSize($event)"/>
+<chatbox  v-show="showChat && !isClosed " :key="id" @layoutPropertiesChanged="updateSize($event)"/>
             </v-layout>
           </v-flex>
           </v-layout>
@@ -63,7 +62,7 @@
 
 <script>
 
-import searchBar from "@/components/Shared/searchBar.vue";
+
 import postList from "@/components/Forum/postList.vue";
 import createPost from "@/components/Forum/createPost.vue";
 import postPage from "@/components/Forum/postPage.vue";
@@ -88,7 +87,6 @@ export default {
     breakPointLeft: "xs12 sm12 md12 lg12 xl12"
   }),
   components: {
-    searchBar,
     postList,
     createPost,
     postPage,
@@ -108,11 +106,10 @@ export default {
       } else {
         this.expandRight = false;
         this.breakPointRight = "xs12 sm12 md6 lg7 xl6 child-flex";
-        this.id += 1;
+
       }
     },
     openEditor() {
-      alert("ok")
       this.textEditor=true;
     }
   },
@@ -120,17 +117,18 @@ export default {
     // called from postList.vue
     const that = this
     EventBus.$on("openPost", function () {
+      that.isClosed=false;
       that.breakPointLeft = "xs12 sm5 md5 lg5 xl5"
       that.expandLeft=false
       that.showPost=true;
       that.showChat=false;
     })
       EventBus.$on("openChat", function () {
+      that.isClosed=false;
       that.breakPointLeft = "xs12 sm5 md5 lg5 xl5"
       that.expandLeft=false
       that.showPost=false;
       that.showChat=true;
-      that.isClosed=false;
     })
   }
 };

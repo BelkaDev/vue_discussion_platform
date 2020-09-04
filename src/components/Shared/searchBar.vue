@@ -1,7 +1,7 @@
 <template >
   <v-card tile class="searchBar">
       <v-layout >
-          <v-flex class="my-n4 mx-4" md7> 
+          <v-flex class="my-n4 mx-4" md9> 
                       <v-text-field
             class="searchField my-6"
             flat
@@ -11,7 +11,9 @@
             ref="search"
             color="primary"
             label="Search"
+            v-model="searchText"            
             prepend-icon="mdi-magnify"
+            @keyup.enter="search(searchText)"
           ></v-text-field>
           
           </v-flex>
@@ -27,8 +29,8 @@
 
 
                  <v-menu
-        open-on-hover
         close-on-content-click
+        :offset-y="true"
      
       >
       
@@ -42,14 +44,16 @@
               <v-icon right class="pb-2">mdi-chevron-down</v-icon> 
           </v-btn>
         </template>
-        <v-list>
+        <v-list
+        offset-y="10">
           <v-list-item
             v-for="(item, index) in items"
             :key="index"
             :href="item.link"
           >
-            <v-list-item-title>
-              <v-icon>{{item.icon}}</v-icon> {{ item.title }}</v-list-item-title>
+            <v-list-item-title >
+              <span @click="sortItems(item.sortBy)"><v-icon>{{item.icon}}</v-icon> {{ item.title }}</span>
+              </v-list-item-title>
           </v-list-item>
         </v-list>
       </v-menu>
@@ -60,12 +64,32 @@
 
 <script>
 export default {
+  props:["list"],
   data: () => ({
      items: [
-        { title: 'Date', icon: 'mdi-calendar', link: "https://google.com" },
-        { title: 'Likes', icon: 'mdi-star', link: "https://google.com" },
+        { title: 'Date', icon: 'mdi-calendar','sortBy':'seen'},
+        { title: 'Likes', icon: 'mdi-star','sortBy':'likes.length'},
       ],
+      filteredList: [],
+      searchText: "",
   }),
+  methods : {
+    sortItems(prop)  {
+        this.list.sort( (a, b) => {
+           return a[prop] < b[prop] ? -1 : 1
+        })
+    },
+    search(text) {
+      alert(text)
+        this.list.filter(element => {
+        return element.content.toLowerCase().includes(text.toLowerCase())
+      })
+     console.log(this.list) 
+    },
+    mounted() {
+      this.filteredList = this.list;
+    },
+  },
 };
 </script>
 
@@ -79,8 +103,8 @@ export default {
   height:50px;
 }
 .divider{
-    height:30px;
-    opacity:1;
+    height:50px !important;
+    border:2px solid #F5F4FB !important;
 }
 .sortBy * {
     padding-top:4px;

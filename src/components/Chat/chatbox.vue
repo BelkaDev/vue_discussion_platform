@@ -4,8 +4,7 @@
       <baseCard class=" mb-n2"  >
       <!-- Top bar chat !-->
       
-      
-      <chatToolbar
+      <chatToolbar 
        :receiver="discussion.receivers[0]"
        @close="closeWindow($event)"
        @windowPropertiesChanged="updateSize($event)"
@@ -35,6 +34,7 @@ export default {
     recent: false,
     windowProperties: {isExpanded:false,isClosed:false},
     message_blocks: [],
+    discussion:null,
   }),
   methods: {
     submitMessage(newMessage) {
@@ -82,6 +82,7 @@ export default {
     const that = this;
       EventBus.$on("openChat", function (discussion) {
         that.discussion = discussion
+        that.message_blocks=[];
         that.setBlocks();
     });
   },

@@ -50,30 +50,6 @@ export default {
         msg: "message1",
         avatar: "https://cdn.vuetifyjs.com/images/john.png",
         sent: false
-      },
-      {
-        id: "2",
-        msg: "message1",
-        avatar: "https://cdn.vuetifyjs.com/images/john.png",
-        sent: true
-      },
-      {
-        id: "3",
-        msg: "message2",
-        avatar: "https://cdn.vuetifyjs.com/images/john.png",
-        sent: false
-      },
-      {
-        id: "4",
-        msg: "message2",
-        avatar: "https://cdn.vuetifyjs.com/images/john.png",
-        sent: false
-      },
-      {
-        id: "5",
-        msg: "message3",
-        avatar: "https://cdn.vuetifyjs.com/images/john.png",
-        sent: false
       }
     ],
     "sender" : {
@@ -87,6 +63,39 @@ export default {
         "id":"1",
         "name":"Luy",
         "lastName":"Robin",
+        "avatar":"https://cdn.vuetifyjs.com/images/john.png"
+      }
+    ]
+    },
+     {
+      "id":"2",
+      "content":"my new work progress",
+      "date":"30 minutes ago",
+    "messages": [
+      {
+        id: "1",
+        msg: "hola",
+        avatar: "https://cdn.vuetifyjs.com/images/john.png",
+        sent: false
+      },
+        {
+        id: "2",
+        msg: "hola I said ",
+        avatar: "https://cdn.vuetifyjs.com/images/john.png",
+        sent: false
+      },
+    ],
+    "sender" : {
+        "id":"1",
+        "name":"Jojo",
+        "lastName":"Bojo",
+        "avatar":""
+    },
+    "receivers" : [
+      {
+        "id":"1",
+        "name":"Jojo",
+        "lastName":"Bojoooo",
         "avatar":"https://cdn.vuetifyjs.com/images/john.png"
       }
     ]
