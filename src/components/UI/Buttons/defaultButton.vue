@@ -1,9 +1,9 @@
 <template>
 <div>
-  <v-btn v-if="!block" large :class="customClass" :style="customStyle">
+  <v-btn v-if="!block" large :class="customClass" :style="customStyle" @click="handleClick">
     <slot/>
   </v-btn>
-  <v-btn class="" v-if="block" block large :class="customClass" :style="customStyle" >
+  <v-btn class="" v-if="block" block large :class="customClass" :style="customStyle" @click="handleClick" >
     <slot/>
   </v-btn>
   </div>

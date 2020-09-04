@@ -132,7 +132,7 @@ export default {
             }
           },
                                         {
-          id: "5",
+          id: "6",
           "content":"Ok sir",
           "date": "10 minutes ago",
           "user": 
@@ -144,7 +144,7 @@ export default {
             }
           },
                                         {
-          id: "6",
+          id: "7",
           "content":"Ok sir",
           "date": "10 minutes ago",
           "user": 
@@ -155,7 +155,7 @@ export default {
               "avatar":"https://avataaars.io/?avatarStyle=Transparent&topType=ShortHairShortCurly&accessoriesType=Prescription02&hairColor=Black&facialHairType=Blank&clotheType=Hoodie&clotheColor=White&eyeType=Default&eyebrowType=DefaultNatural&mouthType=Default&skinColor=Light"
             }
           },                              {
-          id: "7",
+          id: "8",
           "content":"Ok sir",
           "date": "10 minutes ago",
           "user": 
@@ -413,8 +413,9 @@ export default {
     },
   methods: {
   openPost: function(post){
+  
     this.selectedIndex = post.id
-      this.id+=1;
+    this.id+=1;
   EventBus.$emit("openPost",post)
 	}
     }

@@ -1,9 +1,28 @@
 <template >
-        <v-list id="discussionList">
-          <v-list-item-group  v-for="post in posts"
-              :key="post.id"
+        <v-list id="discussionList" class="list_layout">
+          <v-list-item-group v-for="discussion in discussions"
+              :key="discussion.id"
           >
-            <chatCard :post="post"/>
+<v-card class="discussion_card pa-2" :id="discussion.id" @click="openChat(discussion)" :class=" discussion.id === selectedIndex ? 'selected_discussion' : ''" >  
+    <v-card-title class="pb-0 pt-1">
+      <v-list-item-avatar color="grey darken-3">
+          <v-img
+            class="elevation-6"
+            :src="discussion.receivers[0].avatar"
+          ></v-img>
+        </v-list-item-avatar>
+      <span class="title font-weight-bold" style="font-size:16px !important;">{{discussion.receivers[0].name}} {{discussion.receivers[0].lastName}}</span>
+        <v-spacer></v-spacer>
+      <span class="discussion_date font-weight-medium">{{discussion.date}}</span>  
+    </v-card-title>
+    
+
+    <v-card-text class="">
+      {{discussion.content}}
+    </v-card-text>
+
+
+</v-card>
           </v-list-item-group>
         </v-list>
 
@@ -12,53 +31,110 @@
 
 
 <script>
-import chatCard from "./chatCard";
+import EventBus from "@/utils/eventBus";
+
 
 export default {
   name: "",
 
   data: () => ({
-            posts: [
+    selectedIndex:0,
+    discussions: [
       {
-        id :"id",
-        "document_id":"document_id",
-        title: "title one",
-        date: "post_date",
-        creator: [
-         {
-          id: "id",
-           "avatar": "avatar",
-         }
-        ],
-        comments: [
-          {
-          id: "comment_id",
-          "content":"comment_content",
-          "date": "comment_date",
-          "poster": [
-            {
-              id: "id",
-              "avatar":"avatar"
-            }
-          ]
-          }
-
-        ],
-        likes: "",
-
+      "id":"1",
+      "content":"hello sir how are you today",
+      "date":"30 minutes ago",
+    "messages": [
+      {
+        id: "1",
+        msg: "message1",
+        avatar: "https://cdn.vuetifyjs.com/images/john.png",
+        sent: false
       },
+      {
+        id: "2",
+        msg: "message1",
+        avatar: "https://cdn.vuetifyjs.com/images/john.png",
+        sent: true
+      },
+      {
+        id: "3",
+        msg: "message2",
+        avatar: "https://cdn.vuetifyjs.com/images/john.png",
+        sent: false
+      },
+      {
+        id: "4",
+        msg: "message2",
+        avatar: "https://cdn.vuetifyjs.com/images/john.png",
+        sent: false
+      },
+      {
+        id: "5",
+        msg: "message3",
+        avatar: "https://cdn.vuetifyjs.com/images/john.png",
+        sent: false
+      }
+    ],
+    "sender" : {
+        "id":"1",
+        "name":"Luy",
+        "lastName":"Robin",
+        "avatar":""
+    },
+    "receivers" : [
+      {
+        "id":"1",
+        "name":"Luy",
+        "lastName":"Robin",
+        "avatar":"https://cdn.vuetifyjs.com/images/john.png"
+      }
+    ]
+    }
     ]
   }),
     components: {
-        chatCard
+        
     },
   methods: {
-
-    },
+  openChat: function(chat){
+  this.selectedIndex = chat.id
+  this.id+=1;
+  EventBus.$emit("openChat",chat)
+	}
+    }
     
 };
 </script>
 
 <style>
+.list_layout {
+  background-color:transparent  !important;
+}
+
+.discussion_info_icon {
+  opacity:.7;
+}
+
+.subheading {
+  font-size:14px;
+}
+.discussion_date {
+  color: #707C97 !important;
+  font-size: 14px !important;
+  padding-top:2px;
+}
+.discussion_card{
+  margin: 8px !important;
+  margin-bottom:20px !important;
+
+}
+.selected_discussion{
+ filter: brightness(94%);
+  box-shadow: 
+  0px -1px 1px white inset,
+  6px -1px 1px #C8E6C9 inset
+  !important
+}
 
 </style>

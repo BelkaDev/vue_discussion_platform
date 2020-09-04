@@ -27,7 +27,6 @@
 
 
                  <v-menu
-      :offset-y="100"
         open-on-hover
         close-on-content-click
      

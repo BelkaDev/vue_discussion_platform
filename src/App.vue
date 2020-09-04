@@ -1,6 +1,8 @@
 <template>
   <v-app>
     <div id="app">
+              <createPost v-show="textEditor" ></createPost>
+
       <v-container class="fill-height">
           <v-layout  row wrap justify-space-between>
 
@@ -23,7 +25,7 @@
                         >
       <v-switch
       v-model="isPrivate"
-      inset="true"
+      inset
     ></v-switch>
                         <v-icon class="" size="36" style="color:#979797"
                           >mdi-account-multiple-outline</v-icon
@@ -31,31 +33,26 @@
                       
                       
 
-                    
-                    <defaultButton
-                      :block="true"
-                      :style="'width:200px;'"
-                      :gradient="true"
-                      class="my-3 pa-0"
-                      style="margin-left:50px;"
-                      ><v-icon class="mr-4 ">mdi-pencil</v-icon> Add new post</defaultButton
-                    >
+              <createPost ></createPost>
+     
+  
                   </v-flex>
                 </v-layout>
+
                     </div>
 
                   <searchBar style="margin-top:90px;margin-bottom:20px;"/>
 <postList v-if="!isPrivate"/>
 <discussionList v-else/>
-
-
               </div>
           </v-flex>
 
 
           <v-flex d-flex v-if="!isClosed || !expandLeft" :class="breakPointRight" >
             <v-layout row wrap class="right_layout pl-0" >
-<postPage/>
+              
+<postPage v-show="showPost" :key="id" @layoutPropertiesChanged="updateSize($event)"/>
+<chatbox  v-show="showChat" :key="id" @layoutPropertiesChanged="updateSize($event)"/>
             </v-layout>
           </v-flex>
           </v-layout>
@@ -66,12 +63,13 @@
 
 <script>
 
-import defaultButton from "@/components/UI/Buttons/defaultButton.vue";
 import searchBar from "@/components/Shared/searchBar.vue";
 import postList from "@/components/Forum/postList.vue";
+import createPost from "@/components/Forum/createPost.vue";
 import postPage from "@/components/Forum/postPage.vue";
 
 import discussionList from "@/components/Chat/discussionList.vue";
+import chatbox from "@/components/Chat/chatbox.vue";
 
 import EventBus from "@/utils/eventBus";
 
@@ -81,16 +79,20 @@ export default {
     isPrivate: false,
     expandLeft:true,
     expandRight: false,
+    showPost: false,
+    textEditor: false,
+    showChat: false,
     isClosed: false, // put this in a general layout object
     id: 0,
     breakPointRight: "xs12 sm12 md7 lg7 xl7",
     breakPointLeft: "xs12 sm12 md12 lg12 xl12"
   }),
   components: {
-    defaultButton,
     searchBar,
     postList,
+    createPost,
     postPage,
+    chatbox,
     discussionList,
 
   },
@@ -108,6 +110,10 @@ export default {
         this.breakPointRight = "xs12 sm12 md6 lg7 xl6 child-flex";
         this.id += 1;
       }
+    },
+    openEditor() {
+      alert("ok")
+      this.textEditor=true;
     }
   },
     mounted () {
@@ -116,6 +122,15 @@ export default {
     EventBus.$on("openPost", function () {
       that.breakPointLeft = "xs12 sm5 md5 lg5 xl5"
       that.expandLeft=false
+      that.showPost=true;
+      that.showChat=false;
+    })
+      EventBus.$on("openChat", function () {
+      that.breakPointLeft = "xs12 sm5 md5 lg5 xl5"
+      that.expandLeft=false
+      that.showPost=false;
+      that.showChat=true;
+      that.isClosed=false;
     })
   }
 };

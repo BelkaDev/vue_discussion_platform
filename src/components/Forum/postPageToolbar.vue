@@ -21,9 +21,6 @@ import iconButton from "@/components/UI/Buttons/iconButton.vue";
 
 export default {
   name: "chatToolbar",
-
-  props: {
-  },
   data: () => ({
     windowProperties: {isExpanded:false,isClosed:false},
   }),

@@ -4,13 +4,14 @@
       <baseCard class=" mb-n2"  >
       <!-- Top bar chat !-->
       
- 
+      
       <chatToolbar
+       :receiver="discussion.receivers[0]"
        @close="closeWindow($event)"
        @windowPropertiesChanged="updateSize($event)"
       ></chatToolbar>
         <!-- Liste messages !-->
-              <messageList  ref="infoBox"  :blocks="message_blocks">
+              <messageList  ref="infoBox" :blocks="message_blocks">
               </messageList>
 
         <!-- Input message !-->
@@ -27,39 +28,13 @@ import baseCard from "@/components/UI/Cards/baseCard.vue";
 import chatToolbar from "./chatToolbar";
 import chatInput from "./chatInput";
 import messageList from "./messageList";
+import EventBus from "@/utils/eventBus";
 
 export default {
   data: () => ({
     recent: false,
     windowProperties: {isExpanded:false,isClosed:false},
     message_blocks: [],
-    messages: [
-      {
-        msg: "message1",
-        avatar: "https://cdn.vuetifyjs.com/images/john.png",
-        sent: false
-      },
-      {
-        msg: "message1",
-        avatar: "https://cdn.vuetifyjs.com/images/john.png",
-        sent: true
-      },
-      {
-        msg: "message2",
-        avatar: "https://cdn.vuetifyjs.com/images/john.png",
-        sent: false
-      },
-      {
-        msg: "message2",
-        avatar: "https://cdn.vuetifyjs.com/images/john.png",
-        sent: false
-      },
-      {
-        msg: "message3",
-        avatar: "https://cdn.vuetifyjs.com/images/john.png",
-        sent: false
-      }
-    ]
   }),
   methods: {
     submitMessage(newMessage) {
@@ -82,15 +57,15 @@ export default {
       this.messageNew.text = null;
     },
       setBlocks() {
-      let first_block=[this.messages[0]]
+      let first_block=[this.discussion.messages[0]]
       this.message_blocks.push(first_block)
-      for(var i = 1; i < this.messages.length; i++)
+      for(var i = 1; i < this.discussion.messages.length; i++)
       {
-        if (this.messages[i-1].msg == this.messages[i].msg) {
+        if (this.discussion.messages[i-1].msg == this.discussion.messages[i].msg) {
           let last_block=this.message_blocks[this.message_blocks.length-1]
-          last_block.push(this.messages[i]);
+          last_block.push(this.discussion.messages[i]);
         } else {
-          let new_block=[this.messages[i]];
+          let new_block=[this.discussion.messages[i]];
           this.message_blocks.push(new_block)
         }
       }
@@ -104,7 +79,11 @@ export default {
       this.$emit("layoutPropertiesChanged",{"isExpanded":this.windowProperties.isExpanded,"isClosed":this.windowProperties.isClosed,"component":"chatbox"})
     }
   }, mounted() {
-    this.setBlocks();
+    const that = this;
+      EventBus.$on("openChat", function (discussion) {
+        that.discussion = discussion
+        that.setBlocks();
+    });
   },
   components: {
     baseCard,

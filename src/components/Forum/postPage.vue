@@ -1,9 +1,12 @@
 <template>
 <v-container>
-  <v-layout class="post_detail" >
+  <v-layout class="post_detail" fill-height >
     <v-flex>
       <div >
-      <postPageToolbar></postPageToolbar>
+      <postPageToolbar
+       @close="closeWindow($event)"
+       @windowPropertiesChanged="updateSize($event)"
+      ></postPageToolbar>
       <mainPost :post="post"/>
                 <separator class="mt-3">
                   Comments
@@ -28,7 +31,7 @@ import EventBus from "@/utils/eventBus";
   export default {
   
     data: () => ({
-      post: null
+      post: []
     }),
     components: {
       postPageToolbar,
@@ -36,11 +39,20 @@ import EventBus from "@/utils/eventBus";
       commentList,
       separator
     },
-    mounted () {
+    methods: {
+      updateSize(newProperties) {
+      this.windowProperties = newProperties
+      this.$emit("layoutPropertiesChanged",{"isExpanded":this.windowProperties.isExpanded,"isClosed":this.windowProperties.isClosed,"component":"chatbox"})
+    },
+    closeWindow(newProperties) {
+      this.windowProperties = newProperties
+      this.$emit("layoutPropertiesChanged",{"isExpanded":this.windowProperties.isExpanded,"isClosed":this.windowProperties.isClosed,"component":"chatbox"})
+    }
+    },
+    created () {
     const that = this;
     // called from postList.vue
     EventBus.$on("openPost", function (post) {
-      
       that.post = post
     });
   }
