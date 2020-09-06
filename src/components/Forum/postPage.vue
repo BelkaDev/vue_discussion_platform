@@ -63,7 +63,9 @@ import EventBus from "@/utils/eventBus";
     const that = this;
     // called from postList.vue
     EventBus.$on("openPost", function (post) {
-      that.post = post
+    that.post = post
+    var container = that.$el.querySelector("#main_post");
+    container.scrollIntoView({ behavior: 'smooth', block: 'end' });
     });
   }
   }

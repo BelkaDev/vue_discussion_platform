@@ -3,7 +3,7 @@
   <v-layout>
     <v-flex d-flex>
 <hr class="separator right">
-<span class="separator text ml-n8 mr-n8"><slot/></span>
+<span class="separator text ml-n8 pl-8 pr-8 mr-n8"><slot/></span>
 <hr class="separator right">
 </v-flex>
 </v-layout>
@@ -22,7 +22,7 @@ export default {
 .separator {
   color:#707c97;
   opacity: .4;
-  width:40%;
+  width:100%;
   
 }
 

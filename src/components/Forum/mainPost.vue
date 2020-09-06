@@ -1,6 +1,5 @@
 <template>
-<v-card class="mx-3" >
-  
+<v-card class="mx-3" id="main_post" >
     <v-card-title class="pb-0 pt-1">
       <v-list-item-avatar color="grey darken-3">
           <v-img

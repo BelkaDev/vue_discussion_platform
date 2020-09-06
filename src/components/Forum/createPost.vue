@@ -1,6 +1,6 @@
 <template>
   <v-row justify="center">
-    <v-dialog v-model="dialog" max-width="400">
+    <v-dialog v-model="dialog" max-width="600">
       <template v-slot:activator="{ on, attrs }">
 
 
@@ -15,9 +15,18 @@
                       ><v-icon class="mr-4 ">mdi-pencil</v-icon> Add new post</v-btn
                     >
       </template>
-      <v-card>
-          <rich-text-editor @update="onUpdate"/>
-      </v-card>
+      
+  <div class="form">
+
+
+      <v-text-field filled
+        v-model="title"
+        label="Post title"
+      />
+     
+  <rich-text-editor @update="onUpdate"/>
+
+    </div>
     </v-dialog>
   </v-row>
 </template>
@@ -32,6 +41,8 @@ export default {
   data () {
     return {
       text: '',
+      title: '',
+      content: '',
       dialog: false,
     }
   },
@@ -65,4 +76,15 @@ export default {
   0px 3px 10px rgba(0,0,0,0.2);
 }
 
+.label {
+  margin-bottom: 3px;
+  display: block;
+}
+.field {
+    margin-bottom: 20px;
+}
+.form {
+  padding: 6px;
+  background-color: white !important;
+}
 </style>
