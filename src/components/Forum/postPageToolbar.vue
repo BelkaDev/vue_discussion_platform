@@ -1,7 +1,7 @@
 <template>
           <v-toolbar class="post_toolbar mb-n1" color="white" flat height="80px">
 
-              <iconButton :color="'#979797'" :icon="'mdi-pencil'" :shadow="true"></iconButton>
+              <iconButton @click="addComment" :color="'#979797'" :icon="'mdi-pencil'" :shadow="true"></iconButton>
 
 
             <v-spacer></v-spacer>
@@ -41,7 +41,10 @@ export default {
     close() {
      this.windowProperties.isClosed=true
      this.$emit("windowPropertiesChanged",this.windowProperties)
-    }
+    },
+	addComment () {
+	this.$emit("addComment",true)
+	}
   },
   components: {
       iconButton

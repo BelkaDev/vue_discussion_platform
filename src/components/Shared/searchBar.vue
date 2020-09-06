@@ -13,7 +13,7 @@
             label="Search"
             v-model="searchText"            
             prepend-icon="mdi-magnify"
-            @keyup.enter="search(searchText)"
+            @keyup="search(searchText)"
           ></v-text-field>
           
           </v-flex>
@@ -70,26 +70,36 @@ export default {
         { title: 'Date', icon: 'mdi-calendar','sortBy':'seen'},
         { title: 'Likes', icon: 'mdi-star','sortBy':'likes.length'},
       ],
-      filteredList: [],
+      updatedList: [],
+      defaultList: [],
       searchText: "",
   }),
   methods : {
     sortItems(prop)  {
-        this.list.sort( (a, b) => {
+      this.updatedList = this.list
+        this.updatedList.sort( (a, b) => {
            return a[prop] < b[prop] ? -1 : 1
         })
+        this.updateList(this.updatedList);
     },
     search(text) {
-      alert(text)
-        this.list.filter(element => {
+      if (!text == "") {
+        let newList = this.list
+        newList = newList.filter(element => {
         return element.content.toLowerCase().includes(text.toLowerCase())
       })
-     console.log(this.list) 
+      this.updateList(newList)
+      } else {
+      this.updateList(this.defaultList)
+      }
     },
-    mounted() {
-      this.filteredList = this.list;
-    },
+    updateList(newList) {
+	  this.$emit("updateList",newList)
+    }
   },
+mounted () {
+  this.defaultList = this.list.slice(0)
+}
 };
 </script>
 

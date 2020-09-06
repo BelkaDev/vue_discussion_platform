@@ -1,7 +1,7 @@
 <template >
 <span>
- <searchBar :list="posts" style="margin-top:90px;margin-bottom:20px;"/>
-
+ <searchBar @updateList="refreshList($event)" :list="posts" style="margin-top:90px;margin-bottom:20px;"/>
+<separator><b>All posts</b></separator>
         <v-list id="postList" class="list_layout">
           <v-list-item-group v-for="post in posts"
               :key="post.id"
@@ -34,9 +34,9 @@
           class="post_info ml-n8"
         >
           <v-icon class="post_info_icon mr-2" size="18">mdi-thumb-up</v-icon>
-          <span class="subheading mr-3 mt-1" style="color:#707C97 !important" >{{post.comments.length}}</span>
+          <span class="subheading mr-3 mt-1" style="color:#707C97 !important" >{{post.likes.length}}</span>
           <v-icon class="post_info_icon mr-2 " size="18" >mdi-forum</v-icon>
-          <span class="subheading mr-3 mt-1" style="color:#707C97 !important">{{post.likes.length}}</span>
+          <span class="subheading mr-3 mt-1" style="color:#707C97 !important">{{post.comments.length}}</span>
             <v-icon class="post_info_icon  mr-2" size="18">mdi-eye</v-icon>
           <span class="subheading mr-3 mt-1"  style="color:#707C97 !important">{{post.seen}}</span>
         </v-row>
@@ -54,6 +54,7 @@
 <script>
 import EventBus from "@/utils/eventBus";
 import searchBar from "@/components/Shared/searchBar";
+import separator from "@/components/Shared/separator";
 
 
 export default {
@@ -414,7 +415,8 @@ export default {
     ]
   }),
     components: {
-        searchBar
+        searchBar,
+        separator
     },
   methods: {
   openPost: function(post){
@@ -422,7 +424,10 @@ export default {
     this.selectedIndex = post.id
     this.id+=1;
   EventBus.$emit("openPost",post)
-	}
+  },
+  refreshList (newList) {
+    this.posts = newList;
+  }
     }
 };
 </script>

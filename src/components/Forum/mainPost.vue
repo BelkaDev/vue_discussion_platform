@@ -28,10 +28,13 @@
           justify="end"
           class="post_info ml-n8"
         >
-          <v-icon class="post_info_icon mr-2" size="25">mdi-thumb-up</v-icon>
-          <span class="mr-4 mt-1" style="color:#707C97 !important" >{{post.comments.length}}</span>
+          <v-icon @mouseover="hovered=true"
+           @mouseout="hovered=false"  
+           @click="setLike()"
+          class="post_info_icon mr-2" :class="hovered || liked? 'hovered' : ''" size="25">mdi-thumb-up</v-icon>
+          <span class="mr-4 mt-1" style="color:#707C97 !important" >{{post.likes.length}}</span>
           <v-icon class="post_info_icon mr-2 mt-1" size="25" >mdi-forum</v-icon>
-          <span class=" mr-4 mt-1" style="color:#707C97 !important">{{post.likes.length}}</span>
+          <span class=" mr-4 mt-1" style="color:#707C97 !important">{{post.comments.length}}</span>
             <v-icon class="post_info_icon  mr-2" size="25">mdi-eye</v-icon>
           <span class="mr-4 mt-1"  style="color:#707C97 !important">{{post.seen}}</span>
         </v-row>
@@ -47,11 +50,26 @@
   export default {
     props: ["post"],
     data: () => ({
-      
+      hovered:false,
+      liked:false,
     }),
     components: {
       
     },
+    methods: {
+      setLike() {
+        if (!this.liked) {
+        const connectedUser = {"id":"2","name":"ok","lastName":"bye","avatar":"" }
+        const date = ""
+        const newLike = {"id":"9","date":date,user:connectedUser}
+        this.post.likes.push(newLike)
+        this.liked= true;
+        } else {
+          // remove like here
+          this.liked = false;
+        }
+      }
+    }
 
   }
 </script>
@@ -73,5 +91,8 @@
 }
 .username {
   text-transform: capitalize !important;
+}
+.hovered {
+  color:blue !important;
 }
 </style>

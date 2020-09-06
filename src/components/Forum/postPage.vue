@@ -1,17 +1,21 @@
 <template>
 <v-container>
-  <v-layout class="post_detail" fill-height >
+  <v-layout class="post_detail " >
     <v-flex>
       <div >
       <postPageToolbar
+       @addComment="addComment()"
        @close="closeWindow($event)"
        @windowPropertiesChanged="updateSize($event)"
       ></postPageToolbar>
       <mainPost :post="post"/>
                 <separator class="mt-3">
-                  Comments
+                  <b>Comments</b>
                 </separator>
       <commentList :comments="post.comments"></commentList>
+      <div id="comment_input">
+      <commentInput/>
+      </div>
       </div>
     </v-flex>
   </v-layout>
@@ -25,18 +29,20 @@
 import postPageToolbar from "./postPageToolbar";
 import mainPost from "./mainPost";
 import commentList from "./commentList"
+import commentInput from "./commentInput"
 import separator from "@/components/Shared/separator.vue";
 import EventBus from "@/utils/eventBus";
 
   export default {
   
     data: () => ({
-      post: []
+      post: [],
     }),
     components: {
       postPageToolbar,
       mainPost,
       commentList,
+      commentInput,
       separator
     },
     methods: {
@@ -47,6 +53,10 @@ import EventBus from "@/utils/eventBus";
     closeWindow(newProperties) {
       this.windowProperties = newProperties
       this.$emit("layoutPropertiesChanged",{"isExpanded":this.windowProperties.isExpanded,"isClosed":this.windowProperties.isClosed,"component":"chatbox"})
+    },
+    addComment() {
+      var container = this.$el.querySelector("#comment_input");
+     container.scrollIntoView({ behavior: 'smooth', block: 'end' });
     }
     },
     created () {

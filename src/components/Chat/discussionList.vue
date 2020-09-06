@@ -1,4 +1,7 @@
 <template >
+<span>
+ <searchBar @updateList="refreshList($event)" :list="posts" style="margin-top:90px;margin-bottom:20px;"/>
+
         <v-list id="discussionList" class="list_layout">
           <v-list-item-group v-for="discussion in discussions"
               :key="discussion.id"
@@ -25,13 +28,14 @@
 </v-card>
           </v-list-item-group>
         </v-list>
-
+</span>
 </template>
 
 
 
 <script>
 import EventBus from "@/utils/eventBus";
+import searchBar from "@/components/Shared/searchBar";
 
 
 export default {
@@ -103,7 +107,7 @@ export default {
     ]
   }),
     components: {
-        
+      searchBar
     },
   methods: {
   openChat: function(chat){
