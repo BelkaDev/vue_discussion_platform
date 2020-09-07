@@ -1,16 +1,21 @@
 export default class postService {
+  constructor(http) {
+    this._http = http;
+  }
   getPosts() {
-    this.$http
+    this._http
       .get(this.$hostname + "/posts/")
       .then(resp => {
-        console.log(resp.data)
+        console.log(resp.data);
+        alert("ok")
       })
       .catch(error => {
         console.log(error);
+        alert("nah")
       });
   }
   getPost(postId) {
-    this.$http
+    this._http
       .get(this.$hostname + "/posts/" + postId)
       .then(resp => {
         console.log(resp.data);
@@ -20,7 +25,7 @@ export default class postService {
       });
   }
   createPost(post) {
-    this.$http
+    this._http
       .post(this.$hostname + "/posts/", post)
       .then(resp => {
         console.log(resp.data);
@@ -30,7 +35,7 @@ export default class postService {
       });
   }
   updatePost(postId, newPost) {
-    this.$http
+    this._http
       .put(this.$hostname + "/posts/" + postId, newPost)
       .then(resp => {
         console.log(resp.data);
@@ -40,7 +45,7 @@ export default class postService {
       });
   }
   deletePost(postId) {
-    this.$http
+    this._http
       .delete(this.$hostname + "/posts/" + postId)
       .then(resp => {
         console.log(resp.data);

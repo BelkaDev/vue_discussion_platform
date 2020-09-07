@@ -92,15 +92,15 @@ export default {
     ],
     "sender" : {
         "id":"1",
-        "name":"Jojo",
-        "lastName":"Bojo",
+        "name":"Test",
+        "lastName":"Name",
         "avatar":""
     },
     "receivers" : [
       {
         "id":"1",
-        "name":"Jojo",
-        "lastName":"Bojoooo",
+        "name":"test",
+        "lastName":"Name",
         "avatar":"https://cdn.vuetifyjs.com/images/john.png"
       }
     ]
