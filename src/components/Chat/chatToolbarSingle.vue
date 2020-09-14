@@ -25,7 +25,7 @@
 import iconButton from "@/components/UI/Buttons/iconButton.vue";
 
 export default {
-  name: "chatToolbar",
+  name: "chatToolbarSingle",
   props: ["receiver"],
   data: () => ({
     windowProperties: {isExpanded:false,isClosed:false},
@@ -53,7 +53,6 @@ export default {
       iconButton
   },
   mounted() {
-    
   }
 };
 </script>

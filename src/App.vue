@@ -33,7 +33,8 @@
                       
                       
 
-              <createPost ></createPost>
+              <createPost v-if="!isPrivate"></createPost>
+              <createChat v-else></createChat>
      
   
                   </v-flex>
@@ -50,8 +51,8 @@
           <v-flex d-flex :class="breakPointRight">
             <v-layout row wrap class="right_layout pl-0" >
               
-<postPage v-show="showPost && !isClosed " :key="id" @layoutPropertiesChanged="updateSize($event)"/>
-<chatbox  v-show="showChat && !isClosed " :key="id" @layoutPropertiesChanged="updateSize($event)"/>
+<postPage v-show="showPost && !isClosed " :key="id" @layoutPropertiesChanged="updateSize($event)"  :class="expandRight ? 'mt-2' : ''"/>
+<chatbox  v-show="showChat && !isClosed " :key="id" @layoutPropertiesChanged="updateSize($event)" :class="expandRight ? 'mt-2' : ''"/>
             </v-layout>
           </v-flex>
           </v-layout>
@@ -68,6 +69,7 @@ import createPost from "@/components/Forum/createPost.vue";
 import postPage from "@/components/Forum/postPage.vue";
 
 import discussionList from "@/components/Chat/discussionList.vue";
+import createChat from "@/components/Chat/createChat.vue";
 import chatbox from "@/components/Chat/chatbox.vue";
 
 import EventBus from "@/utils/eventBus";
@@ -91,6 +93,7 @@ export default {
     createPost,
     postPage,
     chatbox,
+    createChat,
     discussionList,
 
   },

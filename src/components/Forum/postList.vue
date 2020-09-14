@@ -7,7 +7,7 @@
       v-if="posts.length > 0"
     />
     <separator v-if="posts.length > 0"><b >All posts</b></separator>
-    <h1 @click="test()" class="display-1 grey--text text--darken-2 no_posts">
+    <h1 v-if="posts.length == 0" @click="test()" class="display-1 grey--text text--darken-2 no_posts">
       Il n'y a pas encore de posts pour cette rubrique.
         <br>
                   <p
@@ -88,7 +88,355 @@ export default {
   data: () => ({
     selectedIndex: 0,
     postService: null,
-    posts: []
+       posts: [
+      {
+        id :"1",
+       "document_id":"1",
+       "content":  " Bonjour semicolon-less style is easier and safer in TS because most gotcha edge cases are type invalid as well.",
+        title: "Nouveau sujet de discussion",
+        date: "30 minutes ago",
+      "seen": 15,
+        "user":
+         {
+           id: "1",
+           name: "Luy",
+           lastName: "Robin",
+           "avatar": "https://avataaars.io/?avatarStyle=Transparent&topType=ShortHairShortCurly&accessoriesType=Prescription02&hairColor=Black&facialHairType=Blank&clotheType=Hoodie&clotheColor=White&eyeType=Default&eyebrowType=DefaultNatural&mouthType=Default&skinColor=Light",
+         }
+        ,
+        comments: [
+          {
+          id: "1",
+          "content":"thank you sir",
+          "date": "15 minutes ago",
+          "user":
+            {
+              id: "id",
+              name: "whatever",
+              lastName: "whatever",
+              "avatar":"https://avataaars.io/?avatarStyle=Transparent&topType=ShortHairShortCurly&accessoriesType=Prescription02&hairColor=Black&facialHairType=Blank&clotheType=Hoodie&clotheColor=White&eyeType=Default&eyebrowType=DefaultNatural&mouthType=Default&skinColor=Light"
+            }
+          },
+                    {
+          id: "2",
+          "content":"commentaire test",
+          "date": "10 minutes ago",
+          "user": 
+            {
+              id: "id",
+              name: "whatever",
+              lastName: "whatever",
+              "avatar":"https://avataaars.io/?avatarStyle=Transparent&topType=ShortHairShortCurly&accessoriesType=Prescription02&hairColor=Black&facialHairType=Blank&clotheType=Hoodie&clotheColor=White&eyeType=Default&eyebrowType=DefaultNatural&mouthType=Default&skinColor=Light"
+            }
+          },
+                    {
+          id: "3",
+          "content":"Ok sir",
+          "date": "10 minutes ago",
+          "user": 
+            {
+              id: "id",
+              name: "whatever",
+              lastName: "whatever",
+              "avatar":"https://avataaars.io/?avatarStyle=Transparent&topType=ShortHairShortCurly&accessoriesType=Prescription02&hairColor=Black&facialHairType=Blank&clotheType=Hoodie&clotheColor=White&eyeType=Default&eyebrowType=DefaultNatural&mouthType=Default&skinColor=Light"
+            }
+          },
+                              {
+          id: "4",
+          "content":"Ok sir",
+          "date": "10 minutes ago",
+          "user": 
+            {
+              id: "id",
+              name: "whatever",
+              lastName: "whatever",
+              "avatar":"https://avataaars.io/?avatarStyle=Transparent&topType=ShortHairShortCurly&accessoriesType=Prescription02&hairColor=Black&facialHairType=Blank&clotheType=Hoodie&clotheColor=White&eyeType=Default&eyebrowType=DefaultNatural&mouthType=Default&skinColor=Light"
+            }
+          },
+                              {
+          id: "5",
+          "content":"Ok sir",
+          "date": "10 minutes ago",
+          "user": 
+            {
+              id: "id",
+              name: "whatever",
+              lastName: "whatever",
+              "avatar":"https://avataaars.io/?avatarStyle=Transparent&topType=ShortHairShortCurly&accessoriesType=Prescription02&hairColor=Black&facialHairType=Blank&clotheType=Hoodie&clotheColor=White&eyeType=Default&eyebrowType=DefaultNatural&mouthType=Default&skinColor=Light"
+            }
+          },
+                                        {
+          id: "5",
+          "content":"Ok sir",
+          "date": "10 minutes ago",
+          "user": 
+            {
+              id: "id",
+              name: "whatever",
+              lastName: "whatever",
+              "avatar":"https://avataaars.io/?avatarStyle=Transparent&topType=ShortHairShortCurly&accessoriesType=Prescription02&hairColor=Black&facialHairType=Blank&clotheType=Hoodie&clotheColor=White&eyeType=Default&eyebrowType=DefaultNatural&mouthType=Default&skinColor=Light"
+            }
+          },
+                                        {
+          id: "6",
+          "content":"Ok sir",
+          "date": "10 minutes ago",
+          "user": 
+            {
+              id: "id",
+              name: "whatever",
+              lastName: "whatever",
+              "avatar":"https://avataaars.io/?avatarStyle=Transparent&topType=ShortHairShortCurly&accessoriesType=Prescription02&hairColor=Black&facialHairType=Blank&clotheType=Hoodie&clotheColor=White&eyeType=Default&eyebrowType=DefaultNatural&mouthType=Default&skinColor=Light"
+            }
+          },                              {
+          id: "7",
+          "content":"Ok sir",
+          "date": "10 minutes ago",
+          "user": 
+            {
+              id: "id",
+              name: "whatever",
+              lastName: "whatever",
+              "avatar":"https://avataaars.io/?avatarStyle=Transparent&topType=ShortHairShortCurly&accessoriesType=Prescription02&hairColor=Black&facialHairType=Blank&clotheType=Hoodie&clotheColor=White&eyeType=Default&eyebrowType=DefaultNatural&mouthType=Default&skinColor=Light"
+            }
+          },
+        ],
+           likes: [
+          {
+          id: "1",
+          "date": "15 minutes ago",
+          "user": 
+            {
+              id: "id",
+              name: "whatever",
+              lastName: "whatever",
+              "avatar":"https://avataaars.io/?avatarStyle=Transparent&topType=ShortHairShortCurly&accessoriesType=Prescription02&hairColor=Black&facialHairType=Blank&clotheType=Hoodie&clotheColor=White&eyeType=Default&eyebrowType=DefaultNatural&mouthType=Default&skinColor=Light"
+            }
+          },
+                    {
+          id: "1",
+          "date": "15 minutes ago",
+          "user": 
+            {
+              id: "id",
+              name: "whatever",
+              lastName: "whatever",
+              "avatar":"https://avataaars.io/?avatarStyle=Transparent&topType=ShortHairShortCurly&accessoriesType=Prescription02&hairColor=Black&facialHairType=Blank&clotheType=Hoodie&clotheColor=White&eyeType=Default&eyebrowType=DefaultNatural&mouthType=Default&skinColor=Light"
+            }
+          },
+           ]
+      },
+            {
+        id :"2",
+       "document_id":"1",
+       "content":  "Turns out semicolon-less style is easier and safer in TS because most gotcha edge cases are type invalid as well.",
+        title: "Nouveau sujet de discussion",
+        date: "30 minutes ago",
+      "seen": 15,
+        "user":
+         {
+           id: "1",
+           name: "Luy",
+           lastName: "Robin",
+           "avatar": "https://avataaars.io/?avatarStyle=Transparent&topType=ShortHairShortCurly&accessoriesType=Prescription02&hairColor=Black&facialHairType=Blank&clotheType=Hoodie&clotheColor=White&eyeType=Default&eyebrowType=DefaultNatural&mouthType=Default&skinColor=Light",
+         }
+        ,
+        comments: [
+          {
+          id: "1",
+          "content":"thank you sir",
+          "date": "15 minutes ago",
+          "user": 
+            {
+              id: "id",
+              name: "whatever",
+              lastName: "whatever",
+              "avatar":"https://avataaars.io/?avatarStyle=Transparent&topType=ShortHairShortCurly&accessoriesType=Prescription02&hairColor=Black&facialHairType=Blank&clotheType=Hoodie&clotheColor=White&eyeType=Default&eyebrowType=DefaultNatural&mouthType=Default&skinColor=Light"
+            }
+          
+          },
+                    {
+          id: "2",
+          "content":"thank you again",
+          "date": "10 minutes ago",
+          "user": 
+            {
+              id: "id",
+              name: "whatever",
+              lastName: "whatever",
+              "avatar":"https://avataaars.io/?avatarStyle=Transparent&topType=ShortHairShortCurly&accessoriesType=Prescription02&hairColor=Black&facialHairType=Blank&clotheType=Hoodie&clotheColor=White&eyeType=Default&eyebrowType=DefaultNatural&mouthType=Default&skinColor=Light"
+            }
+          
+          }
+        ],
+           likes: [
+          {
+          id: "1",
+          "date": "15 minutes ago",
+          "user": [
+            {
+              id: "id",
+              name: "whatever",
+              lastName: "whatever",
+              "avatar":"https://avataaars.io/?avatarStyle=Transparent&topType=ShortHairShortCurly&accessoriesType=Prescription02&hairColor=Black&facialHairType=Blank&clotheType=Hoodie&clotheColor=White&eyeType=Default&eyebrowType=DefaultNatural&mouthType=Default&skinColor=Light"
+            }
+          ]
+          },
+                    {
+          id: "1",
+          "date": "15 minutes ago",
+          "user": [
+            {
+              id: "id",
+              name: "whatever",
+              lastName: "whatever",
+              "avatar":"https://avataaars.io/?avatarStyle=Transparent&topType=ShortHairShortCurly&accessoriesType=Prescription02&hairColor=Black&facialHairType=Blank&clotheType=Hoodie&clotheColor=White&eyeType=Default&eyebrowType=DefaultNatural&mouthType=Default&skinColor=Light"
+            }
+          ]
+          },
+           ]
+      },
+            {
+        id :"3",
+       "document_id":"1",
+       "content":  "Turns out semicolon-less style is easier and safer in TS because most gotcha edge cases are type invalid as well.",
+        title: "Nouveau sujet de discussion",
+        date: "30 minutes ago",
+      "seen": 15,
+        "user":
+         {
+           id: "1",
+           name: "Luy",
+           lastName: "Robin",
+           "avatar": "https://avataaars.io/?avatarStyle=Transparent&topType=ShortHairShortCurly&accessoriesType=Prescription02&hairColor=Black&facialHairType=Blank&clotheType=Hoodie&clotheColor=White&eyeType=Default&eyebrowType=DefaultNatural&mouthType=Default&skinColor=Light",
+         }
+        ,
+        comments: [
+          {
+          id: "1",
+          "content":"thank you sir",
+          "date": "15 minutes ago",
+          "user": [
+            {
+              id: "id",
+              name: "whatever",
+              lastName: "whatever",
+              "avatar":"https://avataaars.io/?avatarStyle=Transparent&topType=ShortHairShortCurly&accessoriesType=Prescription02&hairColor=Black&facialHairType=Blank&clotheType=Hoodie&clotheColor=White&eyeType=Default&eyebrowType=DefaultNatural&mouthType=Default&skinColor=Light"
+            }
+          ]
+          },
+                    {
+          id: "2",
+          "content":"thank you again",
+          "date": "10 minutes ago",
+          "user": [
+            {
+              id: "id",
+              name: "whatever",
+              lastName: "whatever",
+              "avatar":"https://avataaars.io/?avatarStyle=Transparent&topType=ShortHairShortCurly&accessoriesType=Prescription02&hairColor=Black&facialHairType=Blank&clotheType=Hoodie&clotheColor=White&eyeType=Default&eyebrowType=DefaultNatural&mouthType=Default&skinColor=Light"
+            }
+          ]
+          }
+        ],
+           likes: [
+          {
+          id: "1",
+          "date": "15 minutes ago",
+          "user": [
+            {
+              id: "id",
+              name: "whatever",
+              lastName: "whatever",
+              "avatar":"https://avataaars.io/?avatarStyle=Transparent&topType=ShortHairShortCurly&accessoriesType=Prescription02&hairColor=Black&facialHairType=Blank&clotheType=Hoodie&clotheColor=White&eyeType=Default&eyebrowType=DefaultNatural&mouthType=Default&skinColor=Light"
+            }
+          ]
+          },
+                    {
+          id: "1",
+          "date": "15 minutes ago",
+          "user": [
+            {
+              id: "id",
+              name: "whatever",
+              lastName: "whatever",
+              "avatar":"https://avataaars.io/?avatarStyle=Transparent&topType=ShortHairShortCurly&accessoriesType=Prescription02&hairColor=Black&facialHairType=Blank&clotheType=Hoodie&clotheColor=White&eyeType=Default&eyebrowType=DefaultNatural&mouthType=Default&skinColor=Light"
+            }
+          ]
+          },
+           ]
+      },
+            {
+        id :"4",
+       "document_id":"1",
+       "content":  "Turns out semicolon-less style is easier and safer in TS because most gotcha edge cases are type invalid as well.",
+        title: "Nouveau sujet de discussion",
+        date: "30 minutes ago",
+      "seen": 15,
+        "user":
+         {
+           id: "1",
+           name: "Luy",
+           lastName: "Robin",
+           "avatar": "https://avataaars.io/?avatarStyle=Transparent&topType=ShortHairShortCurly&accessoriesType=Prescription02&hairColor=Black&facialHairType=Blank&clotheType=Hoodie&clotheColor=White&eyeType=Default&eyebrowType=DefaultNatural&mouthType=Default&skinColor=Light",
+         }
+        ,
+        comments: [
+          {
+          id: "1",
+          "content":"thank you sir",
+          "date": "15 minutes ago",
+          "user": [
+            {
+              id: "id",
+              name: "whatever",
+              lastName: "whatever",
+              "avatar":"https://avataaars.io/?avatarStyle=Transparent&topType=ShortHairShortCurly&accessoriesType=Prescription02&hairColor=Black&facialHairType=Blank&clotheType=Hoodie&clotheColor=White&eyeType=Default&eyebrowType=DefaultNatural&mouthType=Default&skinColor=Light"
+            }
+          ]
+          },
+                    {
+          id: "2",
+          "content":"thank you again",
+          "date": "10 minutes ago",
+          "user": [
+            {
+              id: "id",
+              name: "whatever",
+              lastName: "whatever",
+              "avatar":"https://avataaars.io/?avatarStyle=Transparent&topType=ShortHairShortCurly&accessoriesType=Prescription02&hairColor=Black&facialHairType=Blank&clotheType=Hoodie&clotheColor=White&eyeType=Default&eyebrowType=DefaultNatural&mouthType=Default&skinColor=Light"
+            }
+          ]
+          }
+        ],
+           likes: [
+          {
+          id: "1",
+          "date": "15 minutes ago",
+          "user": [
+            {
+              id: "id",
+              name: "whatever",
+              lastName: "whatever",
+              "avatar":"https://avataaars.io/?avatarStyle=Transparent&topType=ShortHairShortCurly&accessoriesType=Prescription02&hairColor=Black&facialHairType=Blank&clotheType=Hoodie&clotheColor=White&eyeType=Default&eyebrowType=DefaultNatural&mouthType=Default&skinColor=Light"
+            }
+          ]
+          },
+                    {
+          id: "1",
+          "date": "15 minutes ago",
+          "user": [
+            {
+              id: "id",
+              name: "whatever",
+              lastName: "whatever",
+              "avatar":"https://avataaars.io/?avatarStyle=Transparent&topType=ShortHairShortCurly&accessoriesType=Prescription02&hairColor=Black&facialHairType=Blank&clotheType=Hoodie&clotheColor=White&eyeType=Default&eyebrowType=DefaultNatural&mouthType=Default&skinColor=Light"
+            }
+          ]
+          },
+           ]
+      }, 
+    ]
   }),
   components: {
     searchBar,
@@ -110,7 +458,7 @@ export default {
   },
   mounted() {
     this.postService = new postService(this.$http);
-    this.loadPosts();
+    this.postService().getPosts();
   }
 };
 </script>

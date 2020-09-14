@@ -1,6 +1,6 @@
 <template >
 <span>
- <searchBar @updateList="refreshList($event)" :list="posts" style="margin-top:90px;margin-bottom:20px;"/>
+ <searchBar @updateList="refreshList($event)" :list="discussions" style="margin-top:90px;margin-bottom:20px;"/>
 <separator><b>All messages</b></separator>
         <v-list id="discussionList" class="list_layout">
           <v-list-item-group v-for="discussion in discussions"
@@ -49,6 +49,7 @@ export default {
       "id":"1",
       "content":"hello sir how are you today",
       "date":"30 minutes ago",
+      "title":"New project",
     "messages": [
       {
         id: "1",
@@ -61,13 +62,31 @@ export default {
         "id":"1",
         "name":"Luy",
         "lastName":"Robin",
-        "avatar":""
+        "avatar":"",
     },
     "receivers" : [
       {
         "id":"1",
         "name":"Luy",
         "lastName":"Robin",
+        "avatar":"https://cdn.vuetifyjs.com/images/john.png"
+      },
+      {
+        "id":"2",
+        "name":"Luya",
+        "lastName":"Robina",
+        "avatar":"https://cdn.vuetifyjs.com/images/john.png"
+      },
+      {
+        "id":"3",
+        "name":"Luya",
+        "lastName":"Robina",
+        "avatar":"https://cdn.vuetifyjs.com/images/john.png"
+      },
+      {
+        "id":"4",
+        "name":"Luya",
+        "lastName":"Robina",
         "avatar":"https://cdn.vuetifyjs.com/images/john.png"
       }
     ]
@@ -76,6 +95,7 @@ export default {
       "id":"2",
       "content":"my new work progress",
       "date":"30 minutes ago",
+      "title":"new chat",
     "messages": [
       {
         id: "1",
@@ -102,7 +122,7 @@ export default {
         "name":"test",
         "lastName":"Name",
         "avatar":"https://cdn.vuetifyjs.com/images/john.png"
-      }
+      },
     ]
     }
     ]

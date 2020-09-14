@@ -1,0 +1,29 @@
+{
+  "posts": [
+    {
+      "id": 1,
+      "documentId":1,
+      "userId": 1,
+      "title": "json-server",
+      "content":"test",
+      "date": "30 minutes ago"
+    }
+  ],
+  "comments": [
+    {
+      "id": 1,
+      "postId":1,
+      "userId":1,
+      "content": "some comment"
+    }
+  ],
+  "users": [
+  {
+    "id":1,
+    "name": "Luy",
+    "lastName":"Robin",
+    "email":"",
+    "avatar":""
+  }
+  ]
+}

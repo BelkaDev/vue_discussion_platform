@@ -1,6 +1,6 @@
 <template>
 <v-container>
-  <v-layout class="post_detail " >
+  <v-layout class="post_detail" fill-height >
     <v-flex>
       <div >
       <postPageToolbar

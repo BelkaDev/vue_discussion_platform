@@ -1,10 +1,7 @@
 <template>
-  <v-row justify="center">
-    <v-dialog v-model="dialog" max-width="600">
+  <v-row justify="center" >
+    <v-dialog v-model="dialog" max-width="600" >
       <template v-slot:activator="{ on, attrs }">
-
-
-                     
                     <v-btn
                       :block="true"
                       :style="'width:200px;'"

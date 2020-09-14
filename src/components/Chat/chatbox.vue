@@ -2,13 +2,19 @@
   <v-container style="" class="no_padding no_margin">
     <v-col :cols="windowProperties.width" class="fill-height">
       <baseCard class=" mb-n2"  >
+
       <!-- Top bar chat !-->
-      
-      <chatToolbar 
+      <chatToolbarSingle v-if="discussion.receivers.length == 1"
        :receiver="discussion.receivers[0]"
        @close="closeWindow($event)"
        @windowPropertiesChanged="updateSize($event)"
-      ></chatToolbar>
+      ></chatToolbarSingle>
+      <chatToolbarGroup v-if="discussion.receivers.length > 1"
+       :receivers="discussion.receivers"
+       :title="discussion.title"
+       @close="closeWindow($event)"
+       @windowPropertiesChanged="updateSize($event)"
+      ></chatToolbarGroup>
         <!-- Liste messages !-->
               <messageList  ref="infoBox" :blocks="message_blocks">
               </messageList>
@@ -24,7 +30,8 @@
 
 <script>
 import baseCard from "@/components/UI/Cards/baseCard.vue";
-import chatToolbar from "./chatToolbar";
+import chatToolbarSingle from "./chatToolbarSingle";
+import chatToolbarGroup from "./chatToolbarGroup";
 import chatInput from "./chatInput";
 import messageList from "./messageList";
 import EventBus from "@/utils/eventBus";
@@ -88,7 +95,8 @@ export default {
   },
   components: {
     baseCard,
-    chatToolbar,
+    chatToolbarSingle,
+    chatToolbarGroup,
     chatInput,
     messageList
   }

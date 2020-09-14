@@ -52,7 +52,7 @@
             :href="item.link"
           >
             <v-list-item-title >
-              <span @click="sortItems(item.sortBy)"><v-icon>{{item.icon}}</v-icon> {{ item.title }}</span>
+              <span class="clickable" @click="sortItems(item.sortBy)"><v-icon>{{item.icon}}</v-icon> {{ item.title }}</span>
               </v-list-item-title>
           </v-list-item>
         </v-list>
@@ -118,5 +118,8 @@ mounted () {
 }
 .sortBy * {
     padding-top:4px;
+}
+.clickable {
+  cursor:pointer;
 }
 </style>
