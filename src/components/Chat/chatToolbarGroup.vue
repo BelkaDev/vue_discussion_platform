@@ -1,22 +1,57 @@
 <template>
 
           <v-toolbar class="chat_toolbar" color="#FAFBFF" flat height="80px">
+
+                 <v-menu
+        close-on-content-click
+        :offset-y="true"
+     
+      >
+          <template v-slot:activator="{ on }">
+           <v-list-item
+           :flat="true"
+            v-on="on"  
+            style="padding:0px !important; margin:0 !important; max-width:155px !important;" >
           <v-list-item-group 
           class="avatar_group"
           v-for="(receiver,index) in receivers.slice(0, 4)"
               :key="receiver.id"
           >
-          <v-avatar class="avatar ml-2" :style="'z-index:-'+index">
-              <img :src="receiver.avatar" alt="" />
+          <v-avatar class="avatar ml-2" :style="'z-index:-'+index"
+                    >
+              <img
+               :src="receiver.avatar" alt="" />
             </v-avatar>
         </v-list-item-group>
+           </v-list-item>
+          </template>
+                  <v-list
+        width="250"
+        style=""
+        offset-y>
+          <v-list-item
+            v-for="(receiver, index) in receivers"
+            :key="index"
+          >
+            <v-list-item-title >
+          <v-avatar size="35" style="float:left;">
+              <img :src="receiver.avatar" alt="" />
+            </v-avatar>
+              <span style="float:left;" class="ml-2 mt-2">{{receiver.name.charAt(0).toUpperCase() + receiver.name.slice(1)}} {{receiver.lastName.charAt(0).toUpperCase() + receiver.lastName.slice(1)}} </span><v-icon @click="removeMember()" size="20" color="red" class="ml-2 mt-2" style="float:right">mdi-close</v-icon>
+              </v-list-item-title>
+          </v-list-item>
+        </v-list>
+                 </v-menu>
+        
         <v-container style="padding:0 !important">
         <v-layout class="toolbar_title">
           <v-flex d-flex>
             <span class="chat_title_primary">{{title.charAt(0).toUpperCase() + title.slice(1)}}</span>
           </v-flex>
           <v-flex d-flex>
-            <span @click="showMembers" class="show_members">(show members)</span>
+
+
+             
             </v-flex>
                 </v-layout>
         <v-layout class="bottom_title">
@@ -39,6 +74,7 @@
 
 <script>
 import iconButton from "@/components/UI/Buttons/iconButton.vue";
+
 
 export default {
   name: "chatToolbarGroup",
@@ -66,10 +102,13 @@ export default {
     },
     showMembers() {
       alert("ok")
+    },
+    removeMember() {
+      alert("ok")
     }
   },
   components: {
-      iconButton
+      iconButton,
   },
   mounted() {
     
@@ -110,7 +149,7 @@ export default {
   margin-left:0px;
 }
 .avatar {
-  box-shadow: 1px 1px 2px rgba(42, 139, 242, 0.35);
+  box-shadow: 1px 1px 2px rgba(42, 139, 242, 0.4);
 }
 .show_members {
   margin-left:120px;

@@ -12,6 +12,7 @@
 
 <script>
 import commentCard from "./commentCard";
+import EventBus from "@/utils/eventBus";
 
 export default {
   props: ["comments"],
@@ -24,6 +25,11 @@ export default {
   methods: {
 
     },
+    mounted() {
+  EventBus.$on("updateComment",(editedCommentId,newCommentContent)=>{
+  this.comments.find(comment => comment.id == editedCommentId).content = newCommentContent;
+	})
+    }
     
 };
 </script>

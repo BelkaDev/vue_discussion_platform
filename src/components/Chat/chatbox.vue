@@ -16,11 +16,11 @@
        @windowPropertiesChanged="updateSize($event)"
       ></chatToolbarGroup>
         <!-- Liste messages !-->
-              <messageList  ref="infoBox" :blocks="message_blocks">
+              <messageList ref="infoBox" :blocks="message_blocks" :discussion="discussion.id">
               </messageList>
 
         <!-- Input message !-->
-        <chatInput class="" :label="'Type your message here'" @sendMessage="submitMessage($event)">
+        <chatInput :label="'Type your message here'" @sendMessage="submitMessage($event)">
         </chatInput>
 
       </baseCard>
@@ -39,14 +39,22 @@ import EventBus from "@/utils/eventBus";
 export default {
   data: () => ({
     recent: false,
+    id:0,
     windowProperties: {isExpanded:false,isClosed:false},
     message_blocks: [],
     discussion:null,
   }),
+  components: {
+    baseCard,
+    chatToolbarSingle,
+    chatToolbarGroup,
+    chatInput,
+    messageList
+  },
   methods: {
     submitMessage(newMessage) {
       var container = this.$el.querySelector("#messageList");
-      container.scrollTop = container.scrollHeight;
+      container.scrollTop = 1000;
       let message = {
         msg: newMessage.text,
         avatar: "https://cdn.vuetifyjs.com/images/john.png",
@@ -88,18 +96,13 @@ export default {
   }, mounted() {
     const that = this;
       EventBus.$on("openChat", function (discussion) {
+        that.opened=discussion.id
         that.discussion = discussion
         that.message_blocks=[];
         that.setBlocks();
     });
   },
-  components: {
-    baseCard,
-    chatToolbarSingle,
-    chatToolbarGroup,
-    chatInput,
-    messageList
-  }
+
 };
 </script>
 

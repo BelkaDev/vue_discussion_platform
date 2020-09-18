@@ -8,7 +8,7 @@
             <v-textarea
             
               @click:append-outer="sendMessage"
-              @keyup.enter="sendMessage"
+              @keydown="inputHandler"
               v-model="messageNew.text"
               :label="label"
               rows="1"
@@ -16,7 +16,9 @@
             ></v-textarea>
           </v-col>
          <v-col cols="1" class="pr-15 pt-14">
-              <iconButton :icon="'mdi-send'" :shadow="true" :gradient="true"></iconButton>
+              <iconButton 
+              @click="sendMessage"
+              :icon="'mdi-send'" :shadow="true" :gradient="true"></iconButton>
           </v-col>
         </v-row>
 </template>
@@ -43,7 +45,15 @@ export default {
     sendMessage() {
     this.$emit("sendMessage",this.messageNew)
     this.messageNew.text = null;
-  }
+  },
+      inputHandler(e) {
+      if (e.keyCode === 13 && !e.shiftKey) {
+        e.preventDefault();
+        this.sendMessage();
+      } else if (e.keyCode === 13 && e.shiftKey) {
+        this.messageNew.text+="\n"
+      }
+    },
 }
 
 };

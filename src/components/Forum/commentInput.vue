@@ -5,13 +5,16 @@
           <v-col class="ml-5" cols="8">
             <v-textarea
               v-model="commentNew.text"
+              @click:append-outer="addComment"
               label="Enter your comment here"
               rows="2"
               :no-resize="true"
             ></v-textarea>
           </v-col>
          <v-col cols="1" class="pr-15 pt-8">
-              <iconButton :icon="'mdi-send'" :shadow="true" :gradient="true"></iconButton>
+              <iconButton
+              @click="addComment"
+               :icon="'mdi-send'" :shadow="true" :gradient="true"></iconButton>
           </v-col>
         </v-row>
 </template>
@@ -35,8 +38,8 @@ export default {
       iconButton
   },
   methods: {
-    sendMessage() {
-    this.$emit("sendMessage",this.commentNew)
+    addComment() {
+    this.$emit("addComment",this.commentNew.text)
     this.commentNew.text = null;
   }
 }

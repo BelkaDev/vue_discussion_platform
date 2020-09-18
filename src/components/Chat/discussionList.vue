@@ -53,7 +53,7 @@ export default {
     "messages": [
       {
         id: "1",
-        msg: "message1",
+        msg: "message1 \n test",
         avatar: "https://cdn.vuetifyjs.com/images/john.png",
         sent: false
       }
@@ -73,7 +73,7 @@ export default {
       },
       {
         "id":"2",
-        "name":"Luya",
+        "name":"Lu",
         "lastName":"Robina",
         "avatar":"https://cdn.vuetifyjs.com/images/john.png"
       },
@@ -105,7 +105,41 @@ export default {
       },
         {
         id: "2",
-        msg: "hola I said ",
+        msg: "hola I said ok ok ok ok ok ok ok ok ok ok ok ok ok ok ok ok ok okok ",
+        avatar: "https://cdn.vuetifyjs.com/images/john.png",
+        sent: false
+      },
+    ],
+    "sender" : {
+        "id":"1",
+        "name":"Test",
+        "lastName":"Name",
+        "avatar":""
+    },
+    "receivers" : [
+      {
+        "id":"1",
+        "name":"test",
+        "lastName":"Name",
+        "avatar":"https://cdn.vuetifyjs.com/images/john.png"
+      },
+    ]
+    },
+    {
+      "id":"3",
+      "content":"hey hey test",
+      "date":"30 minutes ago",
+      "title":"new chat",
+    "messages": [
+      {
+        id: "1",
+        msg: "hola",
+        avatar: "https://cdn.vuetifyjs.com/images/john.png",
+        sent: false
+      },
+        {
+        id: "2",
+        msg: "hey hey hey",
         avatar: "https://cdn.vuetifyjs.com/images/john.png",
         sent: false
       },
@@ -133,12 +167,10 @@ export default {
     },
   methods: {
   openChat: function(chat){
-  this.selectedIndex = chat.id
-  this.id+=1;
+  this.selectedIndex = chat.ids
   EventBus.$emit("openChat",chat)
-	}
-    }
-    
+  }
+  },    
 };
 </script>
 

@@ -10,13 +10,36 @@
         </v-list-item-avatar>
 
 <span class="title username font-weight-bold" style="font-size:16px !important;">{{comment.user.name.charAt(0).toUpperCase() + comment.user.name.slice(1)}} {{comment.user.lastName.charAt(0).toUpperCase() + comment.user.lastName.slice(1)}}</span>
+
+      <v-menu close-on-content-click :offset-y="true">
+        <template v-on="on" v-slot:activator="{ on }">
+          <v-icon v-on="on" class="ml-1 mt-1"
+            >mdi-dots-horizontal</v-icon
+          >
+        </template>
+        <v-list-item @click="editComment(comment.id)">
+          <v-list-item-title>
+            <v-icon>mdi-update</v-icon>Edit
+          </v-list-item-title>
+        </v-list-item>
+        <v-list-item @click="deleteComment(comment.id)">
+          <v-list-item-title>
+            <v-icon>mdi-delete</v-icon>Delete
+          </v-list-item-title>
+        </v-list-item>
+      </v-menu>
         <v-spacer></v-spacer>
       <span class="post_date font-weight-medium">{{comment.date}}</span>  
     </v-card-title>
     
 
-    <v-card-text class="comment_content font-weight-medium">
-      {{comment.content}}
+    <v-card-text :contenteditable="edit" 
+    @focusout="updateComment()"
+    v-text="comment.content"
+    style="white-space:pre-line"
+    @input="onInput"
+    class="comment_content font-weight-medium"
+    >
     </v-card-text>
 
 </v-card>
@@ -26,15 +49,38 @@
 
 <script>
 
-
   export default {
     props: ["comment"],
     data: () => ({
-      
+      edit:false,
+      content:'',
+      editedText:'',
     }),
     components: {
       
-    }
+    },
+    methods: {
+          updateComment() {
+      var input = this.$el.querySelector(".comment_content");
+      //EventBus.$emit("updateComment",this.comment.id,input.innerText)
+      this.edit = false;    
+      //this.editedText = this.editedText.replaceAll("@@@linebreak@@@","\n")
+      this.comment.content = input.innerText
+      },
+          editComment() {
+      this.edit = true;
+      var input = this.$el.querySelector(".comment_content");
+      this.comment.content += "";
+      setTimeout(function() {
+        input.focus();
+        document.execCommand("selectAll", false, null);
+        document.getSelection().collapseToEnd();
+      }, 0);
+    },
+        onInput() {
+
+  },
+    },
   }
 </script>
 <style>

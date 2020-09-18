@@ -12,9 +12,12 @@
                 <separator class="mt-3">
                   <b>Comments</b>
                 </separator>
-      <commentList :comments="post.comments"></commentList>
+      <commentList
+       :comments="post.comments"></commentList>
       <div id="comment_input">
-      <commentInput/>
+      <commentInput
+      @addComment="submitComment($event)"
+      />
       </div>
       </div>
     </v-flex>
@@ -46,6 +49,24 @@ import EventBus from "@/utils/eventBus";
       separator
     },
     methods: {
+      submitComment(newComment) {
+      var container = this.$el.querySelector("#commentList");
+      container.scrollTop = 1000;
+      let comment = {
+          id: "8",
+          "content":newComment,
+          "date": "15 minutes ago",
+          "user":
+            {
+              id: "2",
+              name: "whatever",
+              lastName: "whatever",
+              "avatar":"https://avataaars.io/?avatarStyle=Transparent&topType=ShortHairShortCurly&accessoriesType=Prescription02&hairColor=Black&facialHairType=Blank&clotheType=Hoodie&clotheColor=White&eyeType=Default&eyebrowType=DefaultNatural&mouthType=Default&skinColor=Light"
+            }
+          }
+      this.post.comments.push(comment)      
+      this.commentNew.text = null;
+    },
       updateSize(newProperties) {
       this.windowProperties = newProperties
       this.$emit("layoutPropertiesChanged",{"isExpanded":this.windowProperties.isExpanded,"isClosed":this.windowProperties.isClosed,"component":"chatbox"})
@@ -67,7 +88,7 @@ import EventBus from "@/utils/eventBus";
     var container = that.$el.querySelector("#main_post");
     container.scrollIntoView({ behavior: 'smooth', block: 'end' });
     });
-  }
+  },
   }
 </script>
 <style>
