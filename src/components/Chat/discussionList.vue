@@ -14,10 +14,23 @@
           
 <v-card class="discussion_card pa-2" :id="discussion.id" @click="openChat(discussion)" :class=" discussion.id === selectedIndex ? 'selected_discussion' : ''" >  
     <v-card-title class="pb-0 pt-1">
-      <v-list-item-avatar color="grey darken-3">
+      <div v-if="discussion.receivers.length > 1" >
+          <v-list-item-group
+          class="avatar_group"
+          v-for="(receiver) in discussion.receivers.slice(0, 4)"
+              :key="receiver.id"
+          >
+          <v-avatar class="avatar" 
+                    >
+              <img
+               :src="receiver.avatar" alt="" />
+            </v-avatar>
+        </v-list-item-group>
+        </div>
+      <v-list-item-avatar v-else color="grey darken-3">
           <v-img
             class="elevation-6"
-            :src="discussion.receivers[0].avatar"
+            :src="discussion.messages[discussion.messages.length -1].sender.avatar"
           ></v-img>
         </v-list-item-avatar>
       <span class="title font-weight-bold" style="font-size:16px !important;">{{discussion.receivers[0].name}} {{discussion.receivers[0].lastName}}</span>
@@ -27,7 +40,7 @@
     
 
     <v-card-text class="">
-      {{discussion.content}}
+      {{discussion.messages[discussion.messages.length -1].content}}
             <v-avatar
         left
         class="ml-5 mt-n1 white--text"
@@ -51,128 +64,14 @@
 import EventBus from "@/utils/eventBus";
 import searchBar from "@/components/Shared/searchBar";
 
+import discussionService from "@/services/chat/discussionService";
 
 export default {
   name: "",
 
   data: () => ({
     selectedIndex:0,
-    discussions: [
-      {
-      "id":"1",
-      "content":"hello sir how are you today",
-      "date":"30 minutes ago",
-      "title":"New project",
-    "messages": [
-      {
-        id: "1",
-        msg: "message1 \n test",
-        avatar: "https://cdn.vuetifyjs.com/images/john.png",
-        sent: false
-      }
-    ],
-    "sender" : {
-        "id":"1",
-        "name":"Luy",
-        "lastName":"Robin",
-        "avatar":"",
-    },
-    "receivers" : [
-      {
-        "id":"1",
-        "name":"Luy",
-        "lastName":"Robin",
-        "avatar":"https://cdn.vuetifyjs.com/images/john.png"
-      },
-      {
-        "id":"2",
-        "name":"Lu",
-        "lastName":"Robina",
-        "avatar":"https://cdn.vuetifyjs.com/images/john.png"
-      },
-      {
-        "id":"3",
-        "name":"Luya",
-        "lastName":"Robina",
-        "avatar":"https://cdn.vuetifyjs.com/images/john.png"
-      },
-      {
-        "id":"4",
-        "name":"Luya",
-        "lastName":"Robina",
-        "avatar":"https://cdn.vuetifyjs.com/images/john.png"
-      }
-    ]
-    },
-     {
-      "id":"2",
-      "content":"my new work progress",
-      "date":"30 minutes ago",
-      "title":"new chat",
-    "messages": [
-      {
-        id: "1",
-        msg: "hola",
-        avatar: "https://cdn.vuetifyjs.com/images/john.png",
-        sent: false
-      },
-        {
-        id: "2",
-        msg: "hola I said ok ok ok ok ok ok ok ok ok ok ok ok ok ok ok ok ok okok ",
-        avatar: "https://cdn.vuetifyjs.com/images/john.png",
-        sent: false
-      },
-    ],
-    "sender" : {
-        "id":"1",
-        "name":"Test",
-        "lastName":"Name",
-        "avatar":""
-    },
-    "receivers" : [
-      {
-        "id":"1",
-        "name":"test",
-        "lastName":"Name",
-        "avatar":"https://cdn.vuetifyjs.com/images/john.png"
-      },
-    ]
-    },
-    {
-      "id":"3",
-      "content":"hey hey test",
-      "date":"30 minutes ago",
-      "title":"new chat",
-    "messages": [
-      {
-        id: "1",
-        msg: "hola",
-        avatar: "https://cdn.vuetifyjs.com/images/john.png",
-        sent: false
-      },
-        {
-        id: "2",
-        msg: "hey hey hey",
-        avatar: "https://cdn.vuetifyjs.com/images/john.png",
-        sent: false
-      },
-    ],
-    "sender" : {
-        "id":"1",
-        "name":"Test",
-        "lastName":"Name",
-        "avatar":""
-    },
-    "receivers" : [
-      {
-        "id":"1",
-        "name":"test",
-        "lastName":"Name",
-        "avatar":"https://cdn.vuetifyjs.com/images/john.png"
-      },
-    ]
-    }
-    ]
+    discussions: []
   }),
     components: {
       searchBar,
@@ -185,7 +84,17 @@ export default {
   refreshList(newList) {
       this.discussions = newList;
     },
-  },    
+  },
+  mounted(){
+      this.discussionService = new discussionService(this.$http,this.$hostname);
+      this.discussionService.getDiscussions().then( discussions => {
+        console.log('-----------')
+        console.log(discussions)
+        console.log('-----------')
+
+        this.discussions = discussions
+      });
+  }  
 };
 </script>
 
@@ -218,5 +127,7 @@ export default {
   6px -1px 1px #C8E6C9 inset
   !important
 }
-
+.avatar_group {
+  display:inline-block;
+}
 </style>

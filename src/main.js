@@ -10,16 +10,17 @@ Vue.config.productionTip = false;
 Vue.use(RichTextEditor);
 Vue.use(axios);
 
-Vue.prototype.$http = axios;
-Vue.prototype.$hostname = "http://localhost:3000";
-
-Vue.use(VueRouter)
+Vue.use(VueRouter);
 const router = new VueRouter({
 routes: [
 { path: '/discussions/:id', component:discussion},
 ],
 mode: 'history'
 });
+
+
+Vue.prototype.$http = axios;
+Vue.prototype.$hostname = "http://localhost:3000";
 
 new Vue({
   vuetify,

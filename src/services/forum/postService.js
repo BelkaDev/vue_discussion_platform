@@ -1,56 +1,46 @@
 export default class postService {
-    constructor(http) {
-        this._http = http;
-    }
-    getPosts() {
-        this._http
-            .get(this.$hostname + "/posts/")
-            .then(resp => {
-                console.log(resp.data);
-                alert("ok")
-            })
-            .catch(error => {
-                console.log(error);
-            });
-    }
-    getPost(postId) {
-        this._http
-            .get(this.$hostname + "/posts/" + postId)
-            .then(resp => {
-                console.log(resp.data);
-            })
-            .catch(error => {
-                console.log(error);
-            });
-    }
-    createPost(post) {
-        this._http
-            .post(this.$hostname + "/posts/", post)
-            .then(resp => {
-                console.log(resp.data);
-            })
-            .catch(error => {
-                console.log(error);
-            });
-    }
-    updatePost(postId, newPost) {
-        this._http
-            .put(this.$hostname + "/posts/" + postId, newPost)
-            .then(resp => {
-                console.log(resp.data);
-            })
-            .catch(error => {
-                console.log(error);
-            });
-    }
-    deletePost(postId) {
-        this._http
-            .delete(this.$hostname + "/posts/" + postId)
-            .then(resp => {
-                console.log(resp.data);
-            })
-            .catch(error => {
-                console.log(error);
-            });
-    }
+  constructor(http, hostname) {
+    this._hostname = hostname;
+    this._http = http;
+  }
+  getPosts() {
+    return this._http
+      .get(this._hostname + "/posts/")
+      .then(resp => {
+        return resp.data;
+      })
+      .catch(error => {
+        console.log(error);
+      });
+  }
+  createPost(post) {
+    this._http
+      .post(this._hostname + "/posts/", post)
+      .then(resp => {
+        console.log(resp.data);
+      })
+      .catch(error => {
+        console.log(error);
+      });
+  }
+  updatePost(postId, newPost) {
+    this._http
+      .put(this._hostname + "/posts/" + postId, newPost)
+      .then(resp => {
+        console.log(resp.data);
+      })
+      .catch(error => {
+        console.log(error);
+      });
+  }
+  deletePost(postId) {
+    this._http
+      .delete(this._hostname + "/posts/" + postId)
+      .then(resp => {
+        console.log(resp.data);
+      })
+      .catch(error => {
+        console.log(error);
+      });
+  }
 }

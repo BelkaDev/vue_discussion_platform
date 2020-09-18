@@ -7,7 +7,7 @@
         style="white-space: pre-line;	overflow-wrap: break-word;"
         @keydown="onInput"
       class="message_content"
-      v-text="message.msg">
+      v-text="message.content">
   
         </span>
       </li>
@@ -46,7 +46,7 @@
         style="white-space: pre-line;	overflow-wrap: break-word;"
         @keydown="onInput"
       class="message_content"
-      v-text="message.msg">
+      v-text="message.content">
   
         </span>
       </li>
@@ -67,7 +67,7 @@ export default {
     updateMessage() {
       this.edit = false;
       var input = this.$el.querySelector(".message_content");
-      this.message.msg = input.innerText;    
+      this.message.content = input.innerText;    
       },
     onInput() {
   },
@@ -78,7 +78,7 @@ export default {
     editMessage() {
       this.edit = true;
       var input = this.$el.querySelector(".message_content");
-      this.message.msg += "\xa0";
+      this.message.content += "\xa0";
       setTimeout(function() {
         input.focus();
         document.execCommand("selectAll", false, null);

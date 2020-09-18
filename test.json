@@ -4,26 +4,120 @@
       "id": 1,
       "documentId":1,
       "userId": 1,
-      "title": "json-server",
-      "content":"test",
-      "date": "30 minutes ago"
-    }
+      "title": "Nouveau project discussion",
+      "content":"test allo allo allo",
+      "date": "30 minutes ago",
+      "seen":15,
+        "user":
+            {
+              "id": "id",
+              "name": "whatever",
+              "lastName": "whatever",
+              "avatar":"https://avataaars.io/?avatarStyle=Transparent&topType=ShortHairShortCurly&accessoriesType=Prescription02&hairColor=Black&facialHairType=Blank&clotheType=Hoodie&clotheColor=White&eyeType=Default&eyebrowType=DefaultNatural&mouthType=Default&skinColor=Light"
+            },
+      "comments": [
+          {
+          "id": "1",
+          "content":"thank you sir",
+          "date": "15 minutes ago",
+          "user":
+            {
+              "id": "id",
+              "name": "whatever",
+              "lastName": "whatever",
+              "avatar":"https://avataaars.io/?avatarStyle=Transparent&topType=ShortHairShortCurly&accessoriesType=Prescription02&hairColor=Black&facialHairType=Blank&clotheType=Hoodie&clotheColor=White&eyeType=Default&eyebrowType=DefaultNatural&mouthType=Default&skinColor=Light"
+            }
+          }
   ],
-  "comments": [
+             "likes": [
+          {
+          "id": "1",
+          "date": "15 minutes ago",
+          "user": 
+            {
+              "id": "id",
+              "name": "whatever",
+              "lastName": "whatever",
+              "avatar":"https://avataaars.io/?avatarStyle=Transparent&topType=ShortHairShortCurly&accessoriesType=Prescription02&hairColor=Black&facialHairType=Blank&clotheType=Hoodie&clotheColor=White&eyeType=Default&eyebrowType=DefaultNatural&mouthType=Default&skinColor=Light"
+            }
+          }
+            ]
+    },
     {
-      "id": 1,
-      "postId":1,
-      "userId":1,
-      "content": "some comment"
+      "id": 2,
+      "documentId":1,
+      "userId": 1,
+      "title": "Nouvelle étude",
+      "content":"test ok ok ok ok",
+      "date": "30 minutes ago",
+      "seen":15,
+        "user":
+            {
+              "id": "id",
+              "name": "whatever",
+              "lastName": "whatever",
+              "avatar":"https://avataaars.io/?avatarStyle=Transparent&topType=ShortHairShortCurly&accessoriesType=Prescription02&hairColor=Black&facialHairType=Blank&clotheType=Hoodie&clotheColor=White&eyeType=Default&eyebrowType=DefaultNatural&mouthType=Default&skinColor=Light"
+            },
+      "comments": [
+          {
+          "id": "1",
+          "content":"thank you sir",
+          "date": "15 minutes ago",
+          "user":
+            {
+              "id": "id",
+              "name": "whatever",
+              "lastName": "whatever",
+              "avatar":"https://avataaars.io/?avatarStyle=Transparent&topType=ShortHairShortCurly&accessoriesType=Prescription02&hairColor=Black&facialHairType=Blank&clotheType=Hoodie&clotheColor=White&eyeType=Default&eyebrowType=DefaultNatural&mouthType=Default&skinColor=Light"
+            }
+          }
+  ],
+             "likes": [
+          {
+          "id": "1",
+          "date": "15 minutes ago",
+          "user": 
+            {
+              "id": "id",
+              "name": "whatever",
+              "lastName": "whatever",
+              "avatar":"https://avataaars.io/?avatarStyle=Transparent&topType=ShortHairShortCurly&accessoriesType=Prescription02&hairColor=Black&facialHairType=Blank&clotheType=Hoodie&clotheColor=White&eyeType=Default&eyebrowType=DefaultNatural&mouthType=Default&skinColor=Light"
+            }
+          }
+            ]
     }
   ],
-  "users": [
-  {
-    "id":1,
-    "name": "Luy",
-    "lastName":"Robin",
-    "email":"",
-    "avatar":""
-  }
-  ]
+      "discussions": [
+      {
+      "id":"1",
+      "date":"30 minutes ago",
+      "title":"New project",
+      "messages": [
+      {
+        "id": "1",
+        "content": "message1 \n test",
+      "sender" : {
+        "id":"1",
+        "name":"Luy",
+        "lastName":"Robin",
+        "avatar":"https://cdn.vuetifyjs.com/images/john.png"
+    }
+      }
+    ],
+        "receivers" : [
+      {
+        "id":"1",
+        "name":"Luy",
+        "lastName":"Robin",
+        "avatar":"https://cdn.vuetifyjs.com/images/john.png"
+      },
+            {
+        "id":"2",
+        "name":"Luya",
+        "lastName":"Robine",
+        "avatar":"https://avataaars.io/?avatarStyle=Transparent&topType=ShortHairShortCurly&accessoriesType=Prescription02&hairColor=Black&facialHairType=Blank&clotheType=Hoodie&clotheColor=White&eyeType=Default&eyebrowType=DefaultNatural&mouthType=Default&skinColor=Light"
+      }
+      ]
+    }
+      ]
 }

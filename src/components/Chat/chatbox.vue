@@ -56,20 +56,18 @@ export default {
       var container = this.$el.querySelector("#messageList");
       container.scrollTop = 1000;
       let message = {
-        msg: newMessage.text,
+        content: newMessage.content,
         avatar: "https://cdn.vuetifyjs.com/images/john.png",
         sent: true
       };
       let last_block=this.message_blocks[this.message_blocks.length-1];
       let last_message=last_block[last_block.length-1];
-      if (message.msg == last_message.msg) {
+      if (message.content == last_message.content) {
       last_block.push(message)
       } else {
       let new_block=[message];
       this.message_blocks.push(new_block);
-      }
-      
-      this.messageNew.text = null;
+      }      
     },
       setBlocks() {
       let first_block=[this.discussion.messages[0]]
