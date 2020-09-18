@@ -3,7 +3,7 @@
     <searchBar
       @updateList="refreshList($event)"
       :list="discussions"
-      style="margin-top:90px;margin-bottom:12px;margin-left:4px;"
+      style="margin-top:90px;margin-bottom:12px;margin-left:6px;"
       v-if="discussions.length > 0"
     />
     

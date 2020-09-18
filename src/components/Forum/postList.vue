@@ -4,7 +4,7 @@
       @updateList="refreshList($event)"
       :list="posts"
       posts=true
-      style="margin-top:90px;margin-bottom:20px;margin-left:4px;"
+      style="margin-top:90px;margin-bottom:20px;margin-left:6px;"
       v-if="posts.length > 0"
     />
     

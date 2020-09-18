@@ -113,7 +113,7 @@ mounted () {
   
 }
 .searchBar {
-  width:100%;
+  width:99%;
   height:50px;
 }
 .divider{

@@ -33,7 +33,6 @@
 <script>
 import defaultButton from "@/components/UI/Buttons/defaultButton.vue";
 
-
 export default {
   name: 'RichTextEditPanel',
   data () {

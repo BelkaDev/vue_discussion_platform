@@ -1,15 +1,13 @@
-<template>
-  <v-container>
-    <layout></layout>
-  </v-container>
-</template>
+  <template>
+    <v-container>
+      <p>ok</p>
+    </v-container>
+  </template>
 
-<script>
-import layout from "@/components/Layouts/mainLayout.vue";
+  <script>
 
-export default {
-  components: {
-    layout,
-  }
-};
-</script>
+  export default {
+    components: {
+    }
+  };
+  </script>

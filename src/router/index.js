@@ -1,30 +1,6 @@
-import Vue from "vue";
-import VueRouter from "vue-router";
+
 import Components from "@/views/Components.vue";
 
-Vue.use(VueRouter);
-
-const routes = [
-  {
-    path: "/",
-    name: "Components",
-    component: Components
-  },
-  {
-    path: "/Components",
-    name: "Components",
-    // route level code-splitting
-    // this generates a separate chunk (about.[hash].js) for this route
-    // which is lazy-loaded when the route is visited.
-    component: () =>
-      import(/* webpackChunkName: "about" */ "../views/Components.vue")
-  }
+export default [
+  { path: "/add", component: Components }
 ];
-
-const router = new VueRouter({
-  mode: "history",
-  base: process.env.BASE_URL,
-  routes
-});
-
-export default router;

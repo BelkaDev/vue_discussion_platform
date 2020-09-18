@@ -82,6 +82,7 @@
 
 
 <script>
+import EventBus from "@/utils/eventBus";
 
   export default {
     props: ["post"],
@@ -143,10 +144,15 @@
     onInput(e) {
       if(e.keyCode == 13) {
         e.preventDefault();
-      }
+      }     
     }
+    },
+    mounted() {
+      const that = this;
+      EventBus.$on("openPost", function () {
+      that.edit = false;
+    });
     }
-
   }
 </script>
 <style>
