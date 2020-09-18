@@ -17,6 +17,7 @@
             >mdi-dots-horizontal</v-icon
           >
         </template>
+        <v-list>
         <v-list-item @click="editComment(comment.id)">
           <v-list-item-title>
             <v-icon>mdi-update</v-icon>Edit
@@ -27,6 +28,7 @@
             <v-icon>mdi-delete</v-icon>Delete
           </v-list-item-title>
         </v-list-item>
+        </v-list>
       </v-menu>
         <v-spacer></v-spacer>
       <span class="post_date font-weight-medium">{{comment.date}}</span>  
@@ -62,9 +64,7 @@
     methods: {
           updateComment() {
       var input = this.$el.querySelector(".comment_content");
-      //EventBus.$emit("updateComment",this.comment.id,input.innerText)
       this.edit = false;    
-      //this.editedText = this.editedText.replaceAll("@@@linebreak@@@","\n")
       this.comment.content = input.innerText
       },
           editComment() {

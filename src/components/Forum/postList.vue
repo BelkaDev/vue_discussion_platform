@@ -6,7 +6,7 @@
       style="margin-top:90px;margin-bottom:20px;"
       v-if="posts.length > 0"
     />
-    <separator v-if="posts.length > 0"><b >All posts</b></separator>
+    
     <h1 v-if="posts.length == 0" @click="test()" class="display-1 grey--text text--darken-2 no_posts">
       Il n'y a pas encore de posts pour cette rubrique.
         <br>
@@ -80,7 +80,6 @@
 <script>
 import EventBus from "@/utils/eventBus";
 import searchBar from "@/components/Shared/searchBar";
-import separator from "@/components/Shared/separator";
 
 import postService from "@/services/forum/postService";
 
@@ -440,7 +439,6 @@ export default {
   }),
   components: {
     searchBar,
-    separator,
   },
   methods: {
     openPost: function(post) {
