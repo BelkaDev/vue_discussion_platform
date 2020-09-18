@@ -2,6 +2,7 @@
   <v-list id="messageList" height="" :style="chatStyle" rounded class="scroll">
 
     <v-list-item-group>
+      
       <ul
         v-for="(block, block_index) in blocks"
         :key="block_index"

@@ -17,7 +17,7 @@
     <v-card-text class="">
       {{post.content}}
     </v-card-text>
-
+   
     <v-card-actions class="mt-n5">
       <v-list-item class="">
 

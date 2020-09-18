@@ -11,13 +11,14 @@
               <div class="header_titles">
                 <h1 class="header_title">Document Name</h1>
                 <h3 class="header_subtitle">
-                  Recent public posts
-                  <v-icon class="header_icon  ml-1" size="25"
-                    >mdi-account-multiple-outline</v-icon
-                  >
+                  <span v-if="!isPrivate" >All public posts                   <v-icon class="header_icon  ml-1" size="18"
+                    >mdi-earth</v-icon> </span>
+                   <span v-else >Your private messages  <v-icon class="header_icon  ml-1" size="18"
+                    >mdi-account-multiple-outline</v-icon> </span>
+
                 </h3>
               </div>
-                    <div class="header_switch">
+                    <div class="header_switch ml-2">
                     <v-layout >
                       <v-flex d-flex md8 lg12>
                         <v-icon class="mr-4 mb-1" size="36" style="color:#979797"
@@ -170,12 +171,12 @@ export default {
   padding-top: 5%;
 }
 .header_title {
-  color: #0d1c2e;
+  color: #444;
   font-size: 30px;
   text-align: left;
 }
 .header_subtitle {
-  color: #707c97;
+  color: #666;
   margin-left:3px;
   font-size: 16px;
   text-align: left;
@@ -187,8 +188,8 @@ export default {
  }
 
 .header_icon {
-  color: #707c97;
-  opacity: 0.65;
+  color: #888;
+  opacity: 0.80;
 }
 
 .right_layout {

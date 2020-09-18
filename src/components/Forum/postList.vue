@@ -3,7 +3,8 @@
     <searchBar
       @updateList="refreshList($event)"
       :list="posts"
-      style="margin-top:90px;margin-bottom:20px;"
+      posts=true
+      style="margin-top:90px;margin-bottom:20px;margin-left:4px;"
       v-if="posts.length > 0"
     />
     
@@ -44,7 +45,8 @@
           >
 
           <v-card-text class="">
-            {{ post.content }}
+            {{ post.content.split(/\s+/).slice(0,15).join(' ') + '...' }}
+            <span style="color:#2A8BF2 !important">(read more)</span>
           </v-card-text>
 
           <v-card-actions class="mt-n3 mb-2 mr-4">

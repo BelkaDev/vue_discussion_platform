@@ -37,16 +37,17 @@
     
           <div
       :class="edit? 'mx-3 mb-4':''" >
-      <span class="title font-weight-bold" style="font-size:16px !important; color:#555 !important"
+      <span class="post_title font-weight-bold" style="font-size:16px !important; color:#555 !important"
       :contenteditable="editTitle"
+        @focusout="updatePost()"
       v-on="edit ? { click: () => editPostTitle() } : {click: ($event) => $event.preventDefault() }"
       :class="edit? 'editable_content mx-15' : ''"
       @keydown="onInput"
       >{{post.title}}</span>
 
     <v-card-text 
-    @focusout="updatePost()"
     :contenteditable="editContent"
+        @focusout="updatePost()"      
     v-on="edit ? { click: () => editPostContent() } : {click: ($event) => $event.preventDefault() }"
     :class="edit? 'editable_content' : ''"
     v-text="post.content"
@@ -108,9 +109,12 @@
         }
       },  
             updatePost() {
-      var input = this.$el.querySelector(".post_content");
-      this.edit = false;    
-      this.post.content = input.innerText
+      this.editContent = false;    
+      this.editTitle = false;    
+      var content = this.$el.querySelector(".post_content");
+      var title = this.$el.querySelector(".post_title");
+      this.post.content = content.innerText
+      this.post.title = title.innerText
       },
       editPostContent() {
       this.editContent=true;
@@ -128,7 +132,7 @@
       this.editTitle=true;
       this.editContent=false;
       this.edit=false;
-      var input = this.$el.querySelector(".title");
+      var input = this.$el.querySelector(".post_title");
       this.post.content += "";
       setTimeout(function() {
         input.focus();

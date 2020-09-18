@@ -1,11 +1,17 @@
 <template >
 <span>
- <searchBar @updateList="refreshList($event)" :list="discussions" style="margin-top:90px;margin-bottom:20px;"/>
-<separator><b>All messages</b></separator>
+    <searchBar
+      @updateList="refreshList($event)"
+      :list="discussions"
+      style="margin-top:90px;margin-bottom:12px;margin-left:4px;"
+      v-if="discussions.length > 0"
+    />
+    
         <v-list id="discussionList" class="list_layout">
           <v-list-item-group v-for="discussion in discussions"
               :key="discussion.id"
           >
+          
 <v-card class="discussion_card pa-2" :id="discussion.id" @click="openChat(discussion)" :class=" discussion.id === selectedIndex ? 'selected_discussion' : ''" >  
     <v-card-title class="pb-0 pt-1">
       <v-list-item-avatar color="grey darken-3">
@@ -22,6 +28,14 @@
 
     <v-card-text class="">
       {{discussion.content}}
+            <v-avatar
+        left
+        class="ml-5 mt-n1 white--text"
+        style="background-color:#60A9F6"
+        size="18"
+      >
+      <span style="margin-top:15%"> 1 </span>
+      </v-avatar>
     </v-card-text>
 
 
@@ -36,7 +50,6 @@
 <script>
 import EventBus from "@/utils/eventBus";
 import searchBar from "@/components/Shared/searchBar";
-import separator from "@/components/Shared/separator";
 
 
 export default {
@@ -163,13 +176,15 @@ export default {
   }),
     components: {
       searchBar,
-      separator
     },
   methods: {
   openChat: function(chat){
   this.selectedIndex = chat.ids
   EventBus.$emit("openChat",chat)
-  }
+  },
+  refreshList(newList) {
+      this.discussions = newList;
+    },
   },    
 };
 </script>

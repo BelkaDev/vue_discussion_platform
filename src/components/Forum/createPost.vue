@@ -4,12 +4,13 @@
       <template v-slot:activator="{ on, attrs }">
                     <v-btn
                       :block="true"
-                      :style="'width:200px;'"
-                      class="my-3 pa-0 button_gradient"
-                      style="margin-left:50px; color:white;"
+                      color="#60A9F6"
+                      :style="'width:100px; margin-top:14px !important;  text-transform:none !important;'"
+                      class="my-3 button_gradient"
+                      style="margin-left:94px; color:white;"
                                 v-bind="attrs"
           v-on="on"
-                      ><v-icon class="mr-4 ">mdi-pencil</v-icon> Add new post</v-btn
+                      ><v-icon class="mr-4" size="18">mdi-pencil</v-icon> Add new post</v-btn
                     >
       </template>
       
@@ -60,11 +61,10 @@ export default {
 <style >
 .default_button {
   opacity: .95;
-  text-transform:none !important;
 
 }
 .button_gradient {
-        background: linear-gradient(to top, rgba(42, 139, 242, 1), rgba(124, 184, 247, 1));
+        background: #60A9F6;
         box-shadow: 0px 0px 3px #2A8BF2;
 }
 

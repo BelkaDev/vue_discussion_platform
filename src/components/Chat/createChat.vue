@@ -2,16 +2,17 @@
   <v-row justify="center">
     <v-dialog v-model="dialog" max-width="600">
       <template v-slot:activator="{ on, attrs }">
-                    <v-btn
+
+                                        <v-btn
                       :block="true"
-                      :style="'width:200px;'"
-                      class="my-3 pa-0 button_gradient"
-                      style="margin-left:50px; color:white;"
+                      color="#60A9F6"
+                      :style="'width:100px; margin-top:14px !important;  text-transform:none !important;'"
+                      class="my-3 button_gradient"
+                      style="margin-left:94px; color:white;"
                                 v-bind="attrs"
-                      v-on="on"
-                      @click="newChat()"
-                      ><v-icon class="mr-4 mt-n1">mdi-pencil</v-icon> Create new chat</v-btn
-                    >
+
+          v-on="on"
+                      ><v-icon class="mr-4" size="18">mdi-pencil</v-icon> Create new Chat</v-btn>
       </template>
 <v-container style="background-color:white !important">
 <searchUsers></searchUsers>

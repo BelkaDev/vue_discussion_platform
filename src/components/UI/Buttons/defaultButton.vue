@@ -3,7 +3,8 @@
   <v-btn v-if="!block" large :class="customClass" :style="customStyle" @click="handleClick">
     <slot/>
   </v-btn>
-  <v-btn class="" v-if="block" block large :class="customClass" :style="customStyle" @click="handleClick" >
+  <v-btn 
+  class="" v-if="block" block large :class="customClass" :style="customStyle" @click="handleClick" >
     <slot/>
   </v-btn>
   </div>
@@ -55,7 +56,8 @@ export default {
 
 }
 .button_gradient {
-        background: linear-gradient(to top, rgba(42, 139, 242, 1), rgba(124, 184, 247, 1));
+  border-radius:0;
+        background-color: #60A9F6;
         box-shadow: 0px 0px 3px #2A8BF2;
 }
 

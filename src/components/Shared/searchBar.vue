@@ -22,9 +22,12 @@
       class="divider my-0"
         inset
         vertical
+        v-if="posts"
       ></v-divider>
 
-         <v-flex class="mt-2 sortBy"> 
+         <v-flex 
+         v-if="posts"
+         class="mt-2 sortBy"> 
                 
 
 
@@ -36,7 +39,8 @@
       
         <template v-slot:activator="{ on }">
           <v-btn
-            color="grey darken-3"
+            color="#777"
+            style="text-transform:none;"
             text
             v-on="on"          >
           
@@ -64,7 +68,7 @@
 
 <script>
 export default {
-  props:["list"],
+  props:["list","posts"],
   data: () => ({
      items: [
         { title: 'Date', icon: 'mdi-calendar','sortBy':'seen'},
@@ -114,7 +118,8 @@ mounted () {
 }
 .divider{
     height:50px !important;
-    border:2px solid #F5F4FB !important;
+    opacity:0.35;
+    border:2px solid #999 !important;
 }
 .sortBy * {
     padding-top:4px;
