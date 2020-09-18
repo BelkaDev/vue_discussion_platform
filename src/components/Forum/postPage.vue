@@ -36,6 +36,8 @@ import commentInput from "./commentInput"
 import separator from "@/components/Shared/separator.vue";
 import EventBus from "@/utils/eventBus";
 
+import commentService from "@/services/forum/commentService";
+
   export default {
   
     data: () => ({
@@ -50,23 +52,15 @@ import EventBus from "@/utils/eventBus";
     },
     methods: {
       submitComment(newComment) {
+      const that = this;
+      newComment.id = this.post.comments.length + 1
+      this.post.comments.push(newComment)     
+      this.commentService.addComment(this.post.id,this.post).then(() => {
+        that.refreshComments();
+      });
       var container = this.$el.querySelector("#commentList");
       container.scrollTop = 1000;
-      let comment = {
-          id: "8",
-          "content":newComment,
-          "date": "15 minutes ago",
-          "user":
-            {
-              id: "2",
-              name: "whatever",
-              lastName: "whatever",
-              "avatar":"https://avataaars.io/?avatarStyle=Transparent&topType=ShortHairShortCurly&accessoriesType=Prescription02&hairColor=Black&facialHairType=Blank&clotheType=Hoodie&clotheColor=White&eyeType=Default&eyebrowType=DefaultNatural&mouthType=Default&skinColor=Light"
-            }
-          }
-      this.post.comments.push(comment)      
-      this.commentNew.text = null;
-    },
+          },
       updateSize(newProperties) {
       this.windowProperties = newProperties
       this.$emit("layoutPropertiesChanged",{"isExpanded":this.windowProperties.isExpanded,"isClosed":this.windowProperties.isClosed,"component":"chatbox"})
@@ -78,15 +72,30 @@ import EventBus from "@/utils/eventBus";
     addComment() {
       var container = this.$el.querySelector("#comment_input");
      container.scrollIntoView({ behavior: 'smooth', block: 'end' });
+    },
+        refreshComments(){
+      this.commentService.getComments(this.post.id,this.post).then((commentList) => {
+        this.post.comments = commentList;
+      })
     }
     },
+
     created () {
     const that = this;
+    this.commentService = new commentService(this.$http,this.$hostname);
     // called from postList.vue
     EventBus.$on("openPost", function (post) {
     that.post = post
     var container = that.$el.querySelector("#main_post");
     container.scrollIntoView({ behavior: 'smooth', block: 'end' });
+    });
+        EventBus.$on("updateComment", function (updatedComment) {
+        
+var commentId = that.post.comments.findIndex(comment => comment.id == updatedComment.id);
+that.post.comments[commentId] = updatedComment
+        that.commentService.updateComment(that.post.id,that.post).then(() => {
+        that.refreshComments()
+      })
     });
   },
   }

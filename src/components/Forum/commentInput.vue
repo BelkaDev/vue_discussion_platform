@@ -4,7 +4,7 @@
           </v-col>
           <v-col class="ml-5" cols="8">
             <v-textarea
-              v-model="commentNew.content"
+              v-model="commentContent"
               @click:append-outer="addComment"
               label="Enter your comment here"
               rows="2"
@@ -29,18 +29,24 @@ export default {
 
   props: ["label"],
   data: () => ({
-    commentNew: {
-      text: null
-    }
-    
+    newComment: {},
+    commentContent:''
   }),
     components: {
       iconButton
   },
   methods: {
     addComment() {
-    this.$emit("addComment",this.commentNew.content)
-    this.commentNew.content = null;
+      var user = {
+        "id":"1",
+        "name":"Luy",
+        "lastName":"Robin",
+        "avatar":"https://cdn.vuetifyjs.com/images/john.png"
+    }
+    this.newComment.user = user;
+    this.newComment.content = this.commentContent
+    this.$emit("addComment",this.newComment)
+    this.commentContent = null;
   }
 }
 

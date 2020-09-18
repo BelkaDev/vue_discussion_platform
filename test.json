@@ -17,7 +17,7 @@
       "comments": [
         {
           "id": "1",
-          "content": "thank you sir",
+          "content": "thank you sir for the gold\n",
           "date": "15 minutes ago",
           "user": {
             "id": "id",
@@ -25,6 +25,56 @@
             "lastName": "whatever",
             "avatar": "https://cdn.vuetifyjs.com/images/john.png"
           }
+        },
+        {
+          "user": {
+            "id": "1",
+            "name": "Luy",
+            "lastName": "Robin",
+            "avatar": "https://cdn.vuetifyjs.com/images/john.png"
+          },
+          "content": "okey",
+          "id": 2
+        },
+        {
+          "user": {
+            "id": "1",
+            "name": "Luy",
+            "lastName": "Robin",
+            "avatar": "https://cdn.vuetifyjs.com/images/john.png"
+          },
+          "content": "aaaa",
+          "id": 3
+        },
+        {
+          "user": {
+            "id": "1",
+            "name": "Luy",
+            "lastName": "Robin",
+            "avatar": "https://cdn.vuetifyjs.com/images/john.png"
+          },
+          "content": "fqsfqs fqsfsqfqsf\n",
+          "id": 4
+        },
+        {
+          "user": {
+            "id": "1",
+            "name": "Luy",
+            "lastName": "Robin",
+            "avatar": "https://cdn.vuetifyjs.com/images/john.png"
+          },
+          "content": "wtf",
+          "id": 5
+        },
+        {
+          "user": {
+            "id": "1",
+            "name": "Luy",
+            "lastName": "Robin",
+            "avatar": "https://cdn.vuetifyjs.com/images/john.png"
+          },
+          "content": "dqsfqsfsq",
+          "id": 6
         }
       ],
       "likes": [
@@ -65,6 +115,26 @@
             "lastName": "whatever",
             "avatar": "https://cdn.vuetifyjs.com/images/john.png"
           }
+        },
+        {
+          "user": {
+            "id": "1",
+            "name": "Luy",
+            "lastName": "Robin",
+            "avatar": "https://cdn.vuetifyjs.com/images/john.png"
+          },
+          "content": "thank you bro wtf\n",
+          "id": 2
+        },
+        {
+          "user": {
+            "id": "1",
+            "name": "Luy",
+            "lastName": "Robin",
+            "avatar": "https://cdn.vuetifyjs.com/images/john.png"
+          },
+          "content": "fhamtni ? or not",
+          "id": 3
         }
       ],
       "likes": [
@@ -96,66 +166,6 @@
             "lastName": "Robin",
             "avatar": "https://cdn.vuetifyjs.com/images/john.png"
           }
-        },
-        {
-          "content": "hello",
-          "sender": {
-            "id": "1",
-            "name": "Luy",
-            "lastName": "Robin",
-            "avatar": "https://cdn.vuetifyjs.com/images/john.png"
-          },
-          "id": 1
-        },
-        {
-          "content": "how are",
-          "sender": {
-            "id": "1",
-            "name": "Luy",
-            "lastName": "Robin",
-            "avatar": "https://cdn.vuetifyjs.com/images/john.png"
-          },
-          "id": 2
-        },
-        {
-          "content": "you",
-          "sender": {
-            "id": "1",
-            "name": "Luy",
-            "lastName": "Robin",
-            "avatar": "https://cdn.vuetifyjs.com/images/john.png"
-          },
-          "id": 3
-        },
-        {
-          "content": "today",
-          "sender": {
-            "id": "1",
-            "name": "Luy",
-            "lastName": "Robin",
-            "avatar": "https://cdn.vuetifyjs.com/images/john.png"
-          },
-          "id": 4
-        },
-        {
-          "content": "i'm good",
-          "sender": {
-            "id": "1",
-            "name": "Luy",
-            "lastName": "Robin",
-            "avatar": "https://cdn.vuetifyjs.com/images/john.png"
-          },
-          "id": 5
-        },
-        {
-          "content": "and you",
-          "sender": {
-            "id": "1",
-            "name": "Luy",
-            "lastName": "Robin",
-            "avatar": "https://cdn.vuetifyjs.com/images/john.png"
-          },
-          "id": 6
         }
       ],
       "receivers": [

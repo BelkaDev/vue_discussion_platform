@@ -50,6 +50,7 @@
 
 
 <script>
+import EventBus from "@/utils/eventBus";
 
   export default {
     props: ["comment"],
@@ -62,10 +63,12 @@
       
     },
     methods: {
-          updateComment() {
+      updateComment() {
       var input = this.$el.querySelector(".comment_content");
       this.edit = false;    
       this.comment.content = input.innerText
+      EventBus.$emit("updateComment",this.comment)
+
       },
           editComment() {
       this.edit = true;

@@ -89,10 +89,6 @@ export default {
   mounted(){
       this.discussionService = new discussionService(this.$http,this.$hostname);
       this.discussionService.getDiscussions().then( discussions => {
-        console.log('-----------')
-        console.log(discussions)
-        console.log('-----------')
-
         this.discussions = discussions
       });
   }  
