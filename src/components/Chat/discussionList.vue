@@ -16,15 +16,15 @@
     <v-card-title class="pb-0 pt-1">
       <div v-if="discussion.receivers.length > 1" >
           <v-list-item-group
-          class="avatar_group"
+          class="avatar_group_list"
           v-for="(receiver) in discussion.receivers.slice(0, 4)"
               :key="receiver.id"
           >
-          <v-avatar class="avatar" 
-                    >
               <img
-               :src="receiver.avatar" alt="" />
-            </v-avatar>
+              class="receiver_avatar"
+              :style="'z-index:-'+index"
+               :src="receiver.avatar" 
+               :alt="receiver.name" />
         </v-list-item-group>
         </div>
       <v-list-item-avatar v-else color="grey darken-3">
@@ -33,25 +33,26 @@
             :src="discussion.messages[discussion.messages.length -1].sender.avatar"
           ></v-img>
         </v-list-item-avatar>
-      <span class="title font-weight-bold" style="font-size:16px !important;">{{discussion.receivers[0].name}} {{discussion.receivers[0].lastName}}</span>
+      <span v-if="discussion.receivers.length > 1" class="title font-weight-bold" style="font-size:16px !important;">{{discussion.title}}</span>      
+      <span v-else class="title font-weight-bold" style="font-size:16px !important;">{{discussion.receivers[0].name}} {{discussion.receivers[0].lastName}}</span>
         <v-spacer></v-spacer>
       <span class="discussion_date font-weight-medium">{{discussion.date}}</span>  
     </v-card-title>
     
-
-    <v-card-text class="">
+<v-layout>
+    <v-card-text align="left">
       {{discussion.messages[discussion.messages.length -1].content}}
-            <v-avatar
-        left
-        class="ml-5 mt-n1 white--text"
+
+    </v-card-text>
+                  <v-avatar
+        class="mr-5 mt-4 white--text"
         style="background-color:#60A9F6"
         size="18"
       >
-      <span style="margin-top:15%"> 1 </span>
+      <span style="margin-top:15%"
+      align="end"> 1 </span>
       </v-avatar>
-    </v-card-text>
-
-
+      </v-layout>
 </v-card>
           </v-list-item-group>
         </v-list>
@@ -127,7 +128,26 @@ export default {
   6px -1px 1px #C8E6C9 inset
   !important
 }
-.avatar_group {
+.avatar_group_list {
   display:inline-block;
+}
+.avatar_group_list {
+  margin-left:-18px;
+}
+.avatar_group_list:first-child {
+  margin-left:0px;
+}
+.avatar_group_list:last-child {
+  margin-right:10px;
+  
+}
+.receiver_avatar {
+  border-radius:50%;
+  margin-top:10px;
+  height:40px;
+  width:40px;
+}
+.title {
+  color:#666;
 }
 </style>

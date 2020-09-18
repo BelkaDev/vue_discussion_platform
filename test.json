@@ -2,122 +2,244 @@
   "posts": [
     {
       "id": 1,
-      "documentId":1,
+      "documentId": 1,
       "userId": 1,
       "title": "Nouveau project discussion",
-      "content":"test allo allo allo",
+      "content": "test allo allo allo",
       "date": "30 minutes ago",
-      "seen":15,
-        "user":
-            {
-              "id": "id",
-              "name": "whatever",
-              "lastName": "whatever",
-              "avatar":"https://avataaars.io/?avatarStyle=Transparent&topType=ShortHairShortCurly&accessoriesType=Prescription02&hairColor=Black&facialHairType=Blank&clotheType=Hoodie&clotheColor=White&eyeType=Default&eyebrowType=DefaultNatural&mouthType=Default&skinColor=Light"
-            },
+      "seen": 15,
+      "user": {
+        "id": "id",
+        "name": "whatever",
+        "lastName": "whatever",
+        "avatar": "https://cdn.vuetifyjs.com/images/john.png"
+      },
       "comments": [
-          {
+        {
           "id": "1",
-          "content":"thank you sir",
+          "content": "thank you sir",
           "date": "15 minutes ago",
-          "user":
-            {
-              "id": "id",
-              "name": "whatever",
-              "lastName": "whatever",
-              "avatar":"https://avataaars.io/?avatarStyle=Transparent&topType=ShortHairShortCurly&accessoriesType=Prescription02&hairColor=Black&facialHairType=Blank&clotheType=Hoodie&clotheColor=White&eyeType=Default&eyebrowType=DefaultNatural&mouthType=Default&skinColor=Light"
-            }
+          "user": {
+            "id": "id",
+            "name": "whatever",
+            "lastName": "whatever",
+            "avatar": "https://cdn.vuetifyjs.com/images/john.png"
           }
-  ],
-             "likes": [
-          {
+        }
+      ],
+      "likes": [
+        {
           "id": "1",
           "date": "15 minutes ago",
-          "user": 
-            {
-              "id": "id",
-              "name": "whatever",
-              "lastName": "whatever",
-              "avatar":"https://avataaars.io/?avatarStyle=Transparent&topType=ShortHairShortCurly&accessoriesType=Prescription02&hairColor=Black&facialHairType=Blank&clotheType=Hoodie&clotheColor=White&eyeType=Default&eyebrowType=DefaultNatural&mouthType=Default&skinColor=Light"
-            }
+          "user": {
+            "id": "id",
+            "name": "whatever",
+            "lastName": "whatever",
+            "avatar": "https://cdn.vuetifyjs.com/images/john.png"
           }
-            ]
+        }
+      ]
     },
     {
       "id": 2,
-      "documentId":1,
+      "documentId": 1,
       "userId": 1,
       "title": "Nouvelle étude",
-      "content":"test ok ok ok ok",
+      "content": "test ok ok ok ok",
       "date": "30 minutes ago",
-      "seen":15,
-        "user":
-            {
-              "id": "id",
-              "name": "whatever",
-              "lastName": "whatever",
-              "avatar":"https://avataaars.io/?avatarStyle=Transparent&topType=ShortHairShortCurly&accessoriesType=Prescription02&hairColor=Black&facialHairType=Blank&clotheType=Hoodie&clotheColor=White&eyeType=Default&eyebrowType=DefaultNatural&mouthType=Default&skinColor=Light"
-            },
-      "comments": [
-          {
-          "id": "1",
-          "content":"thank you sir",
-          "date": "15 minutes ago",
-          "user":
-            {
-              "id": "id",
-              "name": "whatever",
-              "lastName": "whatever",
-              "avatar":"https://avataaars.io/?avatarStyle=Transparent&topType=ShortHairShortCurly&accessoriesType=Prescription02&hairColor=Black&facialHairType=Blank&clotheType=Hoodie&clotheColor=White&eyeType=Default&eyebrowType=DefaultNatural&mouthType=Default&skinColor=Light"
-            }
-          }
-  ],
-             "likes": [
-          {
-          "id": "1",
-          "date": "15 minutes ago",
-          "user": 
-            {
-              "id": "id",
-              "name": "whatever",
-              "lastName": "whatever",
-              "avatar":"https://avataaars.io/?avatarStyle=Transparent&topType=ShortHairShortCurly&accessoriesType=Prescription02&hairColor=Black&facialHairType=Blank&clotheType=Hoodie&clotheColor=White&eyeType=Default&eyebrowType=DefaultNatural&mouthType=Default&skinColor=Light"
-            }
-          }
-            ]
-    }
-  ],
-      "discussions": [
-      {
-      "id":"1",
-      "date":"30 minutes ago",
-      "title":"New project",
-      "messages": [
-      {
-        "id": "1",
-        "content": "message1 \n test",
-      "sender" : {
-        "id":"1",
-        "name":"Luy",
-        "lastName":"Robin",
-        "avatar":"https://cdn.vuetifyjs.com/images/john.png"
-    }
-      }
-    ],
-        "receivers" : [
-      {
-        "id":"1",
-        "name":"Luy",
-        "lastName":"Robin",
-        "avatar":"https://cdn.vuetifyjs.com/images/john.png"
+      "seen": 15,
+      "user": {
+        "id": "id",
+        "name": "whatever",
+        "lastName": "whatever",
+        "avatar": "https://cdn.vuetifyjs.com/images/john.png"
       },
-            {
-        "id":"2",
-        "name":"Luya",
-        "lastName":"Robine",
-        "avatar":"https://avataaars.io/?avatarStyle=Transparent&topType=ShortHairShortCurly&accessoriesType=Prescription02&hairColor=Black&facialHairType=Blank&clotheType=Hoodie&clotheColor=White&eyeType=Default&eyebrowType=DefaultNatural&mouthType=Default&skinColor=Light"
-      }
+      "comments": [
+        {
+          "id": "1",
+          "content": "thank you sir",
+          "date": "15 minutes ago",
+          "user": {
+            "id": "id",
+            "name": "whatever",
+            "lastName": "whatever",
+            "avatar": "https://cdn.vuetifyjs.com/images/john.png"
+          }
+        }
+      ],
+      "likes": [
+        {
+          "id": "1",
+          "date": "15 minutes ago",
+          "user": {
+            "id": "id",
+            "name": "whatever",
+            "lastName": "whatever",
+            "avatar": "https://cdn.vuetifyjs.com/images/john.png"
+          }
+        }
       ]
     }
+  ],
+  "discussions": [
+    {
+      "id": "1",
+      "date": "30 minutes ago",
+      "title": "New project",
+      "messages": [
+        {
+          "id": "1",
+          "content": "message1 \n test",
+          "sender": {
+            "id": "1",
+            "name": "Luy",
+            "lastName": "Robin",
+            "avatar": "https://cdn.vuetifyjs.com/images/john.png"
+          }
+        },
+        {
+          "content": "hello",
+          "sender": {
+            "id": "1",
+            "name": "Luy",
+            "lastName": "Robin",
+            "avatar": "https://cdn.vuetifyjs.com/images/john.png"
+          },
+          "id": 1
+        },
+        {
+          "content": "how are",
+          "sender": {
+            "id": "1",
+            "name": "Luy",
+            "lastName": "Robin",
+            "avatar": "https://cdn.vuetifyjs.com/images/john.png"
+          },
+          "id": 2
+        },
+        {
+          "content": "you",
+          "sender": {
+            "id": "1",
+            "name": "Luy",
+            "lastName": "Robin",
+            "avatar": "https://cdn.vuetifyjs.com/images/john.png"
+          },
+          "id": 3
+        },
+        {
+          "content": "today",
+          "sender": {
+            "id": "1",
+            "name": "Luy",
+            "lastName": "Robin",
+            "avatar": "https://cdn.vuetifyjs.com/images/john.png"
+          },
+          "id": 4
+        },
+        {
+          "content": "i'm good",
+          "sender": {
+            "id": "1",
+            "name": "Luy",
+            "lastName": "Robin",
+            "avatar": "https://cdn.vuetifyjs.com/images/john.png"
+          },
+          "id": 5
+        },
+        {
+          "content": "and you",
+          "sender": {
+            "id": "1",
+            "name": "Luy",
+            "lastName": "Robin",
+            "avatar": "https://cdn.vuetifyjs.com/images/john.png"
+          },
+          "id": 6
+        }
+      ],
+      "receivers": [
+        {
+          "id": "1",
+          "name": "Luy",
+          "lastName": "Robin",
+          "avatar": "https://cdn.vuetifyjs.com/images/john.png"
+        },
+        {
+          "id": "2",
+          "name": "Luya",
+          "lastName": "Robine",
+          "avatar": "https://cdn.vuetifyjs.com/images/john.png"
+        }
       ]
+    },
+    {
+      "id": "2",
+      "date": "30 minutes ago",
+      "title": "New project",
+      "messages": [
+        {
+          "id": "1",
+          "content": "message1 \n test",
+          "sender": {
+            "id": "1",
+            "name": "Luy",
+            "lastName": "Robin",
+            "avatar": "https://cdn.vuetifyjs.com/images/john.png"
+          }
+        }
+      ],
+      "receivers": [
+        {
+          "id": "1",
+          "name": "Luy",
+          "lastName": "Robin",
+          "avatar": "https://cdn.vuetifyjs.com/images/john.png"
+        },
+        {
+          "id": "2",
+          "name": "Luya",
+          "lastName": "Robine",
+          "avatar": "https://cdn.vuetifyjs.com/images/john.png"
+        },
+        {
+          "id": "3",
+          "name": "Luya",
+          "lastName": "Robine",
+          "avatar": "https://cdn.vuetifyjs.com/images/john.png"
+        },
+        {
+          "id": "4",
+          "name": "Luya",
+          "lastName": "Robine",
+          "avatar": "https://cdn.vuetifyjs.com/images/john.png"
+        }
+      ]
+    },
+    {
+      "id": "3",
+      "date": "30 minutes ago",
+      "title": "New project",
+      "messages": [
+        {
+          "id": "1",
+          "content": "message1 \n test lorem ipsum machin truc why am i typing this shit manually kekwk lol lolo losample text . jpeg lmoafa are u mad crazy my d00d",
+          "sender": {
+            "id": "1",
+            "name": "Luy",
+            "lastName": "Robin",
+            "avatar": "https://cdn.vuetifyjs.com/images/john.png"
+          }
+        }
+      ],
+      "receivers": [
+        {
+          "id": "1",
+          "name": "Luy",
+          "lastName": "Robin",
+          "avatar": "https://cdn.vuetifyjs.com/images/john.png"
+        }
+      ]
+    }
+  ]
 }

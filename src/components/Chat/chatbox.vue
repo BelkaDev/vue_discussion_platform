@@ -36,6 +36,8 @@ import chatInput from "./chatInput";
 import messageList from "./messageList";
 import EventBus from "@/utils/eventBus";
 
+import messageService from "@/services/chat/messageService";
+
 export default {
   data: () => ({
     recent: false,
@@ -53,11 +55,18 @@ export default {
   },
   methods: {
     submitMessage(newMessage) {
+      const that = this;
+      this.messageService = new messageService(this.$http,this.$hostname);
+      newMessage.id = this.discussion.messages.length
+      this.discussion.messages.push(newMessage)
+      this.messageService.sendMessage(this.discussion.id,this.discussion).then(() => {
+        that.refreshMessages();
+      });
       var container = this.$el.querySelector("#messageList");
       container.scrollTop = 1000;
       let message = {
         content: newMessage.content,
-        avatar: "https://cdn.vuetifyjs.com/images/john.png",
+        sender: newMessage.sender,
         sent: true
       };
       let last_block=this.message_blocks[this.message_blocks.length-1];
@@ -90,6 +99,12 @@ export default {
     closeWindow(newProperties) {
       this.windowProperties = newProperties
       this.$emit("layoutPropertiesChanged",{"isExpanded":this.windowProperties.isExpanded,"isClosed":this.windowProperties.isClosed,"component":"chatbox"})
+    },
+    refreshMessages(){
+      this.messageService = new messageService(this.$http,this.$hostname);
+      this.messageService.getMessages(this.discussion.id,this.discussion).then((messageList) => {
+        this.discussion.messages = messageList;
+      })
     }
   }, mounted() {
     const that = this;

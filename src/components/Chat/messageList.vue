@@ -6,7 +6,6 @@
       <ul
         v-for="(block, block_index) in blocks"
         :key="block_index"
-        :class="block.sent ? 'text-right' : ''"
       >
         <div v-for="(message, message_index) in block" :key="message_index">
           <chatBlock

@@ -4,7 +4,7 @@
           </v-col>
           <v-col class="ml-5" cols="8">
             <v-textarea
-              v-model="commentNew.text"
+              v-model="commentNew.content"
               @click:append-outer="addComment"
               label="Enter your comment here"
               rows="2"
@@ -39,8 +39,8 @@ export default {
   },
   methods: {
     addComment() {
-    this.$emit("addComment",this.commentNew.text)
-    this.commentNew.text = null;
+    this.$emit("addComment",this.commentNew.content)
+    this.commentNew.content = null;
   }
 }
 

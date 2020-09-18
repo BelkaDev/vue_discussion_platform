@@ -11,7 +11,7 @@
            <v-list-item
            :flat="true"
             v-on="on"  
-            style="padding:0px !important; margin:0 !important; max-width:155px !important;" >
+            :style="'padding:0px !important; margin:0 !important; max-width:'+avatar_group_width+'px !important;'">
           <v-list-item-group 
           class="avatar_group"
           v-for="(receiver,index) in receivers.slice(0, 4)"
@@ -110,8 +110,13 @@ export default {
   components: {
       iconButton,
   },
-  mounted() {
-    
+  computed: {
+    avatar_group_width() {
+      if ( this.receivers.length >= 4) {
+        return 150;
+      }
+    return this.receivers.length * 45 + 2
+    }
   }
 };
 </script>

@@ -23,11 +23,31 @@ export default class discussionService {
         console.log(error);
       });
   }
+  sendMessage(discussionId, discussion) {
+    return this._http
+      .put(this._hostname + "/discussions/" + discussionId, discussion)
+      .then(resp => {
+        console.log(resp);
+      })
+      .catch(error => {
+        console.log(error);
+      });
+  }
   updateDiscussion(discussionId, newDiscussion) {
     this._http
       .put(this._hostname + "/discussions/" + discussionId, newDiscussion)
       .then(resp => {
         console.log(resp.data);
+      })
+      .catch(error => {
+        console.log(error);
+      });
+  }
+  getMessages(discussionId) {
+    return this._http
+      .get(this._hostname + "/discussions/" + discussionId)
+      .then(resp => {
+        return resp.data.messages;
       })
       .catch(error => {
         console.log(error);

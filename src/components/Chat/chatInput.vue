@@ -9,7 +9,7 @@
             
               @click:append-outer="sendMessage"
               @keydown="inputHandler"
-              v-model="newMessage.content"
+              v-model="messageContent"
               :label="label"
               rows="1"
               :no-resize="true"
@@ -33,8 +33,8 @@ export default {
 
   props: ["label"],
   data: () => ({
-    newMessage: []
-    
+    newMessage:{},
+    messageContent:''
   }),
     components: {
       iconButton
@@ -47,9 +47,10 @@ export default {
         "lastName":"Robin",
         "avatar":"https://cdn.vuetifyjs.com/images/john.png"
     }
+    this.newMessage.content = this.messageContent;
     this.newMessage.sender = sender
     this.$emit("sendMessage",this.newMessage)
-    this.newMessage.content = null;
+    this.messageContent = null;
   },
       inputHandler(e) {
       if (e.keyCode === 13 && !e.shiftKey) {
