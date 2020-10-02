@@ -36,18 +36,20 @@
       <span v-if="discussion.receivers.length > 1" class="title font-weight-bold" style="font-size:16px !important;">{{discussion.title}}</span>      
       <span v-else class="title font-weight-bold" style="font-size:16px !important;">{{discussion.receivers[0].name}} {{discussion.receivers[0].lastName}}</span>
         <v-spacer></v-spacer>
-      <span class="discussion_date font-weight-medium">{{discussion.date}}</span>  
+      <span class="discussion_date font-weight-medium">{{discussion.date | moment("from", "now")}}</span>  
     </v-card-title>
     
 <v-layout>
     <v-card-text align="left">
-      {{discussion.messages[discussion.messages.length -1].content}}
 
+  <span v-if="not_empty(discussion)"> <span style="color:#60A9F6"> {{last_sender(discussion)}} </span> {{last_message(discussion)}} </span>
+  <span v-else style="color:grey"> No messages </span>
     </v-card-text>
                   <v-avatar
         class="mr-5 mt-4 white--text"
         style="background-color:#60A9F6"
         size="18"
+        v-if="not_empty(discussion)"
       >
       <span style="margin-top:15%"
       align="end"> 1 </span>
@@ -69,7 +71,7 @@ import discussionService from "@/services/chat/discussionService";
 
 export default {
   name: "",
-
+  props: ["loggedUser","document"],
   data: () => ({
     selectedIndex:0,
     discussions: []
@@ -79,18 +81,34 @@ export default {
     },
   methods: {
   openChat: function(chat){
-  this.selectedIndex = chat.ids
-  EventBus.$emit("openChat",chat)
+  this.selectedIndex = chat.id
+  EventBus.$emit("openChat",chat,this.loggedUser)
   },
   refreshList(newList) {
       this.discussions = newList;
     },
+    last_message(discussion){
+        return discussion.messages[discussion.messages.length -1].content
+    },
+    last_sender(discussion){
+      if(discussion.messages[discussion.messages.length -1].sender.name)
+      return discussion.messages[discussion.messages.length -1].sender.name +':'
+    },
+    not_empty(discussion) {
+      return (discussion.messages.length > 0)
+    }
   },
+
   mounted(){
+      const that = this;
       this.discussionService = new discussionService(this.$http,this.$hostname);
-      this.discussionService.getDiscussions().then( discussions => {
-        this.discussions = discussions
-      });
+      this.discussions = this.document.discussions
+      EventBus.$on("createChat", function (discussion) {
+      discussion.sender = that.loggedUser
+      //discussion.id = that.discussions.length
+      that.document.discussions.push(discussion)
+      that.discussionService.createDiscussion(that.document)
+    })
   }  
 };
 </script>
@@ -115,6 +133,7 @@ export default {
 .discussion_card{
   margin: 8px !important;
   margin-bottom:20px !important;
+  margin-right:18px !important;
 
 }
 .selected_discussion{

@@ -1,11 +1,10 @@
 <template>
   <div>
-    <div v-if="sent" class="message">
+   <div v-if="sent" class="message">
       <li class="message_chain me">
               <span :contenteditable="edit"
         @focusout="updateMessage()"
         style="white-space: pre-line;	overflow-wrap: break-word;"
-        @keydown="onInput"
       class="message_content"
       v-text="message.content">
   
@@ -33,7 +32,6 @@
       </v-menu>
       <p v-if="isLast" class="message_date_left">4 hours ago</p>
     </div>
-
     <div v-else class="message">
       <v-avatar v-if="isFirst" class="message_avatar_right ml-2" size="38">
         <img src="https://cdn.vuetifyjs.com/images/john.jpg" alt="John" />
@@ -44,7 +42,6 @@
       <span :contenteditable="edit"
         @focusout="updateMessage()"
         style="white-space: pre-line;	overflow-wrap: break-word;"
-        @keydown="onInput"
       class="message_content"
       v-text="message.content">
   
@@ -69,8 +66,6 @@ export default {
       var input = this.$el.querySelector(".message_content");
       this.message.content = input.innerText;    
       },
-    onInput() {
-  },
     deleteMessage(id) {
       var container = this.$el.querySelectorAll("[message-id='" + id + "']");
       console.log(container);
@@ -118,8 +113,7 @@ ul li {
   text-align: left;
   margin-left: 3.5em;
   margin-right: 10%;
-  margin-bottom: 0.5em;
-  margin-top: -2em;
+  margin-bottom:10px;
   color: #fff;
   box-shadow: 2px 5px 15px rgba(42, 139, 242, 0.4);
 }
@@ -163,7 +157,7 @@ ul li {
 }
 .message_avatar_right {
   float:left;
-  top: 6px;
+  top: 18px;
 }
 
 /* Messages un envoyés après l'autre */
@@ -178,5 +172,8 @@ ul li {
 }
 .message_content {
   text-align:left;
+}
+.separator{
+
 }
 </style>

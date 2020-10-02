@@ -14,7 +14,7 @@
               <v-autocomplete
                 v-model="searchString"
                 :disabled="isUpdating"
-                :items="people"
+                :items="users"
                 :small-chips="true"
                 placeholder="user list"
                 label="Select one or more users"
@@ -27,7 +27,6 @@
                 open-on-clear
                 deletable-chips
                 hide-no-data
-                :search-input.sync="searchInput"
               >
                 
     
@@ -43,7 +42,7 @@
                     @input="data.parent.selectItem(data.item)"
                   >
   
-                    {{ data.item.name }}
+                    {{ data.item.name  }} {{ data.item.lastName }}
                   </v-chip>
                 </template>
                 <template
@@ -51,13 +50,12 @@
                   slot-scope="data"
                 >
                   <template >
-                    <v-list-tile-avatar>
+                    <div>
                       <img class="avatar" :src="data.item.avatar">
-                    </v-list-tile-avatar>
-                    <v-list-tile-content>
-                      <v-list-tile-title v-html="data.item.name"></v-list-tile-title>
-                      <v-list-tile-sub-title></v-list-tile-sub-title>
-                    </v-list-tile-content>
+                    </div>
+                    <div>
+                      <div v-html="data.item.name +' '+data.item.lastName"></div>
+                    </div>
                   </template>
                 </template>
               </v-autocomplete>
@@ -74,15 +72,10 @@
 </template>
 <script>
 import EventBus from "@/utils/eventBus";
+import userService from "@/services/user/userService";
+
 export default {
   data () {
-    let srcs = {
-      1: 'https://cdn.vuetifyjs.com/images/john.png',
-      2: 'https://cdn.vuetifyjs.com/images/john.png',
-      3: 'https://cdn.vuetifyjs.com/images/john.png',
-      4: 'https://cdn.vuetifyjs.com/images/john.png',
-      5: 'https://cdn.vuetifyjs.com/images/john.png'
-    }
 
     return {
     fab: false,
@@ -96,12 +89,7 @@ export default {
     buttonIcon: "mdi-account-multiple-plus",
       searchString:"",
       isUpdating: false,
-      people: [
-        { id:1, name: 'Sandra Adams', group: 'Sellers', avatar: srcs[1] },
-        { id:2,name: 'Willy Wonka', group: 'Sellers', avatar: srcs[2] },
-        { id:3,name: 'Trevor Hansen', group: 'Sellers', avatar: srcs[3] },
-        { id:4,name: 'Tucker Smith', group: 'Sellers', avatar: srcs[2] },
-      ],
+      users: [],
     }
   },
 
@@ -117,7 +105,8 @@ export default {
   },
   methods:{
     closeDialog () {
-	EventBus.$emit("closeDialog",true)
+  EventBus.$emit("closeDialog",true)
+  this.initialize();
     },
     
     create() {
@@ -128,23 +117,37 @@ export default {
           this.timer = null;
           this.buttonIcon="mdi-check"
           this.color="#1BC47D"
+
+          var discussion = {}
+          const receivers = this.users.filter(e => this.searchString.includes(e.id));
+          discussion.title = this.title
+          discussion.receivers = receivers
+          discussion.date = "hier"
+          discussion.messages = [];
+      EventBus.$emit("createChat",discussion)     
+
           this.closeDialog();
+
+ 
         }, 1000));
 	}
     },
     initialize(){
-        this.loading = false;
+          this.loading = false;
           this.timer = null;
           this.buttonIcon="mdi-account-multiple-plus"
           this.color="#60a9f6"
+          this.title="";
           this.searchString=""
     },
   },
-created() { // fire callback when the component is created
-	EventBus.$on("newChat",()=>{
-	this.initialize()
-	})
-}
+  mounted() {
+    this.userService = new userService(this.$http,this.$hostname);
+    this.userService.getUsers().then((users) => {
+      this.users = users
+    })
+
+  }
 }
 </script>
 <style>

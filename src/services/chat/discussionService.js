@@ -3,19 +3,25 @@ export default class discussionService {
     this._hostname = hostname;
     this._http = http;
   }
-  getDiscussions() {
+  getUserDiscussions(documentId, userId) {
     return this._http
-      .get(this._hostname + "/discussions/")
+      .get(
+        this._hostname +
+          "/documents/" +
+          documentId +
+          "?discussion.receivers.id=" +
+          userId
+      )
       .then(resp => {
-        return resp.data;
+        return resp.data.discussions;
       })
       .catch(error => {
         console.log(error);
       });
   }
-  createDiscussion(discussion) {
+  createDiscussion(doc) {
     this._http
-      .discussion(this._hostname + "/discussions/", discussion)
+      .put(this._hostname + "/documents/" + doc.id, doc)
       .then(resp => {
         console.log(resp.data);
       })

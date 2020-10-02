@@ -16,11 +16,11 @@
        @windowPropertiesChanged="updateSize($event)"
       ></chatToolbarGroup>
         <!-- Liste messages !-->
-              <messageList ref="infoBox" :blocks="message_blocks" :discussion="discussion.id">
+              <messageList ref="infoBox" :blocks="message_blocks" :discussion="discussion.id" :loggedUser="loggedUser.id">
               </messageList>
 
         <!-- Input message !-->
-        <chatInput :label="'Type your message here'" @sendMessage="submitMessage($event)">
+        <chatInput  :label="'Type your message here'" @sendMessage="submitMessage($event)" :loggedUser="loggedUser">
         </chatInput>
 
       </baseCard>
@@ -40,8 +40,9 @@ import messageService from "@/services/chat/messageService";
 
 export default {
   data: () => ({
-    recent: false,
     id:0,
+    recent: false,
+    loggedUser:null,
     windowProperties: {isExpanded:false,isClosed:false},
     message_blocks: [],
     discussion:null,
@@ -106,9 +107,11 @@ export default {
         this.discussion.messages = messageList;
       })
     }
-  }, mounted() {
-    const that = this;
-      EventBus.$on("openChat", function (discussion) {
+  }, created() {
+      const that = this;
+      EventBus.$on("openChat", function (discussion,loggedUser) {
+
+        that.loggedUser=loggedUser
         that.opened=discussion.id
         that.discussion = discussion
         that.message_blocks=[];

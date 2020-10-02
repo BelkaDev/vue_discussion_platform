@@ -1,19 +1,17 @@
 <template>
   <v-app >
     <div id="app">
-              <createPost v-show="textEditor" ></createPost>
-
       <v-container>
           <v-layout  row wrap justify-space-between>
 
           <v-flex d-flex v-if="!expandRight || isClosed" :class="breakPointLeft">
               <div class="left_layout">
               <div class="header_titles">
-                <h1 class="header_title">Document Name {{document_id}}</h1>
+                <h1 class="header_title">Document Name {{opened_document.id}}</h1>
                 <h3 class="header_subtitle">
-                  <span v-if="!isPrivate" >All public posts                   <v-icon class="header_icon  ml-1" size="18"
+                  <span v-if="!isPrivate" >Public posts                   <v-icon class="header_icon  ml-1" size="18"
                     >mdi-earth</v-icon> </span>
-                   <span v-else >Your private messages  <v-icon class="header_icon  ml-1" size="18"
+                   <span v-else >Private messages  <v-icon class="header_icon  ml-1" size="18"
                     >mdi-account-multiple-outline</v-icon> </span>
 
                 </h3>
@@ -34,8 +32,8 @@
                       
                       
 
-              <createPost v-if="!isPrivate"></createPost>
-              <createChat v-else></createChat>
+              <createChat v-if="isPrivate"></createChat>
+              <createPost v-else></createPost>
      
   
                   </v-flex>
@@ -44,16 +42,16 @@
                     </div>
 
                  
-<postList v-if="!isPrivate"/>
-<discussionList v-else/>
+<postList v-if="!isPrivate" :loggedUser="loggedUser" :document="opened_document"/>
+<discussionList v-else :loggedUser="loggedUser" :document="opened_document"/>
               </div>
           </v-flex>
 
           <v-flex d-flex :class="breakPointRight">
             <v-layout row wrap class="right_layout pl-0" >
               
-<postPage v-show="showPost && !isClosed " :key="id" @layoutPropertiesChanged="updateSize($event)"  :class="expandRight ? 'mt-2' : ''"/>
-<chatbox  v-show="showChat && !isClosed " :key="id" @layoutPropertiesChanged="updateSize($event)" :class="expandRight ? 'mt-2' : ''"/>
+<postPage v-show="showPost && !isClosed " @layoutPropertiesChanged="updateSize($event)"  :class="expandRight ? 'mt-2' : ''" :document="opened_document"/>
+<chatbox  v-show="showChat && !isClosed " @layoutPropertiesChanged="updateSize($event)" :class="expandRight ? 'mt-2' : ''" :document="opened_document"/>
             </v-layout>
           </v-flex>
           </v-layout>
@@ -66,19 +64,24 @@
 
 
 import postList from "@/components/Forum/postList.vue";
-import createPost from "@/components/Forum/createPost.vue";
 import postPage from "@/components/Forum/postPage.vue";
+import createPost from "@/components/Forum/createPost.vue";
+
 
 import discussionList from "@/components/Chat/discussionList.vue";
 import createChat from "@/components/Chat/createChat.vue";
 import chatbox from "@/components/Chat/chatbox.vue";
 
 import EventBus from "@/utils/eventBus";
+import userService from "@/services/user/userService";
+import documentService from "@/services/document/documentService";
+
 
 
 export default {
   data: () => ({
-    document_id: 0,
+    opened_document: null,
+    loggedUser: null,
     isPrivate: false,
     expandLeft:true,
     expandRight: false,
@@ -92,8 +95,8 @@ export default {
   }),
   components: {
     postList,
-    createPost,
     postPage,
+    createPost,
     chatbox,
     createChat,
     discussionList,
@@ -116,10 +119,28 @@ export default {
     },
     openEditor() {
       this.textEditor=true;
+    },
+    getLoggedUser(){
+      this.userService.getLoggedUser(1).then((user) => {
+      this.loggedUser = user
+    })
+    },
+    getDocument(documentId){
+      const that = this;
+      this.documentService.getDocument(documentId).then((doc) => {
+      that.opened_document = doc;
+    })
     }
   },
     mounted () {
-      this.document_id= this.$route.params.id
+    this.userService = new userService(this.$http,this.$hostname);
+    this.documentService = new documentService(this.$http,this.$hostname);
+    this.getLoggedUser();
+    this.getDocument(this.$route.params.id);
+    
+    // get the document data
+
+
     // called from postList.vue
     const that = this
     EventBus.$on("openPost", function () {
@@ -129,6 +150,7 @@ export default {
       that.showPost=true;
       that.showChat=false;
     })
+    // called from discussionList.vue
       EventBus.$on("openChat", function () {
       that.isClosed=false;
       that.breakPointLeft = "xs12 sm5 md5 lg5 xl5"

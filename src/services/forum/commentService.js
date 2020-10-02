@@ -4,9 +4,9 @@ export default class postService {
     this._http = http;
   }
 
-  getComments(postId) {
+  getComments(documentId, postId) {
     return this._http
-      .get(this._hostname + "/posts/" + postId)
+      .get(this._hostname + "/documents/" + documentId + "?post.id=" + postId)
       .then(resp => {
         return resp.data.comments;
       })
@@ -15,29 +15,29 @@ export default class postService {
       });
   }
 
-  addComment(postId, post) {
+  addComment(doc) {
     return this._http
-      .put(this._hostname + "/posts/" + postId, post)
+      .put(this._hostname + "/documents/" + doc.id, doc)
       .then(resp => {
-        console.log(resp);
+        console.log(resp.data);
       })
       .catch(error => {
         console.log(error);
       });
   }
-  updateComment(postId, post) {
+  updateComment(doc) {
     return this._http
-      .put(this._hostname + "/posts/" + postId, post)
+      .put(this._hostname + "/documents/" + doc.id, doc)
       .then(resp => {
-        console.log(resp);
+        console.log(resp.data);
       })
       .catch(error => {
         console.log(error);
       });
   }
-  deleteComment(postId) {
-    this._http
-      .delete(this._hostname + "/posts/" + postId)
+  deleteComment(doc) {
+    return this._http
+      .put(this._hostname + "/documents/" + doc.id, doc)
       .then(resp => {
         console.log(resp.data);
       })

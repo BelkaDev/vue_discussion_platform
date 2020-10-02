@@ -9,7 +9,7 @@
        @windowPropertiesChanged="updateSize($event)"
       ></postPageToolbar>
       <mainPost :post="post"/>
-                <separator class="mt-3">
+                <separator v-if="post.comments.length > 0" class="mt-3">
                   <b>Comments</b>
                 </separator>
       <commentList
@@ -39,7 +39,7 @@ import EventBus from "@/utils/eventBus";
 import commentService from "@/services/forum/commentService";
 
   export default {
-  
+    props: ["loggedUser","document"],  
     data: () => ({
       post: [],
     }),
@@ -52,11 +52,9 @@ import commentService from "@/services/forum/commentService";
     },
     methods: {
       submitComment(newComment) {
-      const that = this;
-      newComment.id = this.post.comments.length + 1
-      this.post.comments.push(newComment)     
-      this.commentService.addComment(this.post.id,this.post).then(() => {
-        that.refreshComments();
+      var postIndex = this.document.posts.findIndex(post => post.id == this.post.id);
+      this.document.posts[postIndex].comments.push(newComment)
+      this.commentService.addComment(this.document).then(() => {
       });
       var container = this.$el.querySelector("#commentList");
       container.scrollTop = 1000;
@@ -72,10 +70,14 @@ import commentService from "@/services/forum/commentService";
     addComment() {
       var container = this.$el.querySelector("#comment_input");
      container.scrollIntoView({ behavior: 'smooth', block: 'end' });
+     var el = document.getElementById('comment_box');
+     el.focus();
     },
-        refreshComments(){
-      this.commentService.getComments(this.post.id,this.post).then((commentList) => {
-        this.post.comments = commentList;
+    refreshComments(postIndex){
+      const that = this
+      this.commentService.getComments(this.document.id,this.post.id).then((comments) => {
+        that.document.posts[postIndex].comments = comments;
+        alert(postIndex)
       })
     }
     },
@@ -87,14 +89,23 @@ import commentService from "@/services/forum/commentService";
     EventBus.$on("openPost", function (post) {
     that.post = post
     var container = that.$el.querySelector("#main_post");
+    if(container)
     container.scrollIntoView({ behavior: 'smooth', block: 'end' });
     });
         EventBus.$on("updateComment", function (updatedComment) {
+var postIndex = that.document.posts.findIndex(post => post.id == that.post.id);
+var commentIndex = that.post.comments.findIndex(comment => comment.id == updatedComment.id);
+that.document.posts[postIndex].comments[commentIndex] = updatedComment
+        that.commentService.updateComment(that.document).then(() => {
         
-var commentId = that.post.comments.findIndex(comment => comment.id == updatedComment.id);
-that.post.comments[commentId] = updatedComment
-        that.commentService.updateComment(that.post.id,that.post).then(() => {
-        that.refreshComments()
+      })
+    });
+    EventBus.$on("deleteComment", function (commentId) {
+var postIndex = that.document.posts.findIndex(post => post.id == that.post.id);
+var commentIndex = that.post.comments.findIndex(comment => comment.id == commentId);
+that.document.posts[postIndex].comments.splice(commentIndex,1);
+        that.commentService.deleteComment(that.document).then(() => {
+      
       })
     });
   },

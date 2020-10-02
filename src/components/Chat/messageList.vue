@@ -8,23 +8,16 @@
         :key="block_index"
       >
         <div v-for="(message, message_index) in block" :key="message_index">
-          <chatBlock
-            v-if="message.sent"
-            :sent="true"
+          <!-- sent message !-->
+          <chatBubble
+            :sent="message.sender.id===loggedUser"
             :discussion="discussion"
             :message="message"
-            :isFirst="message_index == 0"
+            :isFirst="isFirst(block[message_index-1],message)"
             :isLast="message_index == block.length - 1"
           >
-          </chatBlock>
-          <chatBlock
-            v-else
-            :message="message"
-            :discussion="discussion"
-            :isFirst="message_index == 0"
-            :isLast="message_index == block.length - 1"
-          >
-          </chatBlock>
+          </chatBubble>
+          <!-- received message !-->
         </div>
       </ul>
     </v-list-item-group>
@@ -32,12 +25,12 @@
 </template>
 
 <script>
-import chatBlock from "./chatBlock";
+import chatBubble from "./chatBubble";
 
 export default {
   name: "",
 
-  props: ["blocks","discussion"],
+  props: ["blocks","discussion","loggedUser"],
   data: () => ({
     clientHeight: 0,
     computedHeight: 0,
@@ -45,7 +38,7 @@ export default {
     id:0
   }),
   components: {
-    chatBlock
+    chatBubble
   },
   methods: {
     handleResize() {
@@ -56,6 +49,31 @@ export default {
       this.computedHeight = this.clientHeight - 250;
       this.chatStyle = "height: " + this.computedHeight + "px !important;";
     },
+        isSent() {
+      return this.message.sender == this.loggedUser
+    },
+    isFirst(prev_message,message){
+    if (!prev_message) return true;
+    if(prev_message.sender.id == this.loggedUser && message.sender.id !=this.loggedUser) {
+        return true;
+    } else if (prev_message.sender != this.loggedUser && message.sender == this.loggedUser) {
+      return true;
+    } else {
+      return false;
+    }
+    },
+    isLast(message,next_message){
+    if (!next_message) return true;
+    if(message.sender.id == this.loggedUser && next_message.sender.id !=this.loggedUser) {
+        return true;
+    } else if (message.sender != this.loggedUser && next_message.sender == this.loggedUser) {
+      return true;
+    } else {
+      return false;
+    }
+    },
+  },
+  computed: {
   },
   beforeMount() {
     window.addEventListener("resize", this.handleResize);

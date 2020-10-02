@@ -9,7 +9,7 @@
     />
     
     <h1 v-if="posts.length == 0" @click="test()" class="display-1 grey--text text--darken-2 no_posts">
-      Il n'y a pas encore de posts pour cette rubrique.
+      There is no posts for this document
         <br>
                   <p
        class="blue--text clickable_text"
@@ -20,7 +20,7 @@
     <v-list id="postList" class="list_layout">
       <v-list-item-group v-for="post in posts" :key="post.id">
         <v-card
-          class="post_card"
+          class="post_card pa-2"
           :id="post.id"
           @click="openPost(post)"
           :class="post.id === selectedIndex ? 'selected_post' : ''"
@@ -37,7 +37,7 @@
               >{{ post.user.name }} {{ post.user.lastName }}</span
             >
             <v-spacer></v-spacer>
-            <span class="post_date font-weight-medium">{{ post.date }}</span>
+            <span class="post_date font-weight-medium">{{ post.date | moment("from", "now") }}</span>
           </v-card-title>
 
           <span
@@ -47,8 +47,8 @@
           >
 
           <v-card-text class="">
-            {{ post.content.split(/\s+/).slice(0,15).join(' ') + '...' }}
-            <span style="color:#2A8BF2 !important">(read more)</span>
+            {{ post.content.split(/\s+/).slice(0,35).join(' ')}} <span v-if="post.content.length >35"> ...  </span>
+            <span v-if="post.content.length>35" style="color:#2A8BF2 !important">(read more)</span>
           </v-card-text>
 
           <v-card-actions class="mt-n3 mb-2 mr-4">
@@ -88,6 +88,7 @@ import searchBar from "@/components/Shared/searchBar";
 import postService from "@/services/forum/postService";
 
 export default {
+  props: ["loggedUser","document"],
   data: () => ({
     selectedIndex: 0,
     postService: null,
@@ -99,7 +100,6 @@ export default {
   methods: {
     openPost: function(post) {
       this.selectedIndex = post.id;
-      this.id += 1;
       EventBus.$emit("openPost", post);
     },
     refreshList(newList) {
@@ -107,15 +107,20 @@ export default {
     },
   },
   mounted() {
+    const that = this;
     this.postService = new postService(this.$http,this.$hostname);
-      this.postService.getPosts().then( posts => {
-        this.posts = posts
-      });
+    this.posts = this.document.posts
+    EventBus.$on("createPost", function (post) {
+      post.user = that.loggedUser
+      //discussion.id = that.discussions.length
+      that.document.posts.push(post)
+      that.postService.createPost(that.document)
+    })
   }
 };
 </script>
 
-<style>
+<style >
 .list_layout {
   background-color: transparent !important;
 }
@@ -132,8 +137,9 @@ export default {
   padding-top: 2px;
 }
 .post_card {
-  margin-bottom: 20px !important;
-  padding: 2px 2px !important;
+  margin: 8px !important;
+  margin-bottom:20px !important;
+  margin-right:18px !important;
 }
 .selected_post {
   filter: brightness(94%);

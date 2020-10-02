@@ -1,11 +1,11 @@
-export default class userService {
+export default class documentService {
   constructor(http, hostname) {
     this._hostname = hostname;
     this._http = http;
   }
-  getUsers() {
+  getDocuments() {
     return this._http
-      .get(this._hostname + "/users/")
+      .get(this._hostname + "/documents/")
       .then(resp => {
         return resp.data;
       })
@@ -13,9 +13,9 @@ export default class userService {
         console.log(error);
       });
   }
-  getLoggedUser(userId) {
+  getDocument(documentId) {
     return this._http
-      .get(this._hostname + "/users/" + userId)
+      .get(this._hostname + "/documents/" + documentId)
       .then(resp => {
         return resp.data;
       })

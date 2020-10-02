@@ -1,4 +1,6 @@
 <template>
+<div>
+
 <v-card outlined class="post_card" >
   
     <v-card-title class="pb-0 pt-1">
@@ -31,7 +33,7 @@
         </v-list>
       </v-menu>
         <v-spacer></v-spacer>
-      <span class="post_date font-weight-medium">{{comment.date}}</span>  
+      <span class="post_date font-weight-medium">{{comment.date | moment("from", "now") }}</span>  
     </v-card-title>
     
 
@@ -39,13 +41,12 @@
     @focusout="updateComment()"
     v-text="comment.content"
     style="white-space:pre-line"
-    @input="onInput"
     class="comment_content font-weight-medium"
     >
     </v-card-text>
 
 </v-card>
-  
+</div>
 </template>
 
 
@@ -80,13 +81,16 @@ import EventBus from "@/utils/eventBus";
         document.getSelection().collapseToEnd();
       }, 0);
     },
-        onInput() {
+      deleteComment() {
+      EventBus.$emit("deleteComment",this.comment.id)
+    },
 
-  },
     },
   }
 </script>
-<style>
+<style lang="scss" scoped>
+
+
 
 .subheading {
   font-size:14px;
@@ -101,6 +105,7 @@ import EventBus from "@/utils/eventBus";
 }
 .comment_content {
   text-align:left;
-  
 }
+
+
 </style>

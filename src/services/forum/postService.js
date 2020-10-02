@@ -3,19 +3,19 @@ export default class postService {
     this._hostname = hostname;
     this._http = http;
   }
-  getPosts() {
+  getPosts(documentId) {
     return this._http
-      .get(this._hostname + "/posts/")
+      .get(this._hostname + "/documents/" + documentId + "?posts")
       .then(resp => {
-        return resp.data;
+        return resp.data.posts;
       })
       .catch(error => {
         console.log(error);
       });
   }
-  createPost(post) {
+  createPost(doc) {
     this._http
-      .post(this._hostname + "/posts/", post)
+      .put(this._hostname + "/documents/" + doc.id, doc)
       .then(resp => {
         console.log(resp.data);
       })
@@ -25,7 +25,7 @@ export default class postService {
   }
   updatePost(postId, newPost) {
     this._http
-      .put(this._hostname + "/posts/" + postId, newPost)
+      .put(this._hostname + "/documents/1?post.id" + postId, newPost)
       .then(resp => {
         console.log(resp.data);
       })
@@ -35,7 +35,7 @@ export default class postService {
   }
   deletePost(postId) {
     this._http
-      .delete(this._hostname + "/posts/" + postId)
+      .delete(this._hostname + "/documents/1?post.id" + postId)
       .then(resp => {
         console.log(resp.data);
       })

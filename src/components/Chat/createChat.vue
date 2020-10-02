@@ -37,7 +37,8 @@ export default {
   },
   methods: {
   newChat () {
-	EventBus.$emit("newChat",true)
+  EventBus.$emit("newChat",true)
+  alert("created")
 	}
   },
   created() {

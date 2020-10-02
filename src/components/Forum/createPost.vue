@@ -1,86 +1,52 @@
 <template>
-  <v-row justify="center" >
-    <v-dialog v-model="dialog" max-width="600" >
+  <v-row justify="center">
+    <v-dialog v-model="dialog" max-width="600">
       <template v-slot:activator="{ on, attrs }">
-                    <v-btn
+
+                                        <v-btn
                       :block="true"
                       color="#60A9F6"
                       :style="'width:100px; margin-top:14px !important;  text-transform:none !important;'"
                       class="my-3 button_gradient"
                       style="margin-left:94px; color:white;"
                                 v-bind="attrs"
+
           v-on="on"
-                      ><v-icon class="mr-4" size="18">mdi-pencil</v-icon> Add new post</v-btn
-                    >
+                      ><v-icon class="mr-4" size="18">mdi-pencil</v-icon> Create new Post</v-btn>
       </template>
-      
-  <div class="form">
-
-
-      <v-text-field filled
-        v-model="title"
-        label="Post title"
-      />
-     
-  <rich-text-editor @update="onUpdate"/>
-
-    </div>
+<v-container style="background-color:white !important">
+<postForm></postForm>
+</v-container>
     </v-dialog>
   </v-row>
 </template>
 
 
 <script>
-import defaultButton from "@/components/UI/Buttons/defaultButton.vue";
+import postForm from "./postForm"
+import EventBus from "@/utils/eventBus";
 
 export default {
-  name: 'RichTextEditPanel',
   data () {
     return {
-      text: '',
-      title: '',
-      content: '',
       dialog: false,
     }
   },
+  components: {
+    postForm
+  },
   methods: {
-    onUpdate (text) {
-      this.text = text
-      this.dialog = true;
-    },
-    components: {
-      defaultButton
-    }
+  newChat () {
+  EventBus.$emit("newChat",true)
+  alert("created")
+	}
+  },
+  created() {
+  const that = this;
+  EventBus.$on("closeDialog",()=>{
+  that.dialog = false;
+	})
   }
-}
+};
 </script>
-    
 
-
-<style >
-.default_button {
-  opacity: .95;
-
-}
-.button_gradient {
-        background: #60A9F6;
-        box-shadow: 0px 0px 3px #2A8BF2;
-}
-
- .button_shadow {
-  box-shadow: 
-  0px 3px 10px rgba(0,0,0,0.2);
-}
-
-.label {
-  margin-bottom: 3px;
-  display: block;
-}
-.field {
-    margin-bottom: 20px;
-}
-.form {
-  padding: 6px;
-  background-color: white !important;
-}
-</style>

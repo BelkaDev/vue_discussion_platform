@@ -1,13 +1,12 @@
 import Vue from "vue";
 import App from "./App.vue";
 import vuetify from "./plugins/vuetify";
-import RichTextEditor from "rich-text-editor-vuetify";
 import axios from "axios";
 import VueRouter from 'vue-router'
 import discussion from "./document"
 
 Vue.config.productionTip = false;
-Vue.use(RichTextEditor);
+Vue.use(require('vue-moment'));
 Vue.use(axios);
 
 Vue.use(VueRouter);

@@ -31,7 +31,7 @@
         </v-list>
       </v-menu>
         <v-spacer></v-spacer>
-      <span class="post_date font-weight-medium">{{post.date}}</span>  
+      <span class="post_date font-weight-medium">{{post.date | moment("from", "now")}}</span>  
 
     </v-card-title>
     
@@ -99,9 +99,8 @@ import EventBus from "@/utils/eventBus";
     methods: {
       setLike() {
         if (!this.liked) {
-        const connectedUser = {"id":"2","name":"ok","lastName":"bye","avatar":"" }
         const date = ""
-        const newLike = {"id":"9","date":date,user:connectedUser}
+        const newLike = {"id":"9","date":date}
         this.post.likes.push(newLike)
         this.liked= true;
         } else {

@@ -9,7 +9,7 @@
         </v-list-item-avatar>
       <span class="title font-weight-bold" style="font-size:16px !important;">{{post.user.name}} {{post.user.lastName}}</span>
         <v-spacer></v-spacer>
-      <span class="post_date font-weight-medium">{{post.date}}</span>  
+      <span class="post_date font-weight-medium">{{post.date | moment("from", "now")}}</span>  
     </v-card-title>
     
       <span class="title font-weight-bold" style="font-size:16px !important; color:#555">{{post.title}}</span>

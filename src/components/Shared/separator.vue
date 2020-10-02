@@ -19,7 +19,7 @@ export default {
 </script>
 
 <style>
-.separator {
+.separator { 
   color:#707c97;
   opacity: .4;
   width:100%;
