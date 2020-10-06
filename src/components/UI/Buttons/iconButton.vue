@@ -40,7 +40,7 @@ export default {
 };
 </script>
 
-<style scoped>
+<style >
 
 .icon_button {
   border-radius: 50%;

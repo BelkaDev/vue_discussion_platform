@@ -1,14 +1,23 @@
 <template >
 <span>
     <searchBar
-      @updateList="refreshList($event)"
-      :list="discussions"
-      style="margin-top:90px;margin-bottom:12px;margin-left:6px;"
-      v-if="discussions.length > 0"
+      @searchList="searchList($event)"
+      :list="discussions" 
+      v-if="discussions.length != 0"
+      :message="'Search in all messages'"
+      style="margin-top:90px;margin-bottom:12px;margin-left:2px;"
     />
     
         <v-list id="discussionList" class="list_layout">
-          <v-list-item-group v-for="discussion in discussions"
+                    <h1 v-if="discussions.length == 0" class="display-1 grey--text text--darken-2 no_posts">
+
+      You don't have any ongoing conversations
+        <br>
+        start a new one.
+    </h1>
+    <draggable v-model="filtered_discussions" group="discussion" 
+            :move="checkMove">
+          <v-list-item-group v-for="discussion in filtered_discussions"
               :key="discussion.id"
           >
           
@@ -22,7 +31,6 @@
           >
               <img
               class="receiver_avatar"
-              :style="'z-index:-'+index"
                :src="receiver.avatar" 
                :alt="receiver.name" />
         </v-list-item-group>
@@ -30,7 +38,7 @@
       <v-list-item-avatar v-else color="grey darken-3">
           <v-img
             class="elevation-6"
-            :src="discussion.messages[discussion.messages.length -1].sender.avatar"
+            :src="discussion.receivers[discussion.receivers.length -1].avatar"
           ></v-img>
         </v-list-item-avatar>
       <span v-if="discussion.receivers.length > 1" class="title font-weight-bold" style="font-size:16px !important;">{{discussion.title}}</span>      
@@ -57,6 +65,8 @@
       </v-layout>
 </v-card>
           </v-list-item-group>
+</draggable>
+
         </v-list>
 </span>
 </template>
@@ -66,20 +76,30 @@
 <script>
 import EventBus from "@/utils/eventBus";
 import searchBar from "@/components/Shared/searchBar";
+import draggable from 'vuedraggable'
 
-import discussionService from "@/services/chat/discussionService";
+import discussionService from "@/services/Chat/discussionService";
 
 export default {
   name: "",
   props: ["loggedUser","document"],
   data: () => ({
     selectedIndex:0,
+    filterString:"",
     discussions: []
   }),
     components: {
       searchBar,
+      draggable
     },
   methods: {
+checkMove: function(){
+},
+          showAlert(type,msg) {
+        this.alertType = type
+        this.alertMessage = msg
+        this.alertTrigger = true
+      },
   openChat: function(chat){
   this.selectedIndex = chat.id
   EventBus.$emit("openChat",chat,this.loggedUser)
@@ -96,20 +116,61 @@ export default {
     },
     not_empty(discussion) {
       return (discussion.messages.length > 0)
-    }
+    },
+    searchList(search) {
+      this.filterString = search
+    },
   },
+  
+  computed : {
+    filtered_discussions: {
+      
+          get: function () {
+            var filtered = []
+      if (this.filterString === "") return this.discussions
+        this.discussions.forEach(discussion => {
+          discussion.messages.forEach(message => {
+        if (message.content.toLowerCase().includes(this.filterString.toLowerCase())) {
+            if (filtered.indexOf(discussion) == -1) {
+            filtered.push(discussion);
+            }
+        }
+      })
+})
+return filtered
+    },
 
+    set: function (newValue) {
+      this.discussions = newValue;
+    }
+  }
+  },
   mounted(){
       const that = this;
       this.discussionService = new discussionService(this.$http,this.$hostname);
       this.discussions = this.document.discussions
       EventBus.$on("createChat", function (discussion) {
       discussion.sender = that.loggedUser
-      //discussion.id = that.discussions.length
+      discussion.id = that.discussions.length + 1
+      if(!that.document.discussions.includes(discussion)) {
       that.document.discussions.push(discussion)
-      that.discussionService.createDiscussion(that.document)
+      that.discussionService.createDiscussion(that.document).then(() => {
+      that.showAlert("success","new Chat created")
+      }).catch(() => {
+        that.showAlert("error","Error creating chat")
+      });
+      }
     })
-  }  
+      EventBus.$on("layoutPropertiesChanged", function (properties) {
+          if(properties.isClosed == true ) {
+            that.selectedIndex = null;
+          }
+    })
+  },
+     beforeDestroy () {
+      EventBus.$off('createChat', true)
+ },
+
 };
 </script>
 

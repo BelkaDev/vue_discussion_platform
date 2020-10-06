@@ -1,5 +1,7 @@
 <template >
-  <v-card tile class="searchBar">
+  <v-card 
+  elevation="2"
+  tile class="searchBar">
       <v-layout >
           <v-flex class="my-n4 mx-4" md9> 
                       <v-text-field
@@ -10,7 +12,7 @@
             id="search"
             ref="search"
             color="primary"
-            label="Search"
+            :label="message"
             v-model="searchText"            
             prepend-icon="mdi-magnify"
             @keyup="search(searchText)"
@@ -68,41 +70,30 @@
 
 <script>
 export default {
-  props:["list","posts"],
+  props:["list","posts","message"],
   data: () => ({
      items: [
-        { title: 'Date', icon: 'mdi-calendar','sortBy':'seen'},
-        { title: 'Likes', icon: 'mdi-star','sortBy':'likes.length'},
+        { title: 'Date', icon: 'mdi-calendar','sortBy':'date'},
+        { title: 'Likes', icon: 'mdi-thumb-up','sortBy':'likes.length'},
+        { title: 'Popularity', icon: 'mdi-star','sortBy':'seen'},
       ],
       updatedList: [],
-      defaultList: [],
       searchText: "",
   }),
   methods : {
     sortItems(prop)  {
       this.updatedList = this.list
         this.updatedList.sort( (a, b) => {
-           return a[prop] < b[prop] ? -1 : 1
+           return a[prop] > b[prop] ? -1 : 1
         })
-        this.updateList(this.updatedList);
+	    this.$emit("sortList",this.updatedList)        
     },
-    search(text) {
-      if (!text == "") {
-        let newList = this.list
-        newList = newList.filter(element => {
-        return element.content.toLowerCase().includes(text.toLowerCase())
-      })
-      this.updateList(newList)
-      } else {
-      this.updateList(this.defaultList)
-      }
+    search() {
+	  this.$emit("searchList",this.searchText)        
     },
-    updateList(newList) {
-	  this.$emit("updateList",newList)
-    }
   },
 mounted () {
-  this.defaultList = this.list.slice(0)
+  
 }
 };
 </script>
@@ -118,8 +109,8 @@ mounted () {
 }
 .divider{
     height:50px !important;
-    opacity:0.35;
-    border:2px solid #999 !important;
+    opacity:0.5;
+    border:1px solid #777 !important;
 }
 .sortBy * {
     padding-top:4px;

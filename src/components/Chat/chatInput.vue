@@ -1,5 +1,5 @@
 <template>
-        <v-row class="pt-2">
+        <v-row class="">
           <v-col cols="1" class="pt-14 ml-4">
               <iconButton :icon="'mdi-plus'" :shadow="true" :gradient="true"></iconButton>
 
@@ -15,6 +15,7 @@
               :no-resize="true"
             ></v-textarea>
           </v-col>
+
          <v-col cols="1" class="pr-15 pt-14">
               <iconButton 
               @click="sendMessage"
@@ -25,7 +26,7 @@
 
 
 <script>
-import iconButton from "@/components/UI/Buttons/iconButton.vue";
+import iconButton from "@/components/UI/Buttons/iconButton";
 
 
 export default {
@@ -49,8 +50,10 @@ export default {
     }
     this.newMessage.content = this.messageContent;
     this.newMessage.sender = sender
+    this.newMessage.date = Date.now();
     this.$emit("sendMessage",this.newMessage)
     this.messageContent = null;
+    this.newMessage = {}
   },
       inputHandler(e) {
       if (e.keyCode === 13 && !e.shiftKey) {

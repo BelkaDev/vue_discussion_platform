@@ -1,5 +1,7 @@
 <template>
-  <v-card class="">
+  <v-card
+  elevation="12"
+   class="">
     <slot />
       <v-spacer></v-spacer>
     <v-divider></v-divider>

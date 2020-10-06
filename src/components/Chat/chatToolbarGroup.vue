@@ -37,12 +37,11 @@
           <v-avatar size="35" style="float:left;">
               <img :src="receiver.avatar" alt="" />
             </v-avatar>
-              <span style="float:left;" class="ml-2 mt-2">{{receiver.name.charAt(0).toUpperCase() + receiver.name.slice(1)}} {{receiver.lastName.charAt(0).toUpperCase() + receiver.lastName.slice(1)}} </span><v-icon @click="removeMember()" size="20" color="red" class="ml-2 mt-2" style="float:right">mdi-close</v-icon>
+              <span style="float:left;" class="ml-2 mt-2">{{receiver.name.charAt(0).toUpperCase() + receiver.name.slice(1)}} {{receiver.lastName.charAt(0).toUpperCase() + receiver.lastName.slice(1)}} </span><v-icon @click="removeMember(receiver)" size="20" color="red" class="ml-2 mt-2" style="float:right">mdi-close</v-icon>
               </v-list-item-title>
           </v-list-item>
         </v-list>
-                 </v-menu>
-        
+                 </v-menu>        
         <v-container style="padding:0 !important">
         <v-layout class="toolbar_title">
           <v-flex d-flex>
@@ -50,18 +49,33 @@
           </v-flex>
           <v-flex d-flex>
 
-
              
             </v-flex>
                 </v-layout>
         <v-layout class="bottom_title">
-            <span class="chat_title_secondary">Last message 8 hours ago</span>
+            <span v-if="last_message != null" class="chat_title_secondary">Last message {{ last_message | moment("from", "now") }}</span>
+            <span v-else class="chat_title_secondary">No messages</span>
         </v-layout>
           </v-container>
+                                <v-dialog v-model="dialog" max-width="600">
+      <template v-slot:activator="{ on, modal }">
 
+
+<v-icon class="button_shadow icon_button"
+ v-on="on" v-bind="modal" :color="'#979797'"
+ >mdi-plus</v-icon>
+
+
+      </template>
+<v-container style="background-color:white !important">
+<addMembers
+:receivers="receivers"
+></addMembers>
+</v-container>
+    </v-dialog>
             <v-spacer></v-spacer>
             <template class="toolbar_buttons">
-              <iconButton :color="'#979797'" :icon="'mdi-magnify'" :shadow="true"></iconButton>
+
               <iconButton v-if="!windowProperties.isExpanded" @click="expand" :color="'#979797'" :icon="'mdi-fullscreen'" :shadow="true"></iconButton>
               <iconButton v-if="windowProperties.isExpanded" @click="expand" :color="'#979797'" :icon="'mdi-fullscreen-exit'" :shadow="true"></iconButton>
               <iconButton @click="close" :color="'#979797'" :icon="'mdi-close'" :shadow="true"></iconButton>
@@ -74,11 +88,12 @@
 
 <script>
 import iconButton from "@/components/UI/Buttons/iconButton.vue";
+import addMembers from "./addMembers"
 
 
 export default {
   name: "chatToolbarGroup",
-  props: ["receivers","title"],
+  props: ["receivers","title","last_message"],
   data: () => ({
     windowProperties: {isExpanded:false,isClosed:false},
   }),
@@ -100,15 +115,13 @@ export default {
      this.windowProperties.isClosed=true
      this.$emit("windowPropertiesChanged",this.windowProperties)
     },
-    showMembers() {
-      alert("ok")
-    },
-    removeMember() {
-      alert("ok")
+    removeMember(member) {
+     this.$emit("removeMember",member)    
     }
   },
   components: {
       iconButton,
+      addMembers
   },
   computed: {
     avatar_group_width() {
@@ -163,4 +176,5 @@ export default {
   font-size: 12px ;
   cursor: pointer;
 }
+
 </style>

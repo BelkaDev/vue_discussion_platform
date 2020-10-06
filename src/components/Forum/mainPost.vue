@@ -4,7 +4,7 @@
     <v-card-title class="pb-0 pt-1">
       <v-list-item-avatar color="grey darken-3">
           <v-img
-            class="elevation-6"
+            class="elevation-2"
             :src="post.user.avatar"
           ></v-img>
         </v-list-item-avatar>
@@ -37,7 +37,7 @@
     
           <div
       :class="edit? 'mx-3 mb-4':''" >
-      <span class="post_title font-weight-bold" style="font-size:16px !important; color:#555 !important"
+      <span class="post_title font-weight-bold" style="font-size:16px !important; color:#888 !important"
       :contenteditable="editTitle"
         @focusout="updatePost()"
       v-on="edit ? { click: () => editPostTitle() } : {click: ($event) => $event.preventDefault() }"
@@ -66,12 +66,13 @@
         >
           <v-icon @mouseover="hovered=true"
            @mouseout="hovered=false"  
+           color="#999"
            @click="setLike()"
           class="post_info_icon mr-2" :class="hovered || liked? 'hovered' : ''" size="25">mdi-thumb-up</v-icon>
           <span class="mr-4 mt-1" style="color:#707C97 !important" >{{post.likes.length}}</span>
-          <v-icon class="post_info_icon mr-2 mt-1" size="25" >mdi-forum</v-icon>
+          <v-icon color="#999" class="post_info_icon mr-2 mt-1" size="25" >mdi-forum</v-icon>
           <span class=" mr-4 mt-1" style="color:#707C97 !important">{{post.comments.length}}</span>
-            <v-icon class="post_info_icon  mr-2" size="25">mdi-eye</v-icon>
+            <v-icon color="#999" class="post_info_icon  mr-2" size="25">mdi-eye</v-icon>
           <span class="mr-4 mt-1"  style="color:#707C97 !important">{{post.seen}}</span>
         </v-row>
       </v-list-item>
@@ -85,7 +86,7 @@
 import EventBus from "@/utils/eventBus";
 
   export default {
-    props: ["post"],
+    props: ["post","isLiked"],
     data: () => ({
       hovered:false,
       liked:false,
@@ -99,22 +100,26 @@ import EventBus from "@/utils/eventBus";
     methods: {
       setLike() {
         if (!this.liked) {
-        const date = ""
-        const newLike = {"id":"9","date":date}
-        this.post.likes.push(newLike)
+        var like = {}
+        like.date = Date.now();
         this.liked= true;
+        EventBus.$emit("setLike",like)     
         } else {
-          // remove like here
           this.liked = false;
+        EventBus.$emit("unLike")     
         }
       },  
-            updatePost() {
+      deletePost() {
+      EventBus.$emit("deletePost",this.post.id)
+      },
+      updatePost() {
       this.editContent = false;    
       this.editTitle = false;    
       var content = this.$el.querySelector(".post_content");
       var title = this.$el.querySelector(".post_title");
       this.post.content = content.innerText
       this.post.title = title.innerText
+      EventBus.$emit("updatePost",this.post)
       },
       editPostContent() {
       this.editContent=true;
@@ -147,6 +152,7 @@ import EventBus from "@/utils/eventBus";
     }
     },
     mounted() {
+      this.liked = this.isLiked
       const that = this;
       EventBus.$on("openPost", function () {
       that.edit = false;
@@ -169,9 +175,13 @@ import EventBus from "@/utils/eventBus";
 }
 .post_content {
     text-align:left;
+    color:#777;
+    padding-left:30px;
 }
 .username {
   text-transform: capitalize !important;
+  color:#888;
+
 }
 .hovered {
   color:blue !important;
@@ -189,7 +199,7 @@ import EventBus from "@/utils/eventBus";
     outline:none;
     box-sizing:border-box;
       border-color:dodgerBlue;
-    box-shadow:0 0 8px 0 dodgerBlue;
-    
+    box-shadow:0 0 8px 0 dodgerBlue;   
 }
+
 </style>

@@ -1,13 +1,8 @@
 <template>
-  <v-form ref="form">
+<div>
+  <v-form ref="form" v-if="users.length > 0">
       <v-container>
           <v-layout>
-      <v-text-field
-      v-model="title"
-      label="Discussion Name"
-      class="mb-1"
-     :rules="inputRules"
-       v-if="searchString.length > 1"></v-text-field>
           </v-layout>
           <v-layout>
             <v-flex xs12 > 
@@ -17,7 +12,7 @@
                 :items="users"
                 :small-chips="true"
                 placeholder="user list"
-                label="Select one or more users"
+                label="Select one or more users to add"
                 item-text="name"
                 item-value="id"
                 multiple
@@ -59,6 +54,7 @@
                   </template>
                 </template>
               </v-autocomplete>
+
             </v-flex>
           <div >
       <v-btn class="white--text ml-4 my-2" :color="color" :loading="loading" :disabled="loading || searchString.length == 0" @click="create" fab>
@@ -69,12 +65,18 @@
 
       </v-container>
       </v-form>
+
+    <div v-else>
+        <p style="color:grey;padding-top:15px;">There is no user left to add</p>
+      </div>
+      </div>
 </template>
 <script>
 import EventBus from "@/utils/eventBus";
 import userService from "@/services/User/userService";
 
 export default {
+  props: ["receivers"], 
   data () {
     return {
     fab: false,
@@ -134,22 +136,24 @@ export default {
     initialize(){
           this.loading = false;
           this.timer = null;
-          this.buttonIcon="mdi-account-multiple-plus"
           this.color="#60a9f6"
-          this.title="";
-          this.searchString=""
     },
   },
   mounted() {
+var userIds = this.receivers.map(function(user) {
+  return user.id;
+});
+
     this.userService = new userService(this.$http,this.$hostname);
     this.userService.getUsers().then((users) => {
-      this.users = users
+var filtered_users = users.filter(function(user){
+  return !userIds.includes(user.id);
+});
+      this.users = filtered_users
+
     })
 
   },
-    beforeDestroy () {
-    EventBus.$off('createChat', true)
- },
 }
 </script>
 <style>

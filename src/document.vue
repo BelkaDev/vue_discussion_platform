@@ -7,7 +7,7 @@
           <v-flex d-flex v-if="!expandRight || isClosed" :class="breakPointLeft">
               <div class="left_layout">
               <div class="header_titles">
-                <h1 class="header_title">Document Name {{opened_document.id}}</h1>
+                <h1 class="header_title">{{opened_document.name}}</h1>
                 <h3 class="header_subtitle">
                   <span v-if="!isPrivate" >Public posts                   <v-icon class="header_icon  ml-1" size="18"
                     >mdi-earth</v-icon> </span>
@@ -32,7 +32,7 @@
                       
                       
 
-              <createChat v-if="isPrivate"></createChat>
+              <createChat class="" v-if="isPrivate"></createChat>
               <createPost v-else></createPost>
      
   
@@ -50,8 +50,10 @@
           <v-flex d-flex :class="breakPointRight">
             <v-layout row wrap class="right_layout pl-0" >
               
-<postPage v-show="showPost && !isClosed " @layoutPropertiesChanged="updateSize($event)"  :class="expandRight ? 'mt-2' : ''" :document="opened_document"/>
-<chatbox  v-show="showChat && !isClosed " @layoutPropertiesChanged="updateSize($event)" :class="expandRight ? 'mt-2' : ''" :document="opened_document"/>
+<postPage v-show="showPost && !isClosed " @layoutPropertiesChanged="updateSize($event)"  :class="expandRight ? 'mt-2' : ''" :document="opened_document" :loggedUser="loggedUser" />
+    <draggable style="width:100%" >
+<chatbox  v-show="showChat && !isClosed " @layoutPropertiesChanged="updateSize($event)" :class="expandRight ? 'mt-2' : ''" :document="opened_document" :loggedUser="loggedUser" />
+</draggable>
             </v-layout>
           </v-flex>
           </v-layout>
@@ -62,20 +64,22 @@
 
 <script>
 
+import draggable from 'vuedraggable'
 
-import postList from "@/components/Forum/postList.vue";
-import postPage from "@/components/Forum/postPage.vue";
 import createPost from "@/components/Forum/createPost.vue";
 
 
-import discussionList from "@/components/Chat/discussionList.vue";
+import discussionList from "@/views/discussionList.vue";
 import createChat from "@/components/Chat/createChat.vue";
-import chatbox from "@/components/Chat/chatbox.vue";
 
 import EventBus from "@/utils/eventBus";
-import userService from "@/services/user/userService";
-import documentService from "@/services/document/documentService";
+import userService from "@/services/User/userService";
+import documentService from "@/services/Document/documentService";
 
+
+import postList from "@/views/postList.vue";
+import chatbox from "@/views/chatbox.vue";
+import postPage from "@/views/postPage.vue";
 
 
 export default {
@@ -94,6 +98,7 @@ export default {
     breakPointLeft: "xs12 sm12 md12 lg12 xl12"
   }),
   components: {
+    draggable,
     postList,
     postPage,
     createPost,
@@ -158,6 +163,12 @@ export default {
       that.showPost=false;
       that.showChat=true;
     })
+      EventBus.$on("closeWindow", function () {
+        that.isClosed = true;
+        that.breakPointLeft = "xs12 sm12 md12 lg12 xl12";
+    })
+      
+
   },
           watch: {
             '$route' () {
@@ -198,6 +209,10 @@ export default {
   padding-left:1%;
   padding-top: 5%;
 }
+.header_titles {
+  margin-left:10px;
+  margin-bottom:10px;
+}
 .header_title {
   color: #444;
   font-size: 30px;
@@ -236,5 +251,8 @@ export default {
 }
 .chatbox {
   margin: 0px 5px !important;
+}
+[contenteditable]:focus {
+    outline: 0px solid transparent;
 }
 </style>

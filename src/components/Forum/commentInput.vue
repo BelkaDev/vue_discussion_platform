@@ -83,7 +83,7 @@ export default {
 }
 .comment-box.panel {
   border: none;
-  margin-bottom: 20px;
+  margin-bottom: 0px;
 
   textarea,
   .btn-primary {

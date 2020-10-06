@@ -3,7 +3,7 @@
           <v-list-item-group  v-for="comment in comments"
               :key="comment.id"
           >
-            <commentCard class="mb-5" :comment="comment"/>
+            <commentCard class="ml-2 mb-5" :comment="comment"/>
           </v-list-item-group>
         </v-list>
 </template>

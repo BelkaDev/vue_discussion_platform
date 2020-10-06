@@ -22,209 +22,179 @@
   "documents": [
     {
       "id": 1,
+      "name": "Document médicals",
       "posts": [
         {
-          "id": 1,
-          "documentId": 1,
-          "userId": 1,
-          "title": "Nouveau project discussion",
-          "content": "test allo allo allo",
-          "date": "30 minutes ago",
-          "seen": 15,
+          "title": "ok ok ok",
+          "content": "hello ok ok ok",
+          "likes": [],
+          "comments": [],
+          "date": 1601862770231,
+          "seen": 152,
           "user": {
-            "id": "id",
+            "id": "1",
             "name": "whatever",
             "lastName": "whatever",
             "avatar": "https://cdn.vuetifyjs.com/images/john.png"
           },
-          "comments": [
-            {
-              "id": "1",
-              "content": "thank you sir for the gold\n",
-              "date": "15 minutes ago",
-              "user": {
-                "id": "id",
-                "name": "whatever",
-                "lastName": "whatever",
-                "avatar": "https://cdn.vuetifyjs.com/images/john.png"
-              }
-            },
-            {
-              "user": {
-                "id": "1",
-                "name": "Luy",
-                "lastName": "Robin",
-                "avatar": "https://cdn.vuetifyjs.com/images/john.png"
-              },
-              "content": "batman",
-              "date": "15 minutes ago"
-            },
-            {
-              "user": {
-                "id": "1",
-                "name": "Luy",
-                "lastName": "Robin",
-                "avatar": "https://cdn.vuetifyjs.com/images/john.png"
-              },
-              "content": "hello sir",
-              "date": 1601635120581
-            }
-          ],
-          "likes": [
-            {
-              "id": "1",
-              "date": "15 minutes ago",
-              "user": {
-                "id": "id",
-                "name": "whatever",
-                "lastName": "whatever",
-                "avatar": "https://cdn.vuetifyjs.com/images/john.png"
-              }
-            }
-          ]
+          "id": 1
         },
         {
-          "id": 2,
-          "documentId": 1,
-          "userId": 1,
-          "title": "Nouvelle étude",
-          "content": "test ok ok ok ok",
-          "date": "30 minutes ago",
-          "seen": 15,
+          "title": "test",
+          "content": "okokokokokok",
+          "likes": [],
+          "comments": [],
+          "date": 1601936961606,
+          "seen": 8,
           "user": {
-            "id": "id",
+            "id": "1",
             "name": "whatever",
             "lastName": "whatever",
             "avatar": "https://cdn.vuetifyjs.com/images/john.png"
           },
-          "comments": [
-            {
-              "id": "1",
-              "content": "thank you sir",
-              "date": "15 minutes ago",
-              "user": {
-                "id": "id",
-                "name": "whatever",
-                "lastName": "whatever",
-                "avatar": "https://cdn.vuetifyjs.com/images/john.png"
-              }
-            }
-          ],
-          "likes": [
-            {
-              "id": "1",
-              "date": "15 minutes ago",
-              "user": {
-                "id": "id",
-                "name": "whatever",
-                "lastName": "whatever",
-                "avatar": "https://cdn.vuetifyjs.com/images/john.png"
-              }
-            }
-          ]
+          "id": 3
         }
       ],
       "discussions": [
         {
-          "id": "1",
-          "date": "30 minutes ago",
-          "title": "New project",
-          "messages": [
-            {
-              "id": "1",
-              "content": "message1 \n test",
-              "sender": {
-                "id": "1",
-                "name": "Luy",
-                "lastName": "Robin",
-                "avatar": "https://cdn.vuetifyjs.com/images/john.png"
-              }
-            }
-          ],
+          "title": "hello",
           "receivers": [
             {
               "id": "1",
-              "name": "Luy",
-              "lastName": "Robin",
+              "name": "whatever",
+              "lastName": "whatever",
               "avatar": "https://cdn.vuetifyjs.com/images/john.png"
             },
             {
               "id": "2",
-              "name": "Luya",
-              "lastName": "Robine",
-              "avatar": "https://cdn.vuetifyjs.com/images/john.png"
-            }
-          ]
-        },
-        {
-          "id": "2",
-          "date": "30 minutes ago",
-          "title": "New project",
-          "messages": [
-            {
-              "id": "1",
-              "content": "message1 \n test",
-              "sender": {
-                "id": "1",
-                "name": "Luy",
-                "lastName": "Robin",
-                "avatar": "https://cdn.vuetifyjs.com/images/john.png"
-              }
-            }
-          ],
-          "receivers": [
-            {
-              "id": "1",
-              "name": "Luy",
-              "lastName": "Robin",
-              "avatar": "https://cdn.vuetifyjs.com/images/john.png"
-            },
-            {
-              "id": "2",
-              "name": "Luya",
-              "lastName": "Robine",
+              "name": "Mr",
+              "lastName": "Ok",
               "avatar": "https://cdn.vuetifyjs.com/images/john.png"
             },
             {
               "id": "3",
-              "name": "Luya",
-              "lastName": "Robine",
-              "avatar": "https://cdn.vuetifyjs.com/images/john.png"
-            },
-            {
-              "id": "4",
-              "name": "Luya",
-              "lastName": "Robine",
+              "name": "Mrs",
+              "lastName": "Bye",
               "avatar": "https://cdn.vuetifyjs.com/images/john.png"
             }
-          ]
-        },
-        {
-          "id": "3",
-          "date": "30 minutes ago",
-          "title": "New project",
+          ],
+          "date": 1601834012105,
           "messages": [
             {
-              "id": "1",
-              "content": "message1 \n test lorem ipsum machin truc why am i typing this shit manually kekwk lol lolo losample text . jpeg lmoafa are u mad crazy my d00d",
+              "content": "hi",
               "sender": {
                 "id": "1",
                 "name": "Luy",
                 "lastName": "Robin",
                 "avatar": "https://cdn.vuetifyjs.com/images/john.png"
-              }
+              },
+              "date": 1601834408494,
+              "id": 0
+            },
+            {
+              "content": "hello",
+              "sender": {
+                "id": "2",
+                "name": "Luy",
+                "lastName": "Robin",
+                "avatar": "https://cdn.vuetifyjs.com/images/john.png"
+              },
+              "date": 1601834408494,
+              "id": 0
+            },
+            {
+              "content": "how are you",
+              "sender": {
+                "id": "1",
+                "name": "Luy",
+                "lastName": "Robin",
+                "avatar": "https://cdn.vuetifyjs.com/images/john.png"
+              },
+              "date": 1601834415422,
+              "id": 2
+            },
+            {
+              "content": "Very good thank you",
+              "sender": {
+                "id": "2",
+                "name": "Mr",
+                "lastName": "Ok",
+                "avatar": "https://cdn.vuetifyjs.com/images/john.png"
+              },
+              "date": 1601834415422,
+              "id": 3
+            },
+            {
+              "content": "me too",
+              "sender": {
+                "id": "3",
+                "name": "Mrs",
+                "lastName": "Bye",
+                "avatar": "https://cdn.vuetifyjs.com/images/john.png"
+              },
+              "date": 1601834415422,
+              "id": 1
             }
           ],
+          "sender": {
+            "id": "1",
+            "name": "whatever",
+            "lastName": "whatever",
+            "avatar": "https://cdn.vuetifyjs.com/images/john.png"
+          },
+          "id": 1
+        },
+        {
+          "title": "hello",
           "receivers": [
             {
               "id": "1",
-              "name": "Luy",
-              "lastName": "Robin",
+              "name": "whatever",
+              "lastName": "whatever",
+              "avatar": "https://cdn.vuetifyjs.com/images/john.png"
+            },
+            {
+              "id": "2",
+              "name": "Mr",
+              "lastName": "Ok",
               "avatar": "https://cdn.vuetifyjs.com/images/john.png"
             }
-          ]
+          ],
+          "date": 1601858104445,
+          "messages": [],
+          "sender": {
+            "id": "1",
+            "name": "whatever",
+            "lastName": "whatever",
+            "avatar": "https://cdn.vuetifyjs.com/images/john.png"
+          },
+          "id": 2
+        },
+        {
+          "title": "",
+          "receivers": [
+            {
+              "id": "1",
+              "name": "whatever",
+              "lastName": "whatever",
+              "avatar": "https://cdn.vuetifyjs.com/images/john.png"
+            }
+          ],
+          "date": 1601934187891,
+          "messages": [],
+          "sender": {
+            "id": "1",
+            "name": "whatever",
+            "lastName": "whatever",
+            "avatar": "https://cdn.vuetifyjs.com/images/john.png"
+          },
+          "id": 3
         }
       ]
+    },
+    {
+      "id": 2,
+      "name": "document d'études"
     }
   ]
 }

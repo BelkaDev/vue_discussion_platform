@@ -1,7 +1,7 @@
 <template>
-  <div>
+  <div style="margin-right:10px">
    <div v-if="sent" class="message">
-      <li class="message_chain me">
+      <li class="message_chain sent">
               <span :contenteditable="edit"
         @focusout="updateMessage()"
         style="white-space: pre-line;	overflow-wrap: break-word;"
@@ -30,29 +30,39 @@
         </v-list-item>
         </v-list>
       </v-menu>
-      <p v-if="isLast" class="message_date_left">4 hours ago</p>
+      <p v-if="isLast" class="message_date_left">{{message.date | moment("from", "now") }} </p>
+      
     </div>
-    <div v-else class="message">
+    
+    <div v-else class="message" :class="isLast? 'last_message':''">
+
       <v-avatar v-if="isFirst" class="message_avatar_right ml-2" size="38">
-        <img src="https://cdn.vuetifyjs.com/images/john.jpg" alt="John" />
+        <img :src="message.sender.avatar" alt="John" />
       </v-avatar>
       <li
-        class="message_chain him"
+        class="message_chain received"
+        
       >
       <span :contenteditable="edit"
         @focusout="updateMessage()"
         style="white-space: pre-line;	overflow-wrap: break-word;"
       class="message_content"
+    
       v-text="message.content">
   
         </span>
+        
       </li>
 
       <p v-if="isLast" class="message_date_right">4 hours ago</p>
     </div>
+    
   </div>
 </template>
 <script>
+import EventBus from "@/utils/eventBus";
+
+
 export default {
   props: ["message", "sent", "isFirst", "isLast", "discussion"],
   data: () => ({
@@ -64,11 +74,12 @@ export default {
     updateMessage() {
       this.edit = false;
       var input = this.$el.querySelector(".message_content");
-      this.message.content = input.innerText;    
+      this.message.content = input.innerText;
+      EventBus.$emit("updateMessage",this.message)
+
       },
-    deleteMessage(id) {
-      var container = this.$el.querySelectorAll("[message-id='" + id + "']");
-      console.log(container);
+    deleteMessage() {
+    EventBus.$emit("deleteMessage",this.message.id)
     },
     editMessage() {
       this.edit = true;
@@ -89,31 +100,27 @@ ul li {
   display: inline-block;
   clear: both;
   padding: 10px;
-  font-family: Helvetica, Arial, sans-serif;
   opacity: 0.8;
 }
 
-.me {
+.sent {
   float: right;
   background: #fff;
   border-radius: 10px 10px 0px 10px;
   text-align: right;
   margin-left: 10%;
-  margin-right: 4em;
-  margin-bottom: 0.5em;
-  margin-top: 0.5em;
+  margin-right: 1em;
   color: #707c97;
   border: 1px solid rgba(112, 124, 151, 0.25);
 }
 
-.him {
+.received {
   float: left;
   background: linear-gradient(to right, #60a9f6, #2a8bf2);
   border-radius: 0px 10px 10px 10px;
   text-align: left;
   margin-left: 3.5em;
   margin-right: 10%;
-  margin-bottom:10px;
   color: #fff;
   box-shadow: 2px 5px 15px rgba(42, 139, 242, 0.4);
 }
@@ -129,24 +136,24 @@ ul li {
 }
 .message_icon_left {
   float: right;
-  margin-top: 0.85em;
-  margin-right: -2em;
+  margin-top: 0.5em;
+  margin-right: -40px;
   opacity: 0.6;
 }
 .message_date_left {
   color: #707c97;
-  opacity: 0.95;
+  opacity: 0.80;
   position: relative;
   float: right;
   font-size: 12px;
   display: block;
   margin-left: 76.5%;
   margin-right: 2em;
-  padding: -5px;
+  margin-top:10px;
 }
 .message_date_right {
   color: #707c97;
-  opacity: 0.75;
+  opacity: 0.80;
   position: relative;
   float: left;
   font-size: 12px;
@@ -157,7 +164,7 @@ ul li {
 }
 .message_avatar_right {
   float:left;
-  top: 18px;
+  top: 8px;
 }
 
 /* Messages un envoyés après l'autre */
@@ -166,6 +173,9 @@ ul li {
   margin-top: 0.2em;
   margin-bottom: 0.1em;
 }
+.message_chain:first-child {
+  margin-bottom:2px;
+}
 .message_chain:not(:first-child) {
   margin-top: -2em;
   box-shadow: 1px 0.5px 3px rgba(42, 139, 242, 0.4);
@@ -173,7 +183,7 @@ ul li {
 .message_content {
   text-align:left;
 }
-.separator{
-
+.last_message{
+  padding-bottom:143px;
 }
 </style>

@@ -7,11 +7,12 @@
                       :block="true"
                       color="#60A9F6"
                       :style="'width:100px; margin-top:14px !important;  text-transform:none !important;'"
-                      class="my-3 button_gradient"
+                      class="my-3 button_gradient "
                       style="margin-left:94px; color:white;"
                                 v-bind="attrs"
 
-          v-on="on"
+                  v-on="on"
+                  @click="resetForm()" 
                       ><v-icon class="mr-4" size="18">mdi-pencil</v-icon> Create new Post</v-btn>
       </template>
 <v-container style="background-color:white !important">
@@ -32,14 +33,14 @@ export default {
       dialog: false,
     }
   },
+methods :{
+resetForm() {
+EventBus.$emit("resetForm",true)
+  
+}
+},
   components: {
-    postForm
-  },
-  methods: {
-  newChat () {
-  EventBus.$emit("newChat",true)
-  alert("created")
-	}
+    postForm,
   },
   created() {
   const that = this;
@@ -49,4 +50,3 @@ export default {
   }
 };
 </script>
-

@@ -5,12 +5,12 @@
             </v-avatar>
             <div class="toolbar_title">
             <span class="chat_title_primary">{{receiver.name.charAt(0).toUpperCase() + receiver.name.slice(1)}} {{receiver.lastName.charAt(0).toUpperCase() + receiver.lastName.slice(1)}}</span>
-            <span class="chat_title_secondary">Last message 5 hours ago</span>
+            <span v-if="last_message != null" class="chat_title_secondary">Last message {{ last_message | moment("from", "now") }}</span>
+            <span v-else class="chat_title_secondary">No messages</span>
           </div>
 
             <v-spacer></v-spacer>
             <template class="toolbar_buttons">
-              <iconButton :color="'#979797'" :icon="'mdi-magnify'" :shadow="true"></iconButton>
               <iconButton v-if="!windowProperties.isExpanded" @click="expand" :color="'#979797'" :icon="'mdi-fullscreen'" :shadow="true"></iconButton>
               <iconButton v-if="windowProperties.isExpanded" @click="expand" :color="'#979797'" :icon="'mdi-fullscreen-exit'" :shadow="true"></iconButton>
               <iconButton @click="close" :color="'#979797'" :icon="'mdi-close'" :shadow="true"></iconButton>
@@ -26,7 +26,7 @@ import iconButton from "@/components/UI/Buttons/iconButton.vue";
 
 export default {
   name: "chatToolbarSingle",
-  props: ["receiver"],
+  props: ["receiver","last_message"],
   data: () => ({
     windowProperties: {isExpanded:false,isClosed:false},
   }),

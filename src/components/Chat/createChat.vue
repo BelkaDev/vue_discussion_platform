@@ -11,7 +11,7 @@
                       style="margin-left:94px; color:white;"
                                 v-bind="attrs"
 
-          v-on="on"
+                      v-on="on"
                       ><v-icon class="mr-4" size="18">mdi-pencil</v-icon> Create new Chat</v-btn>
       </template>
 <v-container style="background-color:white !important">
@@ -38,7 +38,6 @@ export default {
   methods: {
   newChat () {
   EventBus.$emit("newChat",true)
-  alert("created")
 	}
   },
   created() {

@@ -1,24 +1,24 @@
 <template>
   <span>
+
     <searchBar
-      @updateList="refreshList($event)"
+      @sortList="sortList($event)"
+      @searchList="searchList($event)"
+      v-if="posts.length != 0"
+      :message="'Search posts'"
       :list="posts"
-      posts=true
-      style="margin-top:90px;margin-bottom:20px;margin-left:6px;"
-      v-if="posts.length > 0"
+      :posts="true"
+      style="margin-top:90px;margin-bottom:20px;margin-left:2px;"
     />
-    
-    <h1 v-if="posts.length == 0" @click="test()" class="display-1 grey--text text--darken-2 no_posts">
-      There is no posts for this document
-        <br>
-                  <p
-       class="blue--text clickable_text"
-        @click="test()"
-        >créez un nouveau
-        </p>
-    </h1>
+
     <v-list id="postList" class="list_layout">
-      <v-list-item-group v-for="post in posts" :key="post.id">
+          <h1 v-if="posts.length == 0" class="display-1 grey--text text--darken-2 no_posts">
+
+      There is no post for this document
+        <br>
+        create a new one.
+    </h1>
+      <v-list-item-group v-for="post in filtered_posts" :key="post.id">
         <v-card
           class="post_card pa-2"
           :id="post.id"
@@ -73,55 +73,97 @@
                 style="color:#707C97 !important"
                 >{{ post.seen }}</span
               >
+              
             </v-row>
+            
           </v-card-actions>
         </v-card>
-      </v-list-item-group>
+      </v-list-item-group
+      >
+
     </v-list>
+          <alertDialog
+      :trigger="alertTrigger"
+      :type="alertType"
+      :message="alertMessage"
+      ></alertDialog>
   </span>
 </template>
 
 <script>
 import EventBus from "@/utils/eventBus";
 import searchBar from "@/components/Shared/searchBar";
+import alertDialog from "@/components/UI/Alerts/alert";
 
-import postService from "@/services/forum/postService";
+import postService from "@/services/Forum/postService";
 
 export default {
   props: ["loggedUser","document"],
   data: () => ({
     selectedIndex: 0,
     postService: null,
-    posts: []
+    filterString: "",
+    posts: [],
+          alertMessage:'',
+      alertType:'',
+      alertTrigger:false,
   }),
   components: {
     searchBar,
+    alertDialog
   },
   methods: {
+        showAlert(type,msg) {
+        this.alertType = type
+        this.alertMessage = msg
+        this.alertTrigger = true
+      },
     openPost: function(post) {
       this.selectedIndex = post.id;
       EventBus.$emit("openPost", post);
     },
-    refreshList(newList) {
-      this.posts = newList;
+    searchList(search) {
+      this.filterString = search
+    },
+      sortList(list) {
+      this.posts = list
     },
   },
+  computed: {
+filtered_posts() {
+        return this.posts.filter(element => {
+        return element.content.toLowerCase().includes(this.filterString.toLowerCase())
+      })
+}
+  },
+
   mounted() {
+    this.alertTrigger = false
     const that = this;
     this.postService = new postService(this.$http,this.$hostname);
     this.posts = this.document.posts
     EventBus.$on("createPost", function (post) {
       post.user = that.loggedUser
-      //discussion.id = that.discussions.length
+      post.id = that.document.posts.length + 1
+      if(!that.document.posts.includes(post)) {
       that.document.posts.push(post)
-      that.postService.createPost(that.document)
+      that.postService.createPost(that.document).then(() => {
+        that.showAlert("success","Created post successfully")
+      }).catch(() => {
+        that.showAlert("error","Error creating post")
+      });
+    }
     })
-  }
+  },
+     beforeDestroy () {
+      EventBus.$off('createPost', true)
+ },
 };
 </script>
 
 <style >
 .list_layout {
+  margin-left:8px;
   background-color: transparent !important;
 }
 .post_info_icon {
@@ -153,9 +195,7 @@ export default {
   padding-right: 0px; /* Increase/decrease this value for cross-browser compatibility */
 }
 .no_posts {
-  position:fixed;
-  top:50%;
-  margin-left:150px;
+    margin-top:200px;
 }
 .clickable_text {
   cursor:pointer;

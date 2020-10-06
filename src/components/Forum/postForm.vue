@@ -12,17 +12,18 @@
             <v-flex xs12 > 
 
 <v-textarea
+          filled
   v-model="content"
           name="input-7-1"
-          label="Post content"
           placeholder="Enter the content of your post."
           :rules="inputContent" 
         ></v-textarea>
           <div >
-      <v-btn class="white--text ml-4 my-2" :color="color" :loading="loading" :disabled="loading || title.length < 3 || content.length < 10" @click="create" fab>
+
+      </div>
+            <v-btn class="white--text ml-4 my-2" :color="color" :loading="loading" :disabled="loading || title.length < 3 || content.length < 10" @click="create" fab>
         <v-icon>{{buttonIcon}}</v-icon>
       </v-btn>
-      </div>
             </v-flex>
       </v-layout>
 
@@ -46,7 +47,7 @@ export default {
 	v => v && v.length >= 3 || 'Title must contain at least 3 characters'
   ],
       inputContent: [ 
-	v => v && v.length >= 3 || 'Title must contain at least 3 characters'
+	v => v && v.length >= 10 || 'Post content must contain at least 10 characters'
 	],
     buttonIcon: "mdi-send",
       searchString:"",
@@ -56,7 +57,9 @@ export default {
   },
 
   watch: {
+
     isUpdating (val) {
+ 
       if (val) {
         setTimeout(() => (this.isUpdating = false), 3000)
       }
@@ -85,7 +88,7 @@ export default {
           post.content = this.content
           post.likes = []
           post.comments = []
-          post.date = "hier"
+          post.date = Date.now();
           post.seen = 0
       EventBus.$emit("createPost",post)     
           this.closeDialog();
@@ -95,14 +98,24 @@ export default {
     initialize(){
           this.loading = false;
           this.timer = null;
-          this.buttonIcon="mdi-account-multiple-plus"
+          this.buttonIcon="mdi-send"
           this.color="#60a9f6"
           this.title="";
+          this.content="";
           this.searchString=""
     },
   },
-  mounted() {
-  }
+  mounted(){
+    const that = this;
+      EventBus.$on("resetForm", function () {
+        that.$refs.form.reset()
+      })
+  },
+    beforeDestroy () {
+      EventBus.$off('createPost', true)
+ },
+
+
 }
 </script>
 <style>

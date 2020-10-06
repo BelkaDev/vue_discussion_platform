@@ -25,7 +25,7 @@
 </template>
 
 <script>
-import chatBubble from "./chatBubble";
+import chatBubble from "@/components/Chat/chatBubble";
 
 export default {
   name: "",

@@ -1,20 +1,22 @@
-export default class postService {
+export default class discussionService {
   constructor(http, hostname) {
     this._hostname = hostname;
     this._http = http;
   }
-  getPosts(documentId) {
+
+  getMessages(discussionId) {
     return this._http
-      .get(this._hostname + "/documents/" + documentId + "?posts")
+      .get(this._hostname + "/discussions/" + discussionId)
       .then(resp => {
-        return resp.data.posts;
+        return resp.data.messages;
       })
       .catch(error => {
         console.log(error);
       });
   }
-  createPost(doc) {
-    this._http
+
+  sendMessage(doc) {
+    return this._http
       .put(this._hostname + "/documents/" + doc.id, doc)
       .then(resp => {
         console.log(resp.data);
@@ -23,9 +25,9 @@ export default class postService {
         console.log(error);
       });
   }
-  updatePost(postId, newPost) {
-    this._http
-      .put(this._hostname + "/documents/1?post.id" + postId, newPost)
+  updateMessage(doc) {
+    return this._http
+      .put(this._hostname + "/documents/" + doc.id, doc)
       .then(resp => {
         console.log(resp.data);
       })
@@ -33,9 +35,10 @@ export default class postService {
         console.log(error);
       });
   }
-  deletePost(postId) {
-    this._http
-      .delete(this._hostname + "/documents/1?post.id" + postId)
+
+  deleteMessage(doc) {
+    return this._http
+      .put(this._hostname + "/documents/" + doc.id, doc)
       .then(resp => {
         console.log(resp.data);
       })

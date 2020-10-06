@@ -1,26 +1,20 @@
-export default class discussionService {
+export default class postService {
   constructor(http, hostname) {
     this._hostname = hostname;
     this._http = http;
   }
-  getUserDiscussions(documentId, userId) {
+  getPosts(documentId) {
     return this._http
-      .get(
-        this._hostname +
-          "/documents/" +
-          documentId +
-          "?discussion.receivers.id=" +
-          userId
-      )
+      .get(this._hostname + "/documents/" + documentId + "?posts")
       .then(resp => {
-        return resp.data.discussions;
+        return resp.data.posts;
       })
       .catch(error => {
         console.log(error);
       });
   }
-  createDiscussion(doc) {
-    this._http
+  createPost(doc) {
+    return this._http
       .put(this._hostname + "/documents/" + doc.id, doc)
       .then(resp => {
         console.log(resp.data);
@@ -29,19 +23,9 @@ export default class discussionService {
         console.log(error);
       });
   }
-  sendMessage(discussionId, discussion) {
+  updatePost(doc) {
     return this._http
-      .put(this._hostname + "/discussions/" + discussionId, discussion)
-      .then(resp => {
-        console.log(resp);
-      })
-      .catch(error => {
-        console.log(error);
-      });
-  }
-  updateDiscussion(discussionId, newDiscussion) {
-    this._http
-      .put(this._hostname + "/discussions/" + discussionId, newDiscussion)
+      .put(this._hostname + "/documents/" + doc.id, doc)
       .then(resp => {
         console.log(resp.data);
       })
@@ -49,19 +33,39 @@ export default class discussionService {
         console.log(error);
       });
   }
-  getMessages(discussionId) {
+  deletePost(doc) {
     return this._http
-      .get(this._hostname + "/discussions/" + discussionId)
+      .put(this._hostname + "/documents/" + doc.id, doc)
       .then(resp => {
-        return resp.data.messages;
+        console.log(resp.data);
       })
       .catch(error => {
         console.log(error);
       });
   }
-  deleteDiscussion(discussionId) {
-    this._http
-      .delete(this._hostname + "/discussions/" + discussionId)
+  setLike(doc) {
+    return this._http
+      .put(this._hostname + "/documents/" + doc.id, doc)
+      .then(resp => {
+        console.log(resp.data);
+      })
+      .catch(error => {
+        console.log(error);
+      });
+  }
+  unlike(doc) {
+    return this._http
+      .put(this._hostname + "/documents/" + doc.id, doc)
+      .then(resp => {
+        console.log(resp.data);
+      })
+      .catch(error => {
+        console.log(error);
+      });
+  }
+  setSeen(doc) {
+    return this._http
+      .put(this._hostname + "/documents/" + doc.id, doc)
       .then(resp => {
         console.log(resp.data);
       })
