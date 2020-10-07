@@ -16,7 +16,7 @@
             ></v-textarea>
           </v-col>
 
-         <v-col cols="1" class="pr-15 pt-14">
+         <v-col cols="2" class="pr-15 pt-14">
               <iconButton 
               @click="sendMessage"
               :icon="'mdi-send'" :shadow="true" :gradient="true"></iconButton>
@@ -42,18 +42,13 @@ export default {
   },
   methods: {
     sendMessage() {
-    var sender = {
-        "id":"1",
-        "name":"Luy",
-        "lastName":"Robin",
-        "avatar":"https://cdn.vuetifyjs.com/images/john.png"
-    }
+    if (this.messageContent != "") {
     this.newMessage.content = this.messageContent;
-    this.newMessage.sender = sender
     this.newMessage.date = Date.now();
     this.$emit("sendMessage",this.newMessage)
     this.messageContent = null;
     this.newMessage = {}
+    }
   },
       inputHandler(e) {
       if (e.keyCode === 13 && !e.shiftKey) {

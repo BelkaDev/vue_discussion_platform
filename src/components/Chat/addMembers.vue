@@ -3,6 +3,12 @@
   <v-form ref="form" v-if="users.length > 0">
       <v-container>
           <v-layout>
+      <v-text-field
+      v-model="title"
+      label="Discussion Name"
+      class="mb-1"
+     :rules="inputRules"
+       v-if="searchString.length > 0"></v-text-field>
           </v-layout>
           <v-layout>
             <v-flex xs12 > 
@@ -57,7 +63,7 @@
 
             </v-flex>
           <div >
-      <v-btn class="white--text ml-4 my-2" :color="color" :loading="loading" :disabled="loading || searchString.length == 0" @click="create" fab>
+      <v-btn class="white--text ml-4 my-2" :color="color" :loading="loading" :disabled="loading || searchString.length == 0" @click="addMembers()" fab>
         <v-icon>{{buttonIcon}}</v-icon>
       </v-btn>
       </div>
@@ -100,9 +106,6 @@ export default {
         setTimeout(() => (this.isUpdating = false), 3000)
       }
     },
-    search () {
-        
-    }
   },
   methods:{
     closeDialog () {
@@ -110,7 +113,7 @@ export default {
   this.initialize();
     },
     
-    create() {
+    addMembers() {
     if(this.$refs.form.validate()){
       (this.loading = true),
         (this.timer = setTimeout(() => {
@@ -119,13 +122,10 @@ export default {
           this.buttonIcon="mdi-check"
           this.color="#1BC47D"
 
-          var discussion = {}
           const receivers = this.users.filter(e => this.searchString.includes(e.id));
-          discussion.title = this.title
-          discussion.receivers = receivers
-          discussion.date = Date.now();
-          discussion.messages = [];
-      EventBus.$emit("createChat",discussion)     
+          // check if receivers not already in discussion
+    
+      EventBus.$emit("addMembers",this.receivers.concat(receivers),this.title)
 
           this.closeDialog();
 

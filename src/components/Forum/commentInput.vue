@@ -42,13 +42,7 @@ export default {
   },
   methods: {
     addComment() {
-      const user = {
-        "id":"1",
-        "name":"Luy",
-        "lastName":"Robin",
-        "avatar":"https://cdn.vuetifyjs.com/images/john.png"
-    }
-    this.newComment.user = user;
+
     this.newComment.content = this.commentContent
     this.newComment.date =  Date.now();
     this.$emit("addComment",this.newComment)

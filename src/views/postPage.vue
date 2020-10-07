@@ -11,14 +11,17 @@
        @windowPropertiesChanged="updateSize($event)"
       ></postPageToolbar>
       <mainPost 
+      :loggedUser="loggedUser"
       :post="post"
       :isLiked="checkLike" />
                 <separator v-if="post.comments.length > 0" class="mt-3">
-                  <b>Comments</b>
+                  Comments
                 </separator>
       <commentList
       v-if="post.comments.length > 0"
-       :comments="post.comments"></commentList>
+       :comments="post.comments"
+      :loggedUser="loggedUser"
+       ></commentList>
       <div id="comment_input">
       <commentInput
       class="pt-8"
@@ -80,7 +83,9 @@ import postService from "@/services/Forum/postService";
         this.alertTrigger = true
       },submitComment(newComment) {
       const that = this
+      newComment.user = this.loggedUser
       var postIndex = this.document.posts.findIndex(post => post.id == this.post.id);
+      newComment.id = this.document.posts[postIndex].comments.length + 1
       this.document.posts[postIndex].comments.push(newComment)
       this.commentService.addComment(this.document).then(() => {
         that.showAlert("success","Created comment successfully")
@@ -93,6 +98,8 @@ import postService from "@/services/Forum/postService";
       updateSize(newProperties) {
       this.windowProperties = newProperties
       this.$emit("layoutPropertiesChanged",{"isExpanded":this.windowProperties.isExpanded,"isClosed":this.windowProperties.isClosed,"component":"chatbox"})
+      EventBus.$emit("layoutPropertiesChanged",{"isExpanded":this.windowProperties.isExpanded,"isClosed":this.windowProperties.isClosed,"component":"chatbox"})
+
     },
     closeWindow(newProperties) {
       this.windowProperties = newProperties

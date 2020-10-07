@@ -93,7 +93,16 @@ export default {
       draggable
     },
   methods: {
-checkMove: function(){
+getUserDiscussions() {
+const that = this;
+var discussions = this.document.discussions.filter(function(discussion) {
+var isReceiver = false
+  discussion.receivers.forEach(receiver => {
+    if (receiver.id === that.loggedUser.id) {isReceiver = true; }
+  });
+  return (isReceiver)
+});
+return discussions
 },
           showAlert(type,msg) {
         this.alertType = type
@@ -148,7 +157,7 @@ return filtered
   mounted(){
       const that = this;
       this.discussionService = new discussionService(this.$http,this.$hostname);
-      this.discussions = this.document.discussions
+      this.discussions = this.getUserDiscussions();
       EventBus.$on("createChat", function (discussion) {
       discussion.sender = that.loggedUser
       discussion.id = that.discussions.length + 1

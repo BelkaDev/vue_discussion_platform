@@ -57,14 +57,13 @@
             <span v-else class="chat_title_secondary">No messages</span>
         </v-layout>
           </v-container>
-                                <v-dialog v-model="dialog" max-width="600">
+                                <v-dialog 
+                                max-width="600">
       <template v-slot:activator="{ on, modal }">
-
 
 <v-icon class="button_shadow icon_button"
  v-on="on" v-bind="modal" :color="'#979797'"
  >mdi-plus</v-icon>
-
 
       </template>
 <v-container style="background-color:white !important">
@@ -96,6 +95,7 @@ export default {
   props: ["receivers","title","last_message"],
   data: () => ({
     windowProperties: {isExpanded:false,isClosed:false},
+    dialogId:0,
   }),
 
   methods: {
@@ -130,7 +130,7 @@ export default {
       }
     return this.receivers.length * 45 + 2
     }
-  }
+  },
 };
 </script>
     

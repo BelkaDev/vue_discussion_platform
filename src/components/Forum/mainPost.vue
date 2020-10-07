@@ -13,6 +13,7 @@
             close-on-content-click :offset-y="true">
         <template v-on="on" v-slot:activator="{ on }">
           <v-icon v-on="on" class="post_icon_left mt-1 ml-1"
+          v-if="post.user.id === loggedUser.id"
             >mdi-dots-horizontal</v-icon
           >
         </template>
@@ -68,7 +69,7 @@
            @mouseout="hovered=false"  
            color="#999"
            @click="setLike()"
-          class="post_info_icon mr-2" :class="hovered || liked? 'hovered' : ''" size="25">mdi-thumb-up</v-icon>
+          class="post_info_icon mr-2" :class="hovered || isLiked? 'hovered' : ''" size="25">mdi-thumb-up</v-icon>
           <span class="mr-4 mt-1" style="color:#707C97 !important" >{{post.likes.length}}</span>
           <v-icon color="#999" class="post_info_icon mr-2 mt-1" size="25" >mdi-forum</v-icon>
           <span class=" mr-4 mt-1" style="color:#707C97 !important">{{post.comments.length}}</span>
@@ -86,7 +87,7 @@
 import EventBus from "@/utils/eventBus";
 
   export default {
-    props: ["post","isLiked"],
+    props: ["post","isLiked","loggedUser"],
     data: () => ({
       hovered:false,
       liked:false,

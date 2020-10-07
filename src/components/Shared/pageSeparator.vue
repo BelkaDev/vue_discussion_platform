@@ -18,17 +18,18 @@ export default {
 };
 </script>
 
-<style>
-.separator { 
-  color:#707c97;
+<style scoped>
+hr {
+  border: 2px solid #CACACA;
   opacity: .4;
   width:100%;
-  
-}
 
+}
 .separator.text {
+  width:60%;
   color:#707c97;
-  opacity:.8;
-  margin-top:-8px;
+  opacity:.5;
+  font-style: italic;
+  margin:-8px 0;
 }
 </style>

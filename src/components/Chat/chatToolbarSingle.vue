@@ -11,6 +11,22 @@
 
             <v-spacer></v-spacer>
             <template class="toolbar_buttons">
+                                             <v-dialog max-width="600">
+      <template v-slot:activator="{ on, modal }">
+
+
+<v-icon class="button_shadow icon_button"
+ v-on="on" v-bind="modal" :color="'#979797'"
+ >mdi-plus</v-icon>
+
+
+      </template>
+<v-container style="background-color:white !important">
+<addMembers
+:receivers="receiverList"
+></addMembers>
+</v-container>
+    </v-dialog>
               <iconButton v-if="!windowProperties.isExpanded" @click="expand" :color="'#979797'" :icon="'mdi-fullscreen'" :shadow="true"></iconButton>
               <iconButton v-if="windowProperties.isExpanded" @click="expand" :color="'#979797'" :icon="'mdi-fullscreen-exit'" :shadow="true"></iconButton>
               <iconButton @click="close" :color="'#979797'" :icon="'mdi-close'" :shadow="true"></iconButton>
@@ -23,6 +39,7 @@
 
 <script>
 import iconButton from "@/components/UI/Buttons/iconButton.vue";
+import addMembers from "./addMembers"
 
 export default {
   name: "chatToolbarSingle",
@@ -50,7 +67,15 @@ export default {
     }
   },
   components: {
-      iconButton
+      iconButton,
+      addMembers
+  },
+  computed : {
+    receiverList(){
+      var receivers = []
+      receivers.push(this.receiver)
+      return receivers
+    }
   },
   mounted() {
   }

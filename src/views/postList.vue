@@ -5,7 +5,7 @@
       @sortList="sortList($event)"
       @searchList="searchList($event)"
       v-if="posts.length != 0"
-      :message="'Search posts'"
+      :message="'Search in posts'"
       :list="posts"
       :posts="true"
       style="margin-top:90px;margin-bottom:20px;margin-left:2px;"
@@ -18,6 +18,7 @@
         <br>
         create a new one.
     </h1>
+        <draggable v-model="filtered_posts" group="posts" >
       <v-list-item-group v-for="post in filtered_posts" :key="post.id">
         <v-card
           class="post_card pa-2"
@@ -80,7 +81,7 @@
         </v-card>
       </v-list-item-group
       >
-
+</draggable>    
     </v-list>
           <alertDialog
       :trigger="alertTrigger"
@@ -92,6 +93,8 @@
 
 <script>
 import EventBus from "@/utils/eventBus";
+import draggable from 'vuedraggable'
+
 import searchBar from "@/components/Shared/searchBar";
 import alertDialog from "@/components/UI/Alerts/alert";
 
@@ -110,6 +113,7 @@ export default {
   }),
   components: {
     searchBar,
+    draggable,
     alertDialog
   },
   methods: {
@@ -130,10 +134,15 @@ export default {
     },
   },
   computed: {
-filtered_posts() {
+filtered_posts : {
+            get: function () {
         return this.posts.filter(element => {
         return element.content.toLowerCase().includes(this.filterString.toLowerCase())
       })
+            },
+                set: function (newValue) {
+      this.posts = newValue;
+    }
 }
   },
 
@@ -153,6 +162,11 @@ filtered_posts() {
         that.showAlert("error","Error creating post")
       });
     }
+    })
+    EventBus.$on("layoutPropertiesChanged", function (properties) {
+          if(properties.isClosed == true ) {
+            that.selectedIndex = null;
+          }
     })
   },
      beforeDestroy () {

@@ -3,7 +3,9 @@
           <v-list-item-group  v-for="comment in comments"
               :key="comment.id"
           >
-            <commentCard class="ml-2 mb-5" :comment="comment"/>
+            <commentCard 
+            :loggedUser="loggedUser"
+            class="ml-2 mb-5" :comment="comment"/>
           </v-list-item-group>
         </v-list>
 </template>
@@ -14,7 +16,7 @@
 import commentCard from "./commentCard";
 
 export default {
-  props: ["comments"],
+  props: ["comments","loggedUser"],
   data: () => ({
     
   }),

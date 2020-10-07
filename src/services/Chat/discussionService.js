@@ -29,9 +29,9 @@ export default class discussionService {
         console.log(error);
       });
   }
-  updateDiscussion(discussionId, newDiscussion) {
-    this._http
-      .put(this._hostname + "/discussions/" + discussionId, newDiscussion)
+  updateDiscussion(doc) {
+    return this._http
+      .put(this._hostname + "/documents/" + doc.id, doc)
       .then(resp => {
         console.log(resp.data);
       })

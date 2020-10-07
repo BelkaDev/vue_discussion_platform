@@ -16,6 +16,7 @@
       <v-menu close-on-content-click :offset-y="true">
         <template v-on="on" v-slot:activator="{ on }">
           <v-icon v-on="on" class="ml-1 mt-1"
+          v-if="comment.user.id == loggedUser.id"
             >mdi-dots-horizontal</v-icon
           >
         </template>
@@ -54,7 +55,7 @@
 import EventBus from "@/utils/eventBus";
 
   export default {
-    props: ["comment"],
+    props: ["comment","loggedUser"],
     data: () => ({
       edit:false,
       content:'',

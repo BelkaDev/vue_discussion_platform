@@ -92,7 +92,7 @@ export default {
     showPost: false,
     textEditor: false,
     showChat: false,
-    isClosed: false, // put this in a general layout object
+    isClosed: false, // todo: put in a general layout object
     id: 0,
     breakPointRight: "xs12 sm12 md7 lg7 xl7",
     breakPointLeft: "xs12 sm12 md12 lg12 xl12"
@@ -125,8 +125,8 @@ export default {
     openEditor() {
       this.textEditor=true;
     },
-    getLoggedUser(){
-      this.userService.getLoggedUser(1).then((user) => {
+    setLoggedUser(id){
+      this.userService.getLoggedUser(id).then((user) => {
       this.loggedUser = user
     })
     },
@@ -134,20 +134,25 @@ export default {
       const that = this;
       this.documentService.getDocument(documentId).then((doc) => {
       that.opened_document = doc;
+      if (!doc) { this.$router.replace('/404')}
+      
     })
     }
   },
     mounted () {
+    const that = this
     this.userService = new userService(this.$http,this.$hostname);
     this.documentService = new documentService(this.$http,this.$hostname);
-    this.getLoggedUser();
+    // set the document data
+    this.setLoggedUser(1); // set 1 as default
+    // get the document data
     this.getDocument(this.$route.params.id);
     
-    // get the document data
-
 
     // called from postList.vue
-    const that = this
+        EventBus.$on("changeUser", function (userId) {
+    that.setLoggedUser(userId);
+          })
     EventBus.$on("openPost", function () {
       that.isClosed=false;
       that.breakPointLeft = "xs12 sm5 md5 lg5 xl5"
@@ -214,7 +219,7 @@ export default {
   margin-bottom:10px;
 }
 .header_title {
-  color: #444;
+  color: #5F5F56;
   font-size: 30px;
   text-align: left;
 }

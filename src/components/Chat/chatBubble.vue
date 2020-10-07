@@ -37,7 +37,7 @@
     <div v-else class="message" :class="isLast? 'last_message':''">
 
       <v-avatar v-if="isFirst" class="message_avatar_right ml-2" size="38">
-        <img :src="message.sender.avatar" alt="John" />
+        <img :src="message.sender.avatar" alt="" />
       </v-avatar>
       <li
         class="message_chain received"
@@ -54,7 +54,7 @@
         
       </li>
 
-      <p v-if="isLast" class="message_date_right">4 hours ago</p>
+      <p v-if="isLast" class="message_date_right">{{message.date | moment("from", "now")  }}</p>
     </div>
     
   </div>
@@ -184,6 +184,6 @@ ul li {
   text-align:left;
 }
 .last_message{
-  padding-bottom:143px;
+  padding-bottom:100px;
 }
 </style>

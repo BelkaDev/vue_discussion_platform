@@ -1,56 +1,136 @@
 {
   "users": [
     {
-      "id": "1",
-      "name": "whatever",
-      "lastName": "whatever",
-      "avatar": "https://cdn.vuetifyjs.com/images/john.png"
+      "id": 1,
+      "name": "Sacha",
+      "lastName": "Griffin",
+      "avatar": "https://vzkiss.com/demo/chatbox/images/avatar/avatar_1.jpg"
     },
     {
-      "id": "2",
-      "name": "Mr",
-      "lastName": "Ok",
-      "avatar": "https://cdn.vuetifyjs.com/images/john.png"
+      "id": 2,
+      "name": "Debby",
+      "lastName": "Jones",
+      "avatar": "http://vzkiss.com/demo/chatbox/images/avatar/avatar_2.jpeg"
     },
     {
-      "id": "3",
-      "name": "Mrs",
-      "lastName": "Bye",
-      "avatar": "https://cdn.vuetifyjs.com/images/john.png"
+      "id": 3,
+      "name": "James",
+      "lastName": "King",
+      "avatar": "http://vzkiss.com/demo/chatbox/images/avatar/avatar_6.jpg"
     }
   ],
   "documents": [
     {
       "id": 1,
-      "name": "Document médicals",
+      "name": "Medical Document",
       "posts": [
         {
-          "title": "ok ok ok",
-          "content": "hello ok ok ok",
-          "likes": [],
-          "comments": [],
-          "date": 1601862770231,
-          "seen": 152,
+          "title": "New Year Program",
+          "content": "Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat. Duis aute irure dolor in reprehenderit in voluptate velit esse cillum dolore eu fugiat nulla pariatur. Excepteur sint occaecat cupidatat non proident, sunt in culpa qui officia deserunt mollit anim id est laborum",
+          "likes": [
+            {
+              "date": 1602024979664,
+              "user": {
+                "id": 1,
+                "name": "Sacha",
+                "lastName": "Griffin",
+                "avatar": "https://vzkiss.com/demo/chatbox/images/avatar/avatar_1.jpg"
+              },
+              "id": 1
+            },
+            {
+              "date": 1602025096495,
+              "user": {
+                "id": 2,
+                "name": "Debby",
+                "lastName": "Jones",
+                "avatar": "http://vzkiss.com/demo/chatbox/images/avatar/avatar_2.jpeg"
+              },
+              "id": 1
+            },
+            {
+              "date": 1602025106856,
+              "user": {
+                "id": 3,
+                "name": "James",
+                "lastName": "King",
+                "avatar": "http://vzkiss.com/demo/chatbox/images/avatar/avatar_6.jpg"
+              },
+              "id": 3
+            }
+          ],
+          "comments": [
+            {
+              "content": "Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua",
+              "date": 1602025169018,
+              "user": {
+                "id": 3,
+                "name": "James",
+                "lastName": "King",
+                "avatar": "http://vzkiss.com/demo/chatbox/images/avatar/avatar_6.jpg"
+              },
+              "id": 1
+            },
+            {
+              "content": "Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua",
+              "date": 1602025177195,
+              "user": {
+                "id": 2,
+                "name": "Debby",
+                "lastName": "Jones",
+                "avatar": "http://vzkiss.com/demo/chatbox/images/avatar/avatar_2.jpeg"
+              },
+              "id": 2
+            },
+            {
+              "content": "Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua",
+              "date": 1602029480138,
+              "user": {
+                "id": 1,
+                "name": "Sacha",
+                "lastName": "Griffin",
+                "avatar": "https://vzkiss.com/demo/chatbox/images/avatar/avatar_1.jpg"
+              },
+              "id": 3
+            }
+          ],
+          "date": 1602021894671,
+          "seen": 56,
           "user": {
-            "id": "1",
-            "name": "whatever",
-            "lastName": "whatever",
-            "avatar": "https://cdn.vuetifyjs.com/images/john.png"
+            "id": 1,
+            "name": "Sacha",
+            "lastName": "Griffin",
+            "avatar": "https://vzkiss.com/demo/chatbox/images/avatar/avatar_1.jpg"
           },
           "id": 1
         },
         {
-          "title": "test",
-          "content": "okokokokokok",
+          "title": "New Analytics",
+          "content": "Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua",
           "likes": [],
           "comments": [],
-          "date": 1601936961606,
-          "seen": 8,
+          "date": 1602029535027,
+          "seen": 6,
           "user": {
-            "id": "1",
-            "name": "whatever",
-            "lastName": "whatever",
-            "avatar": "https://cdn.vuetifyjs.com/images/john.png"
+            "id": 2,
+            "name": "Debby",
+            "lastName": "Jones",
+            "avatar": "http://vzkiss.com/demo/chatbox/images/avatar/avatar_2.jpeg"
+          },
+          "id": 2
+        },
+        {
+          "title": "Test Example",
+          "content": "This is an example",
+          "likes": [],
+          "comments": [],
+          "date": 1602029591771,
+          "seen": 4,
+          "user": {
+            "id": 1,
+            "name": "Sacha",
+            "lastName": "Griffin",
+            "avatar": "https://vzkiss.com/demo/chatbox/images/avatar/avatar_1.jpg"
           },
           "id": 3
         }
@@ -60,133 +140,185 @@
           "title": "hello",
           "receivers": [
             {
-              "id": "1",
-              "name": "whatever",
-              "lastName": "whatever",
-              "avatar": "https://cdn.vuetifyjs.com/images/john.png"
+              "id": 3,
+              "name": "James",
+              "lastName": "King",
+              "avatar": "http://vzkiss.com/demo/chatbox/images/avatar/avatar_6.jpg"
             },
             {
-              "id": "2",
-              "name": "Mr",
-              "lastName": "Ok",
-              "avatar": "https://cdn.vuetifyjs.com/images/john.png"
+              "id": 1,
+              "name": "Sacha",
+              "lastName": "Griffin",
+              "avatar": "https://vzkiss.com/demo/chatbox/images/avatar/avatar_1.jpg"
             },
             {
-              "id": "3",
-              "name": "Mrs",
-              "lastName": "Bye",
-              "avatar": "https://cdn.vuetifyjs.com/images/john.png"
+              "id": 2,
+              "name": "Debby",
+              "lastName": "Jones",
+              "avatar": "http://vzkiss.com/demo/chatbox/images/avatar/avatar_2.jpeg"
             }
           ],
-          "date": 1601834012105,
+          "date": 1602025260353,
           "messages": [
             {
-              "content": "hi",
+              "content": "Hello",
+              "date": 1602027028000,
               "sender": {
-                "id": "1",
-                "name": "Luy",
-                "lastName": "Robin",
-                "avatar": "https://cdn.vuetifyjs.com/images/john.png"
+                "id": 1,
+                "name": "Sacha",
+                "lastName": "Griffin",
+                "avatar": "https://vzkiss.com/demo/chatbox/images/avatar/avatar_1.jpg"
               },
-              "date": 1601834408494,
-              "id": 0
+              "id": 1
             },
             {
-              "content": "hello",
+              "content": "How are you?",
+              "date": 1602027028000,
               "sender": {
-                "id": "2",
-                "name": "Luy",
-                "lastName": "Robin",
-                "avatar": "https://cdn.vuetifyjs.com/images/john.png"
+                "id": 1,
+                "name": "Sacha",
+                "lastName": "Griffin",
+                "avatar": "https://vzkiss.com/demo/chatbox/images/avatar/avatar_1.jpg"
               },
-              "date": 1601834408494,
-              "id": 0
-            },
-            {
-              "content": "how are you",
-              "sender": {
-                "id": "1",
-                "name": "Luy",
-                "lastName": "Robin",
-                "avatar": "https://cdn.vuetifyjs.com/images/john.png"
-              },
-              "date": 1601834415422,
               "id": 2
             },
             {
-              "content": "Very good thank you",
+              "content": "I'm good",
+              "date": 1602027028000,
               "sender": {
-                "id": "2",
-                "name": "Mr",
-                "lastName": "Ok",
-                "avatar": "https://cdn.vuetifyjs.com/images/john.png"
+                "id": 2,
+                "name": "Debby",
+                "lastName": "Jones",
+                "avatar": "http://vzkiss.com/demo/chatbox/images/avatar/avatar_2.jpeg"
               },
-              "date": 1601834415422,
               "id": 3
             },
             {
-              "content": "me too",
+              "content": "And you",
+              "date": 1602027028000,
               "sender": {
-                "id": "3",
-                "name": "Mrs",
-                "lastName": "Bye",
-                "avatar": "https://cdn.vuetifyjs.com/images/john.png"
+                "id": 2,
+                "name": "Debby",
+                "lastName": "Jones",
+                "avatar": "http://vzkiss.com/demo/chatbox/images/avatar/avatar_2.jpeg"
               },
-              "date": 1601834415422,
-              "id": 1
+              "id": 4
+            },
+            {
+              "content": "Hi everyone",
+              "date": 1602027028000,
+              "sender": {
+                "id": 3,
+                "name": "James",
+                "lastName": "King",
+                "avatar": "http://vzkiss.com/demo/chatbox/images/avatar/avatar_6.jpg"
+              },
+              "id": 5
             }
           ],
           "sender": {
-            "id": "1",
-            "name": "whatever",
-            "lastName": "whatever",
-            "avatar": "https://cdn.vuetifyjs.com/images/john.png"
+            "id": 1,
+            "name": "Sacha",
+            "lastName": "Griffin",
+            "avatar": "https://vzkiss.com/demo/chatbox/images/avatar/avatar_1.jpg"
           },
           "id": 1
         },
         {
-          "title": "hello",
+          "title": "Work Group",
           "receivers": [
             {
-              "id": "1",
-              "name": "whatever",
-              "lastName": "whatever",
-              "avatar": "https://cdn.vuetifyjs.com/images/john.png"
+              "id": 2,
+              "name": "Debby",
+              "lastName": "Jones",
+              "avatar": "http://vzkiss.com/demo/chatbox/images/avatar/avatar_2.jpeg"
             },
             {
-              "id": "2",
-              "name": "Mr",
-              "lastName": "Ok",
-              "avatar": "https://cdn.vuetifyjs.com/images/john.png"
+              "id": 3,
+              "name": "James",
+              "lastName": "King",
+              "avatar": "http://vzkiss.com/demo/chatbox/images/avatar/avatar_6.jpg"
             }
           ],
-          "date": 1601858104445,
-          "messages": [],
+          "date": 1602025282138,
+          "messages": [
+            {
+              "content": "Hi",
+              "date": 1601983828000,
+              "sender": {
+                "id": 2,
+                "name": "Debby",
+                "lastName": "Jones",
+                "avatar": "http://vzkiss.com/demo/chatbox/images/avatar/avatar_2.jpeg"
+              },
+              "id": 1
+            },
+            {
+              "content": "Hello",
+              "date": 1602029914347,
+              "sender": {
+                "id": 3,
+                "name": "James",
+                "lastName": "King",
+                "avatar": "http://vzkiss.com/demo/chatbox/images/avatar/avatar_6.jpg"
+              },
+              "id": 2
+            }
+          ],
           "sender": {
-            "id": "1",
-            "name": "whatever",
-            "lastName": "whatever",
-            "avatar": "https://cdn.vuetifyjs.com/images/john.png"
+            "id": 1,
+            "name": "Sacha",
+            "lastName": "Griffin",
+            "avatar": "https://vzkiss.com/demo/chatbox/images/avatar/avatar_1.jpg"
           },
           "id": 2
         },
         {
-          "title": "",
+          "title": "New Project",
           "receivers": [
             {
-              "id": "1",
-              "name": "whatever",
-              "lastName": "whatever",
-              "avatar": "https://cdn.vuetifyjs.com/images/john.png"
+              "id": 3,
+              "name": "James",
+              "lastName": "King",
+              "avatar": "http://vzkiss.com/demo/chatbox/images/avatar/avatar_6.jpg"
+            },
+            {
+              "id": 1,
+              "name": "Sacha",
+              "lastName": "Griffin",
+              "avatar": "https://vzkiss.com/demo/chatbox/images/avatar/avatar_1.jpg"
             }
           ],
-          "date": 1601934187891,
-          "messages": [],
+          "date": 1602025302890,
+          "messages": [
+            {
+              "content": "Hi",
+              "date": 1602016228000,
+              "sender": {
+                "id": 1,
+                "name": "Sacha",
+                "lastName": "Griffin",
+                "avatar": "https://vzkiss.com/demo/chatbox/images/avatar/avatar_1.jpg"
+              },
+              "id": 1
+            },
+            {
+              "content": "Hello",
+              "date": 1602031329279,
+              "sender": {
+                "id": 1,
+                "name": "Sacha",
+                "lastName": "Griffin",
+                "avatar": "https://vzkiss.com/demo/chatbox/images/avatar/avatar_1.jpg"
+              },
+              "id": 2
+            }
+          ],
           "sender": {
-            "id": "1",
-            "name": "whatever",
-            "lastName": "whatever",
-            "avatar": "https://cdn.vuetifyjs.com/images/john.png"
+            "id": 1,
+            "name": "Sacha",
+            "lastName": "Griffin",
+            "avatar": "https://vzkiss.com/demo/chatbox/images/avatar/avatar_1.jpg"
           },
           "id": 3
         }
@@ -194,7 +326,7 @@
     },
     {
       "id": 2,
-      "name": "document d'études"
+      "name": "Study document"
     }
   ]
 }
