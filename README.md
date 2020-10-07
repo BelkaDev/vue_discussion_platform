@@ -1,4 +1,4 @@
-# neoledge
+# vue_discussion_platform
 
 ## Project setup
 ```
