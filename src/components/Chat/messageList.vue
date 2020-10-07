@@ -31,7 +31,7 @@
 
 <script>
 import chatBubble from "@/components/Chat/chatBubble";
-import separator from "@/components/Shared/pageSeparator.vue";
+import separator from "@/components/UI/Shared/pageSeparator.vue";
 
 export default {
   name: "",

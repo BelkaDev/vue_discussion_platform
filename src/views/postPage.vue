@@ -51,7 +51,8 @@ import postPageToolbar from "@/components/Forum/postPageToolbar";
 import mainPost from "@/components/Forum/mainPost";
 import commentList from "@/components/Forum/commentList"
 import commentInput from "@/components/Forum/commentInput"
-import separator from "@/components/Shared/pageSeparator.vue";
+import separator from "@/components/UI/Shared/pageSeparator.vue";
+
 import EventBus from "@/utils/eventBus";
 import alertDialog from "@/components/UI/Alerts/alert";
 

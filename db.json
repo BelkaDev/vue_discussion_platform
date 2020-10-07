@@ -22,7 +22,7 @@
   "documents": [
     {
       "id": 1,
-      "name": "Medical Document",
+      "name": "Analytic Document",
       "posts": [
         {
           "title": "New Year Program",
@@ -95,7 +95,7 @@
             }
           ],
           "date": 1602021894671,
-          "seen": 56,
+          "seen": 57,
           "user": {
             "id": 1,
             "name": "Sacha",
