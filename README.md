@@ -1,4 +1,8 @@
 # vue_discussion_platform
+Figma Prototype: https://www.figma.com/file/MyZY7qXQiynXoC94z9EXF8/
+Forum Page             |  Chat Page
+:-------------------------:|:-------------------------:
+![](samples/forum_showcase.png)  |  ![](samples/chat_showcase.png) 
 
 ## Project setup
 ```
