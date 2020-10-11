@@ -22,22 +22,12 @@
   "documents": [
     {
       "id": 1,
-      "name": "Analytic Document",
+      "name": "Document name",
       "posts": [
         {
-          "title": "New Year Program",
+          "title": "Title Example",
           "content": "Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat. Duis aute irure dolor in reprehenderit in voluptate velit esse cillum dolore eu fugiat nulla pariatur. Excepteur sint occaecat cupidatat non proident, sunt in culpa qui officia deserunt mollit anim id est laborum",
           "likes": [
-            {
-              "date": 1602024979664,
-              "user": {
-                "id": 1,
-                "name": "Sacha",
-                "lastName": "Griffin",
-                "avatar": "https://vzkiss.com/demo/chatbox/images/avatar/avatar_1.jpg"
-              },
-              "id": 1
-            },
             {
               "date": 1602025096495,
               "user": {
@@ -55,6 +45,16 @@
                 "name": "James",
                 "lastName": "King",
                 "avatar": "http://vzkiss.com/demo/chatbox/images/avatar/avatar_6.jpg"
+              },
+              "id": 3
+            },
+            {
+              "date": 1602418968237,
+              "user": {
+                "id": 1,
+                "name": "Sacha",
+                "lastName": "Griffin",
+                "avatar": "https://vzkiss.com/demo/chatbox/images/avatar/avatar_1.jpg"
               },
               "id": 3
             }
@@ -95,7 +95,7 @@
             }
           ],
           "date": 1602021894671,
-          "seen": 57,
+          "seen": 68,
           "user": {
             "id": 1,
             "name": "Sacha",
@@ -105,12 +105,12 @@
           "id": 1
         },
         {
-          "title": "New Analytics",
+          "title": "Text Sample",
           "content": "Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua",
           "likes": [],
           "comments": [],
           "date": 1602029535027,
-          "seen": 6,
+          "seen": 7,
           "user": {
             "id": 2,
             "name": "Debby",
@@ -137,7 +137,7 @@
       ],
       "discussions": [
         {
-          "title": "hello",
+          "title": "Group Chat",
           "receivers": [
             {
               "id": 3,
@@ -194,7 +194,7 @@
               "id": 3
             },
             {
-              "content": "And you",
+              "content": "How are you?",
               "date": 1602027028000,
               "sender": {
                 "id": 2,
@@ -321,6 +321,26 @@
             "avatar": "https://vzkiss.com/demo/chatbox/images/avatar/avatar_1.jpg"
           },
           "id": 3
+        },
+        {
+          "title": "",
+          "receivers": [
+            {
+              "id": 3,
+              "name": "James",
+              "lastName": "King",
+              "avatar": "http://vzkiss.com/demo/chatbox/images/avatar/avatar_6.jpg"
+            }
+          ],
+          "date": 1602066145468,
+          "messages": [],
+          "sender": {
+            "id": 1,
+            "name": "Sacha",
+            "lastName": "Griffin",
+            "avatar": "https://vzkiss.com/demo/chatbox/images/avatar/avatar_1.jpg"
+          },
+          "id": 4
         }
       ]
     },

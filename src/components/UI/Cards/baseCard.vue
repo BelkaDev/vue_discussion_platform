@@ -1,9 +1,7 @@
 <template>
-  <v-card
-  elevation="12"
-   class="">
+  <v-card elevation="12" class="">
     <slot />
-      <v-spacer></v-spacer>
+    <v-spacer></v-spacer>
     <v-divider></v-divider>
   </v-card>
 </template>
@@ -12,8 +10,7 @@
 export default {
   name: "BaseCard",
 
-  props: {
-  },
+  props: {},
   data: () => ({}),
 
   methods: {}

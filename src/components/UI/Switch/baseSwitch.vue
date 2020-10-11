@@ -1,18 +1,14 @@
 <template>
-    <v-switch
-      v-model="selection"
-      inset="true"
-    ></v-switch>
+  <v-switch v-model="selection" inset="true"></v-switch>
 </template>
 
 <script>
 export default {
   name: "BaseSwitch",
 
-  props: {
-  },
+  props: {},
   data: () => ({
-  selection: true
+    selection: true
   }),
 
   methods: {}

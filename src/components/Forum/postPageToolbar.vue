@@ -1,20 +1,37 @@
 <template>
-          <v-toolbar class="post_toolbar mb-n1" color="white" flat height="80px">
+  <v-toolbar class="post_toolbar mb-n1" color="white" flat height="80px">
+    <iconButton
+      @click="addComment"
+      :color="'#979797'"
+      :icon="'mdi-pencil'"
+      :shadow="true"
+    ></iconButton>
 
-              <iconButton @click="addComment" :color="'#979797'" :icon="'mdi-pencil'" :shadow="true"></iconButton>
-
-
-            <v-spacer></v-spacer>
-            <template class="toolbar_buttons">
-              <iconButton v-if="!windowProperties.isExpanded" @click="expand" :color="'#979797'" :icon="'mdi-fullscreen'" :shadow="true"></iconButton>
-              <iconButton v-if="windowProperties.isExpanded" @click="expand" :color="'#979797'" :icon="'mdi-fullscreen-exit'" :shadow="true"></iconButton>
-              <iconButton @click="close" :color="'#979797'" :icon="'mdi-close'" :shadow="true"></iconButton>
-            </template>
-
-          </v-toolbar>
+    <v-spacer></v-spacer>
+    <template class="toolbar_buttons">
+      <iconButton
+        v-if="!windowProperties.isExpanded"
+        @click="expand"
+        :color="'#979797'"
+        :icon="'mdi-fullscreen'"
+        :shadow="true"
+      ></iconButton>
+      <iconButton
+        v-if="windowProperties.isExpanded"
+        @click="expand"
+        :color="'#979797'"
+        :icon="'mdi-fullscreen-exit'"
+        :shadow="true"
+      ></iconButton>
+      <iconButton
+        @click="close"
+        :color="'#979797'"
+        :icon="'mdi-close'"
+        :shadow="true"
+      ></iconButton>
+    </template>
+  </v-toolbar>
 </template>
-
-
 
 <script>
 import iconButton from "@/components/UI/Buttons/iconButton.vue";
@@ -22,40 +39,37 @@ import iconButton from "@/components/UI/Buttons/iconButton.vue";
 export default {
   name: "chatToolbar",
   data: () => ({
-    windowProperties: {isExpanded:false,isClosed:false},
+    windowProperties: { isExpanded: false, isClosed: false }
   }),
 
   methods: {
-     expand(){
+    expand() {
       if (!this.windowProperties.isExpanded) {
-      this.expand_icon="mdi-fullscreen-exit"
-      this.windowProperties.isExpanded=true;
-      this.windowProperties.isClosed=false;
+        this.expand_icon = "mdi-fullscreen-exit";
+        this.windowProperties.isExpanded = true;
+        this.windowProperties.isClosed = false;
       } else {
-      this.expand_icon="mdi-fullscreen"
-      this.windowProperties.isExpanded=false;
-      this.windowProperties.isClosed=false;
+        this.expand_icon = "mdi-fullscreen";
+        this.windowProperties.isExpanded = false;
+        this.windowProperties.isClosed = false;
       }
-    this.$emit("windowPropertiesChanged",this.windowProperties)
+      this.$emit("windowPropertiesChanged", this.windowProperties);
     },
     close() {
-     this.windowProperties.isClosed=true
-     this.$emit("windowPropertiesChanged",this.windowProperties)
+      this.windowProperties.isClosed = true;
+      this.$emit("windowPropertiesChanged", this.windowProperties);
     },
-	addComment () {
-	this.$emit("addComment",true)
-	}
+    addComment() {
+      this.$emit("addComment", true);
+    }
   },
   components: {
-      iconButton
+    iconButton
   }
 };
 </script>
-    
 
-
-<style >
-
+<style>
 .chat_title_primary {
   color: #0d1c2e;
   margin-left: 10px;
@@ -71,8 +85,7 @@ export default {
 }
 
 .toolbar_buttons {
-    padding: 2px;
-    margin: 2px;
+  padding: 2px;
+  margin: 2px;
 }
-
 </style>

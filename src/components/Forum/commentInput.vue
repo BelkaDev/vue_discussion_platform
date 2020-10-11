@@ -1,32 +1,30 @@
 <template>
-<div>
-  
-        <div class="ml-5 col-md-11 col-xs-11">
-            <div class="panel comment-box">
-                <div class="panel-body">
-                    <textarea
-                    id="comment_box"
-        v-model="commentContent"
-
-                     placeholder="Enter your comment here, you can edit and delete it after."></textarea>
-                </div>
-                <div class="panel-footer clearfix">
-                  <iconButton 
-                  class="mt-4"
-                  style="float:right"
-                                @click="addComment"
-              :icon="'mdi-send'" :shadow="true" :gradient="true"></iconButton>
-                </div>
-            </div>
+  <div>
+    <div class="ml-5 col-md-11 col-xs-11">
+      <div class="panel comment-box">
+        <div class="panel-body">
+          <textarea
+            id="comment_box"
+            v-model="commentContent"
+            placeholder="Enter your comment here, you can edit and delete it after."
+          ></textarea>
         </div>
+        <div class="panel-footer clearfix">
+          <iconButton
+            class="mt-4"
+            style="float:right"
+            @click="addComment"
+            :icon="'mdi-send'"
+            :shadow="true"
+            :gradient="true"
+          ></iconButton>
+        </div>
+      </div>
+    </div>
   </div>
-
-
 </template>
 
-
 <script>
-
 import iconButton from "@/components/UI/Buttons/iconButton.vue";
 
 export default {
@@ -35,45 +33,37 @@ export default {
   props: ["label"],
   data: () => ({
     newComment: {},
-    commentContent:''
+    commentContent: ""
   }),
-    components: {
-      iconButton
+  components: {
+    iconButton
   },
   methods: {
     addComment() {
-
-    this.newComment.content = this.commentContent
-    this.newComment.date =  Date.now();
-    this.$emit("addComment",this.newComment)
-    this.commentContent = null;
-    this.newComment = {};
+      this.newComment.content = this.commentContent;
+      this.newComment.date = Date.now();
+      this.$emit("addComment", this.newComment);
+      this.commentContent = null;
+      this.newComment = {};
+    }
   }
-}
-
 };
 </script>
 
 <style lang="scss" scoped>
+.panel-body {
+  padding: 0;
+}
 
-
-
-
-  .panel-body {
-    padding: 0;
-  }
-
-  .panel-footer {
-    background-color: #fff;
-  }
-
+.panel-footer {
+  background-color: #fff;
+}
 
 .comment-box.panel {
   //-webkit-box-shadow: 0 0 2px 2px rgba(0, 0, 0, 0.025);
   //box-shadow: 0 0 2px 2px rgba(0, 0, 0, 0.025);
-  
-  box-shadow: 0 1px 3px rgba(0,0,0,0.12), 0 1px 2px rgba(0,0,0,0.24);
 
+  box-shadow: 0 1px 3px rgba(0, 0, 0, 0.12), 0 1px 2px rgba(0, 0, 0, 0.24);
 }
 .comment-box.panel {
   border: none;
@@ -90,24 +80,27 @@ export default {
     padding: 20px;
     border: none;
     resize: none;
-      
 
-    &::-webkit-input-placeholder { /* Chrome/Opera/Safari */
+    &::-webkit-input-placeholder {
+      /* Chrome/Opera/Safari */
       color: #bdbdbd;
       font-weight: 300;
       font-size: 15px;
     }
-    &::-moz-placeholder { /* Firefox 19+ */
+    &::-moz-placeholder {
+      /* Firefox 19+ */
       color: #bdbdbd;
       font-weight: 300;
       font-size: 15px;
     }
-    &:-ms-input-placeholder { /* IE 10+ */
+    &:-ms-input-placeholder {
+      /* IE 10+ */
       color: #bdbdbd;
       font-weight: 300;
       font-size: 15px;
     }
-    &:-moz-placeholder { /* Firefox 18- */
+    &:-moz-placeholder {
+      /* Firefox 18- */
       color: #bdbdbd;
       font-weight: 300;
       font-size: 15px;
@@ -115,9 +108,8 @@ export default {
   }
 }
 
-  .media-left,
-  .media > .pull-left {
-    padding-right: 30px;
-  }
-
+.media-left,
+.media > .pull-left {
+  padding-right: 30px;
+}
 </style>

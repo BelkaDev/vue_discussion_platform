@@ -3,12 +3,13 @@
     "version": "0.1.0",
     "private": true,
     "scripts": {
-        "serve": "vue-cli-service serve",
+        "serve": "concurrently \" json-server -p 3000 db.json\"  \"vue-cli-service serve \" ",
         "build": "vue-cli-service build",
         "lint": "vue-cli-service lint"
     },
     "dependencies": {
         "axios": "^0.20.0",
+        "concurrently": "^5.3.0",
         "core-js": "^3.6.5",
         "moment": "^2.29.0",
         "vue": "^2.6.11",
